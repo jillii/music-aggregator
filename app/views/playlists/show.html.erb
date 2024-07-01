@@ -2,8 +2,8 @@
 
 <div class="playlist">
   <div class="site-container">
-    <% if @image %>
-      <img src="<%= @image %>" alt="image for playlist <%= @title %>" />
+    <% if @image.attached? %>
+      <%= image_tag @image, size: "100x100", alt: "#{@title} image", class: "playlist-image"  %>
     <% end %>
     <div class="copy-area">
       <h1 class="playlist-title"><%= @title %></h1>

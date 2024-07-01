@@ -1,6 +1,6 @@
 <div id="<%= dom_id playlist %>" class="playlist">
-    <% if playlist.image %>
-        <img src="<%= playlist.image %>" alt="image for playlist <%= playlist.title %>" class="playlist-image" />
+    <% if playlist.image.attached? %>
+        <%= image_tag playlist.image, size: "100x100", alt: "#{playlist.title} image", class: "playlist-image"  %>
     <% end %>
     <h2 class="playlist-title"><%= playlist.title %></h2>
     <%= link_to "View", playlist %>
