@@ -5,10 +5,7 @@
 <div id="playlists">
   <% @playlists.each do |playlist| %>
     <%= render playlist %>
-    <p>
-      <%= link_to "Show this playlist", playlist %>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "New playlist", new_playlist_path %>
+<%= link_to "New", new_playlist_path %>

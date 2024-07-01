@@ -1,2 +1,13 @@
-<div id="<%= dom_id playlist %>">
+<div id="<%= dom_id playlist %>" class="playlist">
+    <% if playlist.image %>
+        <img src="<%= playlist.image %>" alt="image for playlist <%= playlist.title %>" class="playlist-image" />
+    <% end %>
+    <h2 class="playlist-title"><%= playlist.title %></h2>
+    <%= link_to "View", playlist %>
+    <% if current_user.id == playlist.user_id %>
+        <div class="playlist-actions">
+            <%= link_to "Edit", edit_playlist_path(playlist) %> |
+            <%= button_to "Delete", @playlist, method: :delete %>
+        </div>
+    <% end %>
 </div>
