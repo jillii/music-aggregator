@@ -27,6 +27,7 @@ class PlaylistsController < ApplicationController
   # POST /playlists or /playlists.json
   def create
     @playlist = Playlist.new(playlist_params)
+    @playlist.user_id = current_user.id
 
     respond_to do |format|
       if @playlist.save
