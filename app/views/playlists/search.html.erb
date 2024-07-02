@@ -1,0 +1,20 @@
+<h2># Search</h2>
+<%= form_with url: search_path, method: :get, local: true do %>
+    <%= label_tag :query, "Search for:" %>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search" %>
+<% end %>
+  
+<% if @results.present? %>
+    <h2>Results:</h2>
+    <% @results.each do |video| %>
+        <% image = video['snippet']['thumbnails']['default']['url'] %>
+        <% if image != nil %>
+            <%= image_tag image, alt: "Image for #{video['snippet']['title']}", class: "video-image"  %>
+        <% end %>
+        <h3><%= video['snippet']['title'] %></h3>
+        <p><%= video['snippet']['description'] %></p>
+        <a href="https://www.youtube.com/watch?v=<%= video['id']['videoId'] %>">Watch</a>
+        <br>
+    <% end %>
+<% end %>

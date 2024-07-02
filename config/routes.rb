@@ -5,4 +5,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root to: "home#index"
+
+  # Defines route to search
+  get '/playlists/:id/add', to: 'playlists#search', as: :search
 end

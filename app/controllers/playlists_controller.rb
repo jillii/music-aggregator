@@ -63,6 +63,17 @@ class PlaylistsController < ApplicationController
     end
   end
 
+  def search
+    @playlist = Playlist.find(params[:id])
+    @query = params[:query]
+    if @query.present?
+      service = Search.new(Rails.application.credentials.youtube[:api_key])
+      @results = service.search(@query).parsed_response['items']
+    else
+      @results = []
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_playlist
