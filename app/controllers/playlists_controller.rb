@@ -74,6 +74,27 @@ class PlaylistsController < ApplicationController
     end
   end
 
+  def addTrack
+    @playlist = Playlist.find(params[:id])
+    @tracklist = @playlist.tracklist
+    @track = params[:track]
+    if (!@tracklist || @tracklist == '')
+      @playlist.update(:tracklist => "'#{@track}'")
+    else
+      @playlist.update(:tracklist => @playlist.tracklist + ", '#{@track}'")
+    end
+
+    respond_to do |format|
+      if @playlist.save
+        format.html { redirect_to search_path(@playlist), notice: "Playlist was successfully updated." }
+        format.json { render :show, status: :updated, location: @playlist }
+      else
+        format.html { render :search, status: :unprocessable_entity }
+        format.json { render json: @playlist.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_playlist

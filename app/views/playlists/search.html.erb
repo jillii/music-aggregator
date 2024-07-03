@@ -4,17 +4,21 @@
     <%= text_field_tag :query, params[:query] %>
     <%= submit_tag "Search" %>
 <% end %>
+
+<%= @playlist.tracklist.inspect %>
   
 <% if @results.present? %>
     <h2>Results:</h2>
     <% @results.each do |video| %>
         <% image = video['snippet']['thumbnails']['default']['url'] %>
-        <% if image != nil %>
+        <% @id = video['id']['videoId'] %>
+        <% if image.present? %>
             <%= image_tag image, alt: "Image for #{video['snippet']['title']}", class: "video-image"  %>
         <% end %>
         <h3><%= video['snippet']['title'] %></h3>
         <p><%= video['snippet']['description'] %></p>
         <a href="https://www.youtube.com/watch?v=<%= video['id']['videoId'] %>">Watch</a>
+        <%= button_to "Add", add_track_path, params: {track: @id}, method: :put %>
         <br>
     <% end %>
 <% end %>

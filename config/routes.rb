@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   # Defines route to search
   get '/playlists/:id/add', to: 'playlists#search', as: :search
+  put '/playlists/:id/add', to: 'playlists#addTrack', as: :add_track
 end
