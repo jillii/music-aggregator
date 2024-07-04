@@ -1,0 +1,146 @@
+<%= link_to "Back to playlists", playlists_path %>
+
+<div class="playlist">
+  <div class="site-container">
+    <% if @playlist.image.attached? %>
+      <%= image_tag @playlist.image, size: "100x100", alt: "#{@playlist.title} image", class: "playlist-image"  %>
+    <% end %>
+    <div class="copy-area">
+      <h1 class="playlist-title"><%= @playlist.title %></h1>
+      <% if current_user.id == @playlist.user_id %>
+        <p class="playlist_user">By you</p>
+        <div class="playlist-actions">
+            <%= link_to "Edit", edit_playlist_path(@playlist) %>
+            <%= button_to "Delete", @playlist, method: :delete %>
+        </div>
+      <% else %>
+        <p class="playlist-user">By <%= @user.email %></p>
+      <% end %>
+    </div>
+    # Tracks
+    <% if @tracks %>
+        <% index = 0 %>
+        <%= link_to "Play all", '#', id: 'playAll'  %>
+
+        <div class="playlist-tracks">
+            <% for track in @tracks %>
+                <% if track.source == 'youtube' %>
+                    <a href="#" class="play-track" data-id=<%= track.track_id %> data-index=<%= index %>>
+                        <h3 style="pointer-events: none"><%= track.title %></h3>
+                    </a>
+                <% else %>
+                    <audio class="play-track" preload="none" id="player-1" onloadedmetadata="mDur('1')" ontimeupdate="mPlay('1')" data-title="spiritual paralysis">
+                        <source src="https://feeds.soundcloud.com/stream/1830873042-generalexpletive-spiritual-paralysis.mp3" type="audio/mpeg">
+                    </audio>
+                <% end %>
+                <% index += 1 %>
+            <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+# Media player
+<div id="media-player" class="windows active playing">
+    <marquee>Now playing: <span id="track-title"></span></marquee>
+    <div class="controls"> 
+    <button aria-label="play" id="play" class="play">Play</button> 
+    <button aria-label="stop" id="stop" class="stop">Stop</button>
+    <button aria-label="previous track" id="prev" class="prev">Prev</button>
+    <button aria-label="next track" id="next" class="next">Next</button>
+    <div class="current-time-container">
+        <span id="curr-main" class="current-time">6.799571</span>
+    </div>
+    </div>
+    <div class="range-container">
+    <input id="dur-main" type="range" name="rng" min="0" value="0" max="252.029388">
+    </div>
+</div>
+
+<div controls data-playlist='<%= raw @track_ids %>' data-autoplay="0" data-loop="1" id="youtube-player">Youtube Player</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+
+window.YT.ready(function() {
+    const youtubePlayer = document.getElementById('youtube-player');
+    const playlist = JSON.parse(youtubePlayer.getAttribute('data-playlist'));
+    
+    let titleElem = document.getElementById('track-title');
+
+    const playTracks = document.getElementsByClassName('play-track');
+    // initiallize youtube player
+    const player = new YT.Player('youtube-player', {
+        width: 300,
+        height: 200,
+        events: {
+            'onReady': function() {
+                player.cuePlaylist(playlist);
+                playerControls();
+            },
+            'onStateChange': updateTitle
+        }
+    });
+    // start playlist from clicked item
+    for (var i = 0; i < playTracks.length; i++) {
+        playTracks[i].addEventListener("click", function(e){
+            e.preventDefault();
+            const index = this.getAttribute('data-index');
+            player.loadPlaylist(playlist, index);
+        });
+    }
+    // update title that displays in media player marquee
+    function updateTitle(event) {
+        if (event.target.videoTitle !== titleElem.innerHTML && player.getPlayerState() == YT.PlayerState.PLAYING) {
+            titleElem.innerHTML = event.target.videoTitle;
+        }
+    }
+    // define media player controls
+    function playerControls() {
+        const playAll = document.getElementById("playAll"),
+              play = document.getElementById("play"),
+              stop = document.getElementById("stop"),
+              prev = document.getElementById("prev"),
+              next = document.getElementById("next");
+
+        playAll.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (player.getPlayerState() != YT.PlayerState.PLAYING) {
+                player.playVideo();
+            }
+        });
+        play.addEventListener("click", function() {
+            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+                play.innerHTML = "Play";
+            } else {
+                player.playVideo();
+                play.innerHTML = "Pause";
+            }
+        });
+        stop.addEventListener("click", function() {
+            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+                player.stopVideo();
+                play.innerHTML = "Play";
+            }
+        });
+        prev.addEventListener("click", function() {
+            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+                player.previousVideo();
+            } else {
+                player.previousVideo();
+                player.pauseVideo();
+            }
+        });
+        next.addEventListener("click", function() {
+            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+                player.nextVideo();
+            } else {
+                player.nextVideo();
+                player.pauseVideo();
+            }
+        });
+    }
+});
+</script>
