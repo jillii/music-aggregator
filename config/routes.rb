@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   # Defines route to search
-  get '/playlists/:id/tracks/new', to: 'tracks#new'
+  get '/playlists/:id/tracks/new', to: 'tracks#new', as: :search_tracks
   put '/playlists/:id/tracks/new', to: 'tracks#create', as: :add_track
 end

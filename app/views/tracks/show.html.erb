@@ -37,6 +37,10 @@
             <% end %>
         </div>
     <% end %>
+
+    <% if current_user.id === @playlist.user_id %>
+        <%= link_to "Add track", add_track_path(@playlist) %>
+    <% end %>
   </div>
 </div>
 

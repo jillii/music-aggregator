@@ -22,6 +22,7 @@ class TracksController < ApplicationController
   
   # POST /tracks
   def create
+    @playlist = Playlist.find(params[:id])
     @track = Track.new
     @track.title = params[:track_title]
     @track.source = 'youtube'
@@ -30,7 +31,7 @@ class TracksController < ApplicationController
 
     respond_to do |format|
       if @track.save
-        format.html { redirect_to add_track_path, notice: "Track was successfully added." }
+        format.html { redirect_to view_playlist_path(@playlist), notice: "Track was successfully added." }
         format.json { render :show, status: :created, location: @track }
       else
         format.html { render :new, status: :unprocessable_entity }
