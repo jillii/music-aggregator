@@ -14,7 +14,7 @@
             <%= button_to "Delete", @playlist, method: :delete %>
         </div>
       <% else %>
-        <p class="playlist-user">By <%= @user.email %></p>
+        <p class="playlist-user">By <%= @user.username ? @user.username : @user.email %></p>
       <% end %>
     </div>
     # Tracks
