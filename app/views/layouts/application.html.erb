@@ -18,7 +18,7 @@
         <%= link_to "playlists", playlists_path %>
         <% if current_user %>
           <%= link_to 'create', new_playlist_path %>
-          <%= link_to 'account', '#' %>
+          <%= link_to 'account', user_account_path(current_user.id) %>
         <% else %>
           <%= link_to 'login' %>
           <%= link_to 'register' %>
