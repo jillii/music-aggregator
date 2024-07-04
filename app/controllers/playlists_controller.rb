@@ -6,15 +6,6 @@ class PlaylistsController < ApplicationController
     @playlists = Playlist.all
   end
 
-  # GET /playlists/1 or /playlists/1.json
-  def show
-    @title = @playlist.title
-    @image = @playlist.image
-    @tracks = @playlist.tracklist.split(', ')
-    @user_id = @playlist.user_id
-    @user = User.find(@user_id).email
-  end
-
   # GET /playlists/new
   def new
     @playlist = Playlist.new
