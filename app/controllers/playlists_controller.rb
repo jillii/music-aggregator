@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: %i[ show edit update destroy ]
+  before_action :set_playlist, only: %i[ correct_user edit update destroy ]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /playlists or /playlists.json
   def index
@@ -63,5 +64,12 @@ class PlaylistsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def playlist_params
       params.require(:playlist).permit(:title, :image)
+    end
+
+    # Protect playlists from unauthorized users
+    def correct_user
+      unless current_user.id === @playlist.user_id
+          redirect_to user_path(current_user)
+      end
     end
 end

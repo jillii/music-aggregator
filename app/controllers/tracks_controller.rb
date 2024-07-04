@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+  before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
+
   # GET /playlists/1/tracks
   def show
     @playlist = Playlist.find(params[:id])
@@ -59,5 +61,12 @@ class TracksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def track_params
       params.require(:track).permit(:title, :source, :track_id)
+    end
+    # Protect playlists from unauthorized users
+    def correct_user
+      @playlist = Playlist.find(params[:id])
+      unless current_user.id === @playlist.user_id
+          redirect_to root_path, notice: "Sorry, you don't have access to that page."
+      end
     end
 end
