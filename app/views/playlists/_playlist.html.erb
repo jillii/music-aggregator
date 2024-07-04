@@ -1,9 +1,23 @@
+<% user = User.find(playlist.user_id) %>
 <div id="<%= dom_id playlist %>" class="playlist">
     <% if playlist.image.attached? %>
         <%= image_tag playlist.image, size: "100x100", alt: "#{playlist.title} image", class: "playlist-image"  %>
     <% end %>
     <h2 class="playlist-title"><%= playlist.title %></h2>
-    <%= link_to "View", playlist %>
+    <p class="playlist-user">By <%= user.username ? user.username : user.email %></p>
+    <% if playlist.tracks.present? %>
+        <% for i in 1..3 do %>
+            <% if playlist.tracks[i] %>
+                <% track = playlist.tracks[i] %>
+                <div class="track">
+                    <p class="track-title"><%= track.title %></p>
+                </div>
+            <% end %>
+        <% end %>
+    <% else %>
+    No tracks :(
+    <% end %>
+    <%= link_to "View", view_playlist_path(playlist) %>
     <% if current_user.id == playlist.user_id %>
         <div class="playlist-actions">
             <%= link_to "Edit", edit_playlist_path(playlist) %> |
