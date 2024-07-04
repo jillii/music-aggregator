@@ -1,9 +1,9 @@
 class TracksController < ApplicationController
+  before_action :set_playlist, only: %i[ correct_user show new create edit update destroy ]
   before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /playlists/1/tracks
   def show
-    @playlist = Playlist.find(params[:id])
     @user = User.find(@playlist.user_id)
     @tracks = @playlist.tracks
     @track_ids = @tracks.pluck(:track_id)
@@ -11,7 +11,6 @@ class TracksController < ApplicationController
 
   # GET /playlist/:id/tracks/new
   def new
-    @playlist = Playlist.find(params[:id])
     @track = Track.new
     @query = params[:query]
     if @query.present?
@@ -24,7 +23,6 @@ class TracksController < ApplicationController
   
   # POST /tracks
   def create
-    @playlist = Playlist.find(params[:id])
     @track = Track.new
     @track.title = params[:track_title]
     @track.source = 'youtube'
@@ -54,8 +52,8 @@ class TracksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_track
-      @track = Track.find(params[:id])
+    def set_playlist
+      @playlist = Playlist.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
@@ -64,7 +62,6 @@ class TracksController < ApplicationController
     end
     # Protect playlists from unauthorized users
     def correct_user
-      @playlist = Playlist.find(params[:id])
       unless current_user.id === @playlist.user_id
           redirect_to root_path, notice: "Sorry, you don't have access to that page."
       end
