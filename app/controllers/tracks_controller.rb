@@ -7,19 +7,30 @@ class TracksController < ApplicationController
     @track_ids = @tracks.pluck(:track_id)
   end
 
-  # GET /tracks/new
+  # GET /playlist/:id/tracks/new
   def new
+    @playlist = Playlist.find(params[:id])
     @track = Track.new
+    @query = params[:query]
+    if @query.present?
+      service = Search.new(Rails.application.credentials.youtube[:api_key])
+      @results = service.search(@query).parsed_response['items']
+    else
+      @results = []
+    end
   end
-
+  
   # POST /tracks
   def create
-    @track = Track.new(track_params)
+    @track = Track.new
+    @track.title = params[:track_title]
+    @track.source = 'youtube'
+    @track.track_id = params[:track_id]
     @track.playlist_id = params[:id]
 
     respond_to do |format|
       if @track.save
-        format.html { redirect_to playlist_url(@track), notice: "Track was successfully added." }
+        format.html { redirect_to add_track_path, notice: "Track was successfully added." }
         format.json { render :show, status: :created, location: @track }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,7 +48,6 @@ class TracksController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

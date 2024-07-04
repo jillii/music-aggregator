@@ -1,2 +1,26 @@
 <h1>Tracks#new</h1>
-<p>Find me in app/views/tracks/new.html.erb</p>
+<h2># Search</h2>
+<%= form_with url: add_track_path, method: :get, local: true do %>
+    <%= label_tag :query, "Search for:" %>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search" %>
+<% end %>
+
+<%= @playlist.tracks.inspect %>
+  
+<% if @results.present? %>
+    <h2>Results:</h2>
+    <% @results.each do |video| %>
+        <% title = video['snippet']['title'] %>
+        <% image = video['snippet']['thumbnails']['default']['url'] %>
+        <% @id = video['id']['videoId'] %>
+        <% if image.present? %>
+            <%= image_tag image, alt: "Image for #{video['snippet']['title']}", class: "video-image"  %>
+        <% end %>
+        <h3><%= title %></h3>
+        <p><%= video['snippet']['description'] %></p>
+        <a href="https://www.youtube.com/watch?v=<%= video['id']['videoId'] %>">Watch</a>
+        <%= button_to "Add", add_track_path, params: {track_id: @id, track_title: title}, method: :put %>
+        <br>
+    <% end %>
+<% end %>
