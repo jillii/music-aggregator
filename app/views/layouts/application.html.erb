@@ -11,6 +11,20 @@
   </head>
 
   <body>
+    <nav class="site-nav">
+      <div class="site-container">
+        <%= link_to "home", root_path %>
+        <%= link_to "about", '#' %>
+        <%= link_to "playlists", playlists_path %>
+        <% if current_user %>
+          <%= link_to 'create', new_playlist_path %>
+          <%= link_to 'account', '#' %>
+        <% else %>
+          <%= link_to 'login' %>
+          <%= link_to 'register' %>
+        <% end %>
+      </div>
+    </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
