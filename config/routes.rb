@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :playlists, :only => [:index, :show, :new, :create, :edit, :update]
+  resources :playlists, :only => [:new, :create, :edit, :update]
+  resources :playlists do
+    get '/page/:page', action: :index, on: :collection
+  end
   devise_for :users
   
   get '/playlists/:id/tracks', to: 'tracks#show', as: :view_playlist

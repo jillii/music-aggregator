@@ -4,7 +4,7 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists or /playlists.json
   def index
-    @playlists = Playlist.all
+    @playlists = Playlist.order(:title).page params[:page]
   end
 
   # GET /playlists/new
