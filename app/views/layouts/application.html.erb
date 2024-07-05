@@ -20,8 +20,8 @@
           <%= link_to 'create', new_playlist_path %>
           <%= link_to 'account', user_account_path(current_user.id) %>
         <% else %>
-          <%= link_to 'login' %>
-          <%= link_to 'register' %>
+          <%= link_to 'login', new_user_session_path %>
+          <%= link_to 'register', new_user_registration_path %>
         <% end %>
       </div>
     </nav>
