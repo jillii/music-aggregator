@@ -1,10 +1,17 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: %i[ correct_user edit update destroy ]
+  before_action :set_playlist, only: %i[ correct_user show edit update destroy ]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /playlists or /playlists.json
   def index
     @playlists = Playlist.order(:title).page params[:page]
+  end
+
+  # GET /playlists/1
+  def show
+    @user = User.find(@playlist.user_id)
+    @tracks = @playlist.tracks
+    @track_ids = @tracks.pluck(:track_id)
   end
 
   # GET /playlists/new

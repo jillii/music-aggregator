@@ -1,13 +1,6 @@
 class TracksController < ApplicationController
-  before_action :set_playlist, only: %i[ correct_user show new create edit update destroy ]
+  before_action :set_playlist, only: %i[ correct_user new create edit update destroy ]
   before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
-
-  # GET /playlists/1/tracks
-  def show
-    @user = User.find(@playlist.user_id)
-    @tracks = @playlist.tracks
-    @track_ids = @tracks.pluck(:track_id)
-  end
 
   # GET /playlist/:id/tracks/new
   def new
