@@ -18,7 +18,7 @@
     No tracks :(
     <% end %>
     <%= link_to "View", view_playlist_path(playlist) %>
-    <% if current_user.id == playlist.user_id %>
+    <% if current_user && current_user.id === playlist.user_id %>
         <div class="playlist-actions">
             <%= link_to "Edit", edit_playlist_path(playlist) %> |
             <%= button_to "Delete", @playlist, method: :delete %>
