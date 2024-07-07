@@ -43,7 +43,7 @@ class PlaylistsController < ApplicationController
   def update
     respond_to do |format|
       if @playlist.update(playlist_params)
-        format.html { redirect_to view_playlist_path(@playlist), notice: "Playlist was successfully updated." }
+        format.html { redirect_to playlist(@playlist), notice: "Playlist was successfully updated." }
         format.json { render :show, status: :ok, location: @playlist }
       else
         format.html { render :edit, status: :unprocessable_entity }

@@ -24,7 +24,7 @@ class TracksController < ApplicationController
 
     respond_to do |format|
       if @track.save
-        format.html { redirect_to view_playlist_path(@playlist), notice: "Track was successfully added." }
+        format.html { redirect_to playlist(@playlist), notice: "Track was successfully added." }
         format.json { render :show, status: :created, location: @track }
       else
         format.html { render :new, status: :unprocessable_entity }
