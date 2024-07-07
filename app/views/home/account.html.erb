@@ -15,13 +15,15 @@
         </div>
     </div>
 </section>
-<section class="user-playlists">
+<section class="user-playlists bg-gray">
     <div class="site-container">
         <h2 class="user-playlists-headline"><%= @user.username %>'s Playlists</h2>
         <% if @playlists.present? %>
-            <% @playlists.each do |playlist| %>
-                <%= render playlist %>
-            <% end %>
+            <div class="card-container">
+                <% @playlists.each do |playlist| %>
+                    <%= render playlist %>
+                <% end %>
+            </div>
         <% else %>
             No playlists
         <% end %>

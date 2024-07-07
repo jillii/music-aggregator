@@ -1,7 +1,7 @@
-<%= link_to "Back to playlists", playlists_path %>
 
-<div class="playlist">
-  <div class="site-container">
+<%= link_to "Back to playlists", playlists_path %>
+<section class="playlist">
+<div class="site-container">
     <% if @playlist.image.attached? %>
       <%= image_tag @playlist.image, size: "100x100", alt: "#{@playlist.title} image", class: "playlist-image"  %>
     <% end %>
@@ -34,7 +34,7 @@
         <%= link_to "Add track", add_track_path(@playlist) %>
     <% end %>
   </div>
-</div>
+</section>
 
 # Media player
 <div id="media-player" class="windows active playing">

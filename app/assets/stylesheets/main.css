@@ -10,8 +10,9 @@
 }
 
 body {
+  margin: 69px 0 0;
   font-family: "Ubuntu Mono", monospace;
-  font-size: 18;
+  font-size: 18px;
   line-height: 24px;
   font-weight: 400;
   color: var(--black);
@@ -137,7 +138,7 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 280px;
   max-width: 330px;
   padding: 33px;
-  box-shadow: 0 0 20px var(--gray);
+  box-shadow: 8px 8px 8px var(--gray);
   border-radius: 0;
   border: none;
 }

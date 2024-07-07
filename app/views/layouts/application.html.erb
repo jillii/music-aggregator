@@ -6,22 +6,22 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "main", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <nav class="site-nav">
       <div class="site-container">
-        <%= link_to "home", root_path %>
+        <%= link_to "home", root_path, class: "home" %>
         <%= link_to "about", '#' %>
         <%= link_to "playlists", playlists_path %>
         <% if current_user %>
-          <%= link_to 'create', new_playlist_path %>
-          <%= link_to 'account', user_account_path(current_user.id) %>
+        <%= link_to 'account', user_account_path(current_user.id) %>
+        <%= link_to 'create', new_playlist_path, class: "btn" %>
         <% else %>
           <%= link_to 'login', new_user_session_path %>
-          <%= link_to 'register', new_user_registration_path %>
+          <%= link_to 'register', new_user_registration_path, class: "btn" %>
         <% end %>
       </div>
     </nav>

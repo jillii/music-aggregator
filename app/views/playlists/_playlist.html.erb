@@ -1,5 +1,5 @@
 <% user = User.find(playlist.user_id) %>
-<div id="<%= dom_id playlist %>" class="playlist">
+<div id="<%= dom_id playlist %>" class="playlist card">
     <% if playlist.image.attached? %>
         <%= image_tag playlist.image, size: "100x100", alt: "#{playlist.title} image", class: "playlist-image"  %>
     <% end %>
@@ -20,8 +20,8 @@
     <%= link_to "View", playlist_path(playlist) %>
     <% if current_user && current_user.id === playlist.user_id %>
         <div class="playlist-actions">
-            <%= link_to "Edit", edit_playlist_path(playlist) %> |
-            <%= button_to "Delete", @playlist, method: :delete %>
+            <%= link_to "Edit", edit_playlist_path(playlist), class: "btn" %> |
+            <%= button_to "Delete", @playlist, method: :delete, class: "btn" %>
         </div>
     <% end %>
 </div>

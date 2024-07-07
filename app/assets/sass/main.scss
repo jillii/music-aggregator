@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch+Pop&family=Silkscreen:wght@400;700&family=Ubuntu+Mono:wght@400;700&family=Tiny5&display=swap');
 
+* {
+	box-sizing: border-box;
+}
 :root {
     --black: #3e3c41;
     --white: #fff;
@@ -7,8 +10,9 @@
 }
 
 body {
+	margin: 69px 0 0;
 	font-family: "Ubuntu Mono", monospace;
-	font-size: 18;
+	font-size: 18px;
 	line-height: 24px;
 	font-weight: 400;
 	color: var(--black);
@@ -90,7 +94,10 @@ h1, h2, h3, h4, h5, h6 {
 	border: 2px solid var(--black);
 	font-family: "Silkscreen", sans-serif;
     text-decoration: none;
-    color: pink;
+	font-size: 18px;
+	line-height: 22px;
+    color: inherit;
+	background-color: #f0f0f0;
 	cursor: pointer;
 	transition: transform .25s, background-color .25s;
     &:hover {
@@ -114,7 +121,7 @@ h1, h2, h3, h4, h5, h6 {
 	min-width: 280px;
 	max-width: 330px;
 	padding: 33px;
-	box-shadow: 0 0 20px var(--gray);
+	box-shadow: 8px 8px 8px var(--gray);
 	border-radius: 0;
 	border: none;
 }
