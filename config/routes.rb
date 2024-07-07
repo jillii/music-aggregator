@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   resources :playlists do
     get '/page/:page', action: :index, on: :collection
   end
+
+  # Defines track reorder route
+  post '/tracks/reorder', to: 'tracks#reorder'
+
   devise_for :users
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -7,6 +7,7 @@
     --black: #3e3c41;
     --white: #fff;
     --gray: #ebf0f5;
+	--slate: #f0f0f0;
 }
 
 body {
@@ -97,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-size: 18px;
 	line-height: 22px;
     color: inherit;
-	background-color: #f0f0f0;
+	background-color: var(--slate);
 	cursor: pointer;
 	transition: transform .25s, background-color .25s;
     &:hover {
@@ -124,6 +125,24 @@ h1, h2, h3, h4, h5, h6 {
 	box-shadow: 8px 8px 8px var(--gray);
 	border-radius: 0;
 	border: none;
+}
+
+/* Tracks */
+.track {
+	display: flex;
+	background-color: var(--slate);
+
+	a {
+		flex: 1 0 auto;
+		display: flex;
+		align-items: center;
+	}
+
+	&-move {
+		margin-left: auto;
+		height: 30px;
+		width: 30px;
+	}
 }
 
 /* Media queries */

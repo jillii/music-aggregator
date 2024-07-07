@@ -22,7 +22,7 @@
         <% index = 0 %>
         <%= link_to "Play all", '#', id: 'playAll'  %>
 
-        <div class="playlist-tracks">
+        <div id="tracklist" class="playlist-tracks">
             <% for track in @tracks %>
                 <%= render "tracks/track", track: track, index: index %>
                 <% index += 1 %>
@@ -56,8 +56,27 @@
 <div controls data-playlist='<%= raw @track_ids %>' data-autoplay="0" data-loop="1" id="youtube-player">Youtube Player</div>
 
 <script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
 <script>
+
+// Reorder tracks
+const tracklist = document.getElementById("tracklist");
+var sortable = Sortable.create(tracklist, {
+    onEnd: function (evt) {
+        var itemEl = evt.item;
+        var itemIds = Array.from(tracklist.children).map(item => item.dataset.track);
+
+        fetch('/tracks/reorder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ item_ids: itemIds })
+        });
+    }
+  });
 
 window.YT.ready(function() {
     const youtubePlayer = document.getElementById('youtube-player');
