@@ -1,5 +1,5 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: %i[ correct_user show edit update destroy ]
+  before_action :set_playlist, only: [ :correct_user, :show, :edit, :update, :destroy ]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /playlists or /playlists.json
@@ -59,6 +59,17 @@ class PlaylistsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to playlists_url, notice: "Playlist was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /playlists/searchby
+  def searchby
+    @query = params[:search]
+
+    if @query 
+      @title = Track.find_by(track_id: @query).title
+
+      @playlists = Playlist.includes(:tracks).where(tracks: {track_id: params[:search]})
     end
   end
 

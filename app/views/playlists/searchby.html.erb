@@ -1,0 +1,18 @@
+<section>
+    <div class="site-container">
+        <% if @query %>
+            <h1>Search for: <%= @title.inspect %></h1>
+            <% if @playlists.present? %>
+                <div class="card-container">
+                    <% @playlists.each do |playlist| %>
+                        <%= render playlist %>
+                    <% end %>
+                </div>
+            <% else %>
+                <p>No playlists found.</p>
+            <% end %>
+        <% else %>
+            No search found.
+        <% end %>
+    </div>
+</section>
