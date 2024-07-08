@@ -31,7 +31,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Test emails on local
-gem "mailcatcher"
+gem "letter_opener", group: :development
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
