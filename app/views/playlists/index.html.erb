@@ -1,6 +1,15 @@
 <section>
   <div class="site-container">
-    <h1>Playlists</h1>
+    <% if @track || @tag %>
+      <h1>Search for: <%= @title.inspect %></h1>
+    <% else %>
+      <h1>Playlists</h1>
+    <% end %>
+
+    <form action="/searchby" method="post">
+      <input placeholder="Search" type="text"/>
+      <input type="submit" value="search" class="btn"/>
+    </form>
 
     <div id="playlists" class="card-container">
       <% @playlists.each do |playlist| %>

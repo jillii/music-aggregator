@@ -19,9 +19,6 @@ Rails.application.routes.draw do
   get '/playlists/:id/tracks/new', to: 'tracks#new', as: :search_tracks
   put '/playlists/:id/tracks/new', to: 'tracks#create', as: :add_track
 
-  # Defines route to search by track
-  get '/searchby', to: 'playlists#searchby', as: :searchby_track
-
   # Defines delete for tags
   resources :tags, :only => [:destroy]
 end
