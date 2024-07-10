@@ -20,7 +20,7 @@
       <% if @playlist.tags %>
         <div class="playlist-tags">
             <% @playlist.tags.each do |tag| %>
-                <div class="tag"><%= tag.label %></div>
+                <%= render "tags/tag", tag: tag, is_user: current_user.id === @playlist.user_id %>
             <% end %>
         </div>
       <% end %>

@@ -1,0 +1,6 @@
+<div class="tag">
+    <%= tag.label %>
+    <% if is_user %>
+        <%= button_to "Delete", {controller: :tags, action: :destroy, id: tag.id}, method: :delete %>
+    <% end %>
+</div>

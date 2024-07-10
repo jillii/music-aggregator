@@ -21,4 +21,7 @@ Rails.application.routes.draw do
 
   # Defines route to search by track
   get '/searchby', to: 'playlists#searchby', as: :searchby_track
+
+  # Defines delete for tags
+  resources :tags, :only => [:destroy]
 end
