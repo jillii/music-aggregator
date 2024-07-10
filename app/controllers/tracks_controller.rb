@@ -6,6 +6,7 @@ class TracksController < ApplicationController
   def new
     @track = Track.new
     @query = params[:query]
+    @playlist = Playlist.find(params[:id])
     if @query.present?
       service = Search.new(Rails.application.credentials.youtube[:api_key])
       @results = service.search(@query).parsed_response['items']
