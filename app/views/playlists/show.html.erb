@@ -16,6 +16,14 @@
       <% else %>
         <p class="playlist-user">By <%= @user.username ? @user.username : @user.email %></p>
       <% end %>
+      # Tags
+      <% if @playlist.tags %>
+        <div class="playlist-tags">
+            <% @playlist.tags.each do |tag| %>
+                <div class="tag"><%= tag.label %></div>
+            <% end %>
+        </div>
+      <% end %>
     </div>
     # Tracks
     <% if @tracks %>

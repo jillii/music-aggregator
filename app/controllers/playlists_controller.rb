@@ -41,6 +41,12 @@ class PlaylistsController < ApplicationController
 
   # PATCH/PUT /playlists/1 or /playlists/1.json
   def update
+    tags = params[:playlist][:tag_id].split(',')
+
+    tags.each do |tag|
+      Tag.create(label: tag.strip, playlist_id: @playlist.id)
+    end
+
     respond_to do |format|
       if @playlist.update(playlist_params)
         format.html { redirect_to playlist_path(@playlist), notice: "Playlist was successfully updated." }

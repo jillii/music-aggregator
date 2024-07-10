@@ -13,6 +13,10 @@
   <%= form.text_field :title %>
   <%= form.file_field :image %>
   <div>
+    <%= form.text_area :tag_id, size: "40x5" %><br>
+    <label>Enter tags separated by commas</label>
+  </div>
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

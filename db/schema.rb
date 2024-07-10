@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_08_215521) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_09_124314) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,6 +42,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_08_215521) do
 # Could not dump table "playlists" because of following StandardError
 #   Unknown type '' for column 'image'
 
+  create_table "tags", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "playlist_id"
+    t.index ["playlist_id"], name: "index_tags_on_playlist_id"
+  end
+
   create_table "tracks", force: :cascade do |t|
     t.string "track_id"
     t.string "title"
@@ -59,5 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_08_215521) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "playlists", "users"
+  add_foreign_key "tags", "playlists"
   add_foreign_key "tracks", "playlists"
 end
