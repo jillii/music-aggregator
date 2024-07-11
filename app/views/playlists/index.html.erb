@@ -6,17 +6,20 @@
       <h1>Playlists</h1>
     <% end %>
 
-    <form action="/searchby" method="post">
-      <input placeholder="Search" type="text"/>
-      <input type="submit" value="search" class="btn"/>
-    </form>
+    <%= form_with url: playlists_path, method: :get do |form| %>
+      <%= form.text_field :search %>
+      <%= form.submit "Search" %>
+    <% end %>
+    <% if @playlists.present? %>
+      <div id="playlists" class="card-container">
+        <% @playlists.each do |playlist| %>
+          <%= render playlist %>
+        <% end %>
+      </div>
+      <%= paginate @playlists %>
+    <% else %>
+      <p>Sorry, we couldn't find anything</p>
+    <% end %>
 
-    <div id="playlists" class="card-container">
-      <% @playlists.each do |playlist| %>
-        <%= render playlist %>
-      <% end %>
-    </div>
-
-    <%= paginate @playlists %>
   </div>
 </section>
