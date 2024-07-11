@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :playlists, :only => [:new, :create, :edit, :update]
   resources :playlists do
     get '/page/:page', action: :index, on: :collection
   end
