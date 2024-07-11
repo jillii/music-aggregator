@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   put '/playlists/:id/tracks/new', to: 'tracks#create', as: :add_track
 
   # Defines delete for tags
-  resources :tags, :only => [:destroy]
+  delete 'tags/:id', to: 'tags#destroy'
 
   # Defines delete for tracks
   delete 'tracks/:id', to: 'tracks#destroy'
