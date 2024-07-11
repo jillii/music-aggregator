@@ -20,7 +20,7 @@
       <% if @playlist.tags %>
         <div class="playlist-tags">
             <% @playlist.tags.each do |tag| %>
-                <%= render "tags/tag", tag: tag, is_user: current_user.id === @playlist.user_id %>
+                <%= render "tags/tag", tag: tag, is_user: current_user && current_user.id === @playlist.user_id %>
             <% end %>
         </div>
       <% end %>
@@ -30,7 +30,7 @@
         <% index = 0 %>
         <%= link_to "Play all", '#', id: 'playAll'  %>
 
-        <div id="<%= current_user.id === @user.id ? 'sortable-' : '' %>tracklist" class="playlist-tracks">
+        <div id="<%= current_user && current_user.id === @user.id ? 'sortable-' : '' %>tracklist" class="playlist-tracks">
             <% for track in @tracks %>
                 <%= render "tracks/track", track: track, index: index, user: @user %>
                 <% index += 1 %>
