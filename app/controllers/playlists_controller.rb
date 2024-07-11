@@ -6,11 +6,11 @@ class PlaylistsController < ApplicationController
   def index
     @track = params[:track]
     @tag = params[:tag]
-    search = params[:search]
+    @search = params[:search]
     
-    if search
-      @title = search
-      search_query = "%#{search}%"
+    if @search
+      @title = @search
+      search_query = "%#{@search}%"
 
       by_tag = Tag.where("label LIKE ?", search_query).pluck(:playlist_id)
       by_track = Track.where("title LIKE ?", search_query).pluck(:playlist_id)

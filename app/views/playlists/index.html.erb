@@ -1,7 +1,7 @@
 <section>
   <div class="site-container">
-    <% if @track || @tag %>
-      <h1>Search for: <%= @title.inspect %></h1>
+    <% if @search || @track || @tag %>
+      <h1>Search for: <%= @tag ? 'tag: ' : ''%><%= @track ? 'track: ' : '' %><%= @title.inspect %></h1>
     <% else %>
       <h1>Playlists</h1>
     <% end %>
