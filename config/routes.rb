@@ -21,4 +21,7 @@ Rails.application.routes.draw do
 
   # Defines delete for tags
   resources :tags, :only => [:destroy]
+
+  # Defines delete for tracks
+  delete 'tracks/:id', to: 'tracks#destroy'
 end

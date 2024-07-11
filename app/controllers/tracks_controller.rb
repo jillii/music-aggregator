@@ -36,10 +36,12 @@ class TracksController < ApplicationController
 
   # DELETE /tracks/1
   def destroy
+    @playlist = Playlist.find(params[:playlist])
+    @track = Track.find(params[:track])
     @track.destroy
 
     respond_to do |format|
-      format.html { redirect_to playlists_url, notice: "Track was removed." }
+      format.html { redirect_to playlist_path(@playlist) }
       format.json { head :no_content }
     end
   end
