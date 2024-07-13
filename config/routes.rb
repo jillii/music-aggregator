@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   get '/playlists/:id/tracks/new', to: 'tracks#new', as: :search_tracks
   put '/playlists/:id/tracks/new', to: 'tracks#create', as: :add_track
 
+  # Defines route to add editors to playlist
+  get '/playlists/:id/editors/new', to: 'playlists#search_editors', as: :search_users
+  put '/playlists/:id/editors/new', to: 'playlists#add_editor', as: :add_editor
+
   # Defines delete for tags
   delete 'tags/:id', to: 'tags#destroy'
 

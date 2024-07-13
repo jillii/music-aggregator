@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_09_124314) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_11_233002) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_09_124314) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "editors_playlists", force: :cascade do |t|
+    t.integer "playlist_id", null: false
+    t.integer "user_id", null: false
+    t.index ["playlist_id", "user_id"], name: "index_editors_playlists_on_playlist_id_and_user_id", unique: true
+    t.index ["playlist_id"], name: "index_editors_playlists_on_playlist_id"
+    t.index ["user_id"], name: "index_editors_playlists_on_user_id"
   end
 
 # Could not dump table "playlists" because of following StandardError
@@ -66,6 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_09_124314) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "editors_playlists", "playlists"
+  add_foreign_key "editors_playlists", "users"
   add_foreign_key "playlists", "users"
   add_foreign_key "tags", "playlists"
   add_foreign_key "tracks", "playlists"

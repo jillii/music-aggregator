@@ -1,6 +1,6 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [ :correct_user, :show, :edit, :update, :destroy ]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_playlist, only: [ :correct_user, :show, :edit, :update, :destroy, :add_editor, :search_editors ]
+  before_action :correct_user, only: [:edit, :update, :destroy, :add_editor, :search_editors]
 
   # GET /playlists or /playlists.json
   def index
@@ -82,6 +82,31 @@ class PlaylistsController < ApplicationController
     end
   end
 
+  def search_editors
+    @search = params[:search]
+    not_in = @playlist.editors.ids
+    not_in << current_user.id
+
+    if (@search)
+      search_query = "%#{@search}%"
+      @users = User.where("username LIKE ? OR email LIKE ? AND id NOT IN (?)", search_query, search_query, not_in)
+    else
+      @users = User.where("id NOT IN (?)", not_in)
+    end
+  end
+
+  def add_editor
+    editor = User.find(params[:user])
+
+    begin
+      @playlist.editors.push(editor)
+    rescue Exception => e
+      redirect_to add_editor_path(@playlist), notice: 'Could not add user'
+    else
+      redirect_to playlist_path(@playlist), notice: "Editor was successfully added."
+    end
+  end
+
   # DELETE /playlists/1 or /playlists/1.json
   def destroy
     @playlist.destroy
@@ -106,7 +131,7 @@ class PlaylistsController < ApplicationController
     # Protect playlists from unauthorized users
     def correct_user
       unless current_user.id === @playlist.user_id
-          redirect_to user_path(current_user)
+          redirect_to user_account_path(current_user)
       end
     end
 end

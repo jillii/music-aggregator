@@ -2,6 +2,10 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
   has_many :playlists, dependent: :destroy
+  has_and_belongs_to_many :playlists_editing, 
+                          class_name: 'Playlist', 
+                          join_table: :editors_playlists, 
+                          foreign_key: :user_id
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :confirmable, :registerable,

@@ -10,11 +10,20 @@
       <% if current_user && current_user.id === @playlist.user_id %>
         <p class="playlist_user">By you</p>
         <div class="playlist-actions">
+            <%= link_to "Add editor", search_users_path %>
             <%= link_to "Edit", edit_playlist_path(@playlist) %>
             <%= button_to "Delete", @playlist, method: :delete %>
         </div>
       <% else %>
         <p class="playlist-user">By <%= @user.username ? @user.username : @user.email %></p>
+      <% end %>
+      # Editors
+      <% if @playlist.editors.present? %>
+        <div class="playlist-editors">
+            <% @playlist.editors.each do |editor| %>
+                <%= link_to editor.username, user_account_path(editor) %>
+            <% end %>
+        </div>
       <% end %>
       # Tags
       <% if @playlist.tags %>
