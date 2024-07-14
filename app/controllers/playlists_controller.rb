@@ -36,6 +36,7 @@ class PlaylistsController < ApplicationController
     @user = User.find(@playlist.user_id)
     @tracks = @playlist.tracks
     @track_ids = @tracks.pluck(:track_id)
+    @is_editor = @playlist.editors.ids.include?(current_user.id)
   end
 
   # GET /playlists/new

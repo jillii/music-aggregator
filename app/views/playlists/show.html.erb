@@ -39,7 +39,7 @@
         <% index = 0 %>
         <%= link_to "Play all", '#', id: 'playAll'  %>
 
-        <div id="<%= current_user && current_user.id === @user.id ? 'sortable-' : '' %>tracklist" class="playlist-tracks">
+        <div id="<%= current_user && current_user.id === @user.id || @is_editor ? 'sortable-' : '' %>tracklist" class="playlist-tracks">
             <% for track in @tracks %>
                 <%= render "tracks/track", track: track, index: index, user: @user %>
                 <% index += 1 %>
@@ -47,7 +47,7 @@
         </div>
     <% end %>
 
-    <% if current_user && current_user.id === @playlist.user_id %>
+    <% if current_user && current_user.id === @playlist.user_id || @is_editor %>
         <%= link_to "Add track", add_track_path(@playlist) %>
     <% end %>
   </div>

@@ -1,7 +1,7 @@
 <div class="tag">
     <%= link_to tag.label, playlists_path(tag: tag.label) %>
 
-    <% if is_user %>
+    <% if is_user || @is_editor %>
         <%= button_to "Delete", {controller: :tags, action: :destroy, id: tag.id}, method: :delete %>
     <% end %>
 </div>
