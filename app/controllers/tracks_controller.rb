@@ -24,6 +24,10 @@ class TracksController < ApplicationController
     @track.track_id = params[:track_id]
     @track.playlist_id = params[:id]
 
+    if current_user.id != Playlist.find(params[:id]).user_id
+      @track.addedby = current_user.id
+    end
+
     respond_to do |format|
       if @track.save
         format.html { redirect_to playlist_path(@playlist), notice: "Track was successfully added." }
