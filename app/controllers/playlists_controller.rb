@@ -1,6 +1,7 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [ :correct_user, :show, :edit, :update, :destroy, :add_editor, :search_editors ]
+  before_action :set_playlist, only: [ :correct_user, :correct_editor, :show, :edit, :update, :destroy, :add_editor, :search_editors ]
   before_action :correct_user, only: [:edit, :update, :destroy, :add_editor, :search_editors]
+  before_action :correct_editor, only: [ :show ]
 
   # GET /playlists or /playlists.json
   def index
@@ -131,8 +132,13 @@ class PlaylistsController < ApplicationController
 
     # Protect playlists from unauthorized users
     def correct_user
-      unless current_user.id === @playlist.user_id
+      @is_user = current_user.id === @playlist.user_id
+      unless @is_user
           redirect_to user_account_path(current_user)
       end
+    end
+
+    def correct_editor
+      @is_editor = @playlist.editors.ids.include?(current_user.id)
     end
 end
