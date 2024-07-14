@@ -1,6 +1,7 @@
 class TracksController < ApplicationController
-  before_action :set_playlist, only: %i[ correct_user new create edit update destroy ]
-  before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_playlist, only: %i[ correct_user correct_user_or_editor new create update destroy ]
+  before_action :correct_user, only: [:update, :destroy]
+  before_action :correct_user_or_editor, only: [:new, :create]
 
   # GET /playlist/:id/tracks/new
   def new
@@ -69,4 +70,10 @@ class TracksController < ApplicationController
           redirect_to root_path, notice: "Sorry, you don't have access to that page."
       end
     end
+
+    def correct_user_or_editor
+      unless current_user.id === @playlist.user_id || @playlist.editors.ids.include?(current_user.id)
+        redirect_to root_path, notice: "Sorry, you don't have access to that page."
+      end
+    end      
 end
