@@ -45,10 +45,6 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.new
   end
 
-  # GET /playlists/1/edit
-  def edit
-  end
-
   # POST /playlists or /playlists.json
   def create
     @playlist = Playlist.new(playlist_params)
