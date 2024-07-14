@@ -29,3 +29,15 @@
         <% end %>
     </div>
 </section>
+<% if @editor_playlists.present? %>
+    <section class="user-playlists">
+        <div class="site-container">
+            <h2 class="user-playlists-headline"><%= @user.username %>'s Collabs</h2>
+            <div class="card-container">
+                <% @editor_playlists.each do |playlist| %>
+                    <%= render playlist %>
+                <% end %>
+            </div>
+        </div>
+    </section>
+<% end %>
