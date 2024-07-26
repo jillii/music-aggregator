@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_14_204003) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_26_120058) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_14_204003) do
     t.index ["user_id"], name: "index_editors_playlists_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.text "message"
+    t.integer "recipient_id", null: false
+    t.integer "sender_id", null: false
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
+    t.index ["sender_id"], name: "index_notifications_on_sender_id"
+  end
+
 # Could not dump table "playlists" because of following StandardError
 #   Unknown type '' for column 'image'
 
@@ -77,6 +88,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_14_204003) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "editors_playlists", "playlists"
   add_foreign_key "editors_playlists", "users"
+  add_foreign_key "notifications", "users", column: "recipient_id"
+  add_foreign_key "notifications", "users", column: "sender_id"
   add_foreign_key "playlists", "users"
   add_foreign_key "tags", "playlists"
   add_foreign_key "tracks", "playlists"

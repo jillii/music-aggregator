@@ -10,4 +10,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id'
+  has_many :received_notifications, class_name: 'Notification', foreign_key: 'recipient_id'
 end
