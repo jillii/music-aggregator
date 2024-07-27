@@ -1,0 +1,4 @@
+<p>
+    <% if notification.created_at <= prev_viewed_at %>(read) <% end %>
+    <%= notification.message.html_safe %>
+</p>

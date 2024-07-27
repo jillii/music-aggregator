@@ -95,12 +95,19 @@ class PlaylistsController < ApplicationController
 
   def add_editor
     editor = User.find(params[:user])
+    notification = Notification.new(
+      message: "<a href='/playlists/#{@playlist.id}'>You've been invited to edit #{@playlist.title}</a>",
+      sender_id: current_user.id,
+      recipient_id: editor.id,
+      read: false
+    )
 
     begin
       @playlist.editors.push(editor)
     rescue Exception => e
       redirect_to add_editor_path(@playlist), notice: 'Could not add user'
     else
+      notification.save
       redirect_to playlist_path(@playlist), notice: "Editor was successfully added."
     end
   end
