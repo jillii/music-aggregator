@@ -6,6 +6,17 @@
     <% end %>
     <div class="copy-area">
       <h1 class="playlist-title"><%= @playlist.title %></h1>
+      <% if user_signed_in? %>
+        <% if current_user.liked_playlists.include?(@playlist) %>
+            <%= button_to playlist_unlike_path(@playlist), method: :delete do |btn| %>
+                &#9829;
+            <% end %>
+        <% else %>
+            <%= button_to playlist_like_path(@playlist), method: :post do |btn| %>
+                &#9825;
+            <% end %>
+        <% end %>
+        <% end %>
       <% if @is_user %>
         <p class="playlist_user">By you</p>
         <div class="playlist-actions">
