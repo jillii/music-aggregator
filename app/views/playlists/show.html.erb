@@ -6,17 +6,7 @@
     <% end %>
     <div class="copy-area">
       <h1 class="playlist-title"><%= @playlist.title %></h1>
-      <% if user_signed_in? %>
-        <% if current_user.liked_playlists.include?(@playlist) %>
-            <%= button_to playlist_unlike_path(@playlist), method: :delete do |btn| %>
-                &#9829;
-            <% end %>
-        <% else %>
-            <%= button_to playlist_like_path(@playlist), method: :post do |btn| %>
-                &#9825;
-            <% end %>
-        <% end %>
-        <% end %>
+      <%= render 'likes/like_button', playlist: @playlist %>
       <% if @is_user %>
         <p class="playlist_user">By you</p>
         <div class="playlist-actions">
@@ -88,7 +78,7 @@
 <script>
 
 // Reorder tracks
-const tracklist = document.getElementById("sortable-tracklist");
+var tracklist = document.getElementById("sortable-tracklist");
 
 if (tracklist) {
     var sortable = Sortable.create(tracklist, {

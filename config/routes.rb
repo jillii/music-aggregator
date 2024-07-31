@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-  get 'likes/create'
-  get 'likes/destroy'
   get 'users/:id/notifications', to: 'notifications#index', as: :user_notifications
   resources :playlists do
     get '/page/:page', action: :index, on: :collection
     # liking routes
-    post 'like', to: 'likes#create'
-    delete 'unlike', to: 'likes#destroy'
+    resource :like, only: [:destroy, :create]
   end
 
   # Defines track reorder route
