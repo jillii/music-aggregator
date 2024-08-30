@@ -1,4 +1,4 @@
-<% if current_user.likes.exists?(playlist: playlist) %>
+<% if current_user && current_user.likes.exists?(playlist: playlist) %>
   <%= button_to 'Unlike', playlist_like_path(playlist), method: :delete, remote: true, id: 'like-button' %>
 <% else %>
   <%= button_to 'Like', playlist_like_path(playlist), method: :post, remote: true, id: 'like-button' %>

@@ -37,7 +37,7 @@ class PlaylistsController < ApplicationController
     @user = User.find(@playlist.user_id)
     @tracks = @playlist.tracks
     @track_ids = @tracks.pluck(:track_id)
-    @is_user = current_user.id === @playlist.user_id
+    @is_user = current_user && current_user.id === @playlist.user_id
   end
 
   # GET /playlists/new
@@ -122,26 +122,27 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_playlist
-      @playlist = Playlist.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_playlist
+    @playlist = Playlist.find(params[:id])
+  end
+
+  # Protect playlists from unauthorized users
+  def correct_user
+    @is_user = current_user.id === @playlist.user_id
+    unless @is_user
+        redirect_to user_account_path(current_user)
     end
+  end
+  
+  def correct_editor
+    @is_editor = current_user && @playlist.editors.ids.include?(current_user.id)
+  end
+
+  private
 
     # Only allow a list of trusted parameters through.
     def playlist_params
       params.require(:playlist).permit(:title, :image)
-    end
-
-    # Protect playlists from unauthorized users
-    def correct_user
-      @is_user = current_user.id === @playlist.user_id
-      unless @is_user
-          redirect_to user_account_path(current_user)
-      end
-    end
-
-    def correct_editor
-      @is_editor = @playlist.editors.ids.include?(current_user.id)
     end
 end

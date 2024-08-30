@@ -7,7 +7,7 @@
             <% if track.addedby %>
                 Added by: <%= User.find(track.addedby).username %>
             <% end %>
-            <% if @is_user || track.addedby === current_user.id %>
+            <% if @is_user || (current_user && track.addedby === current_user.id) %>
                 <%= button_to "Remove", {controller: :tracks, action: :destroy, params: {track: track.id, playlist: track.playlist_id}}, method: :delete %>            
             <% end %>
         </a>
