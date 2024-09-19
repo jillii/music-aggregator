@@ -1,3 +1,4 @@
+<%= turbo_frame_tag "app" do %>
 <h1>Editing playlist</h1>
 
 <%= render "form", playlist: @playlist %>
@@ -8,3 +9,4 @@
   <%= link_to "Show this playlist", playlist_path(@playlist) %> |
   <%= link_to "Back to playlists", playlists_path %>
 </div>
+<% end %>

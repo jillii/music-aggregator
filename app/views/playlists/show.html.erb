@@ -1,3 +1,4 @@
+<%= turbo_frame_tag "app" do %>
 <%= link_to "Back to playlists", playlists_path %>
 <section class="playlist">
 <div class="site-container">
@@ -52,6 +53,7 @@
     <% end %>
   </div>
 </section>
+<% end%>
 
 # Media player
 <div id="media-player" class="windows active playing">
