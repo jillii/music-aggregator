@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "app" do %>
 <%= link_to "Back to playlists", playlists_path %>
 <section class="playlist">
-<div class="site-container">
+  <div class="site-container">
     <% if @playlist.image.attached? %>
       <%= image_tag @playlist.image, size: "100x100", alt: "#{@playlist.title} image", class: "playlist-image"  %>
     <% end %>
@@ -38,7 +38,8 @@
     # Tracks
     <% if @tracks %>
         <% index = 0 %>
-        <%= link_to "Play all", '#', id: 'playAll'  %>
+        <%= link_to "Play Playlist", '#', id: 'playPlaylist', data: {turbo_frame: 'mediaplayer'} %>
+        <%= link_to "Add to queue", '#', id: 'cuePlaylist', data: {'playlist' => @track_ids.join(','), turbo_frame: 'mediaplayer'}  %>
 
         <div id="<%= @is_user || @is_editor ? 'sortable-' : '' %>tracklist" class="playlist-tracks">
             <% for track in @tracks %>
@@ -54,130 +55,3 @@
   </div>
 </section>
 <% end%>
-
-# Media player
-<div id="media-player" class="windows active playing">
-    <marquee>Now playing: <span id="track-title"></span></marquee>
-    <div class="controls"> 
-    <button aria-label="play" id="play" class="play">Play</button> 
-    <button aria-label="stop" id="stop" class="stop">Stop</button>
-    <button aria-label="previous track" id="prev" class="prev">Prev</button>
-    <button aria-label="next track" id="next" class="next">Next</button>
-    <div class="current-time-container">
-        <span id="curr-main" class="current-time">6.799571</span>
-    </div>
-    </div>
-    <div class="range-container">
-    <input id="dur-main" type="range" name="rng" min="0" value="0" max="252.029388">
-    </div>
-</div>
-
-<div controls data-playlist='<%= raw @track_ids %>' data-autoplay="0" data-loop="1" id="youtube-player">Youtube Player</div>
-
-<script src="https://www.youtube.com/iframe_api"></script>
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-
-<script>
-
-// Reorder tracks
-var tracklist = document.getElementById("sortable-tracklist");
-
-if (tracklist) {
-    var sortable = Sortable.create(tracklist, {
-        onEnd: function (evt) {
-            var itemEl = evt.item;
-            var itemIds = Array.from(tracklist.children).map(item => item.dataset.track);
-
-            fetch('/tracks/reorder', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify({ item_ids: itemIds })
-            });
-        }
-    });
-}
-
-window.YT.ready(function() {
-    const youtubePlayer = document.getElementById('youtube-player');
-    const playlist = JSON.parse(youtubePlayer.getAttribute('data-playlist'));
-    
-    let titleElem = document.getElementById('track-title');
-
-    const playTracks = document.getElementsByClassName('play-track');
-    // initiallize youtube player
-    const player = new YT.Player('youtube-player', {
-        width: 300,
-        height: 200,
-        events: {
-            'onReady': function() {
-                player.cuePlaylist(playlist);
-                playerControls();
-            },
-            'onStateChange': updateTitle
-        }
-    });
-    // start playlist from clicked item
-    for (var i = 0; i < playTracks.length; i++) {
-        playTracks[i].addEventListener("click", function(e){
-            e.preventDefault();
-            const index = this.getAttribute('data-index');
-            player.loadPlaylist(playlist, index);
-        });
-    }
-    // update title that displays in media player marquee
-    function updateTitle(event) {
-        if (event.target.videoTitle !== titleElem.innerHTML && player.getPlayerState() == YT.PlayerState.PLAYING) {
-            titleElem.innerHTML = event.target.videoTitle;
-        }
-    }
-    // define media player controls
-    function playerControls() {
-        const playAll = document.getElementById("playAll"),
-              play = document.getElementById("play"),
-              stop = document.getElementById("stop"),
-              prev = document.getElementById("prev"),
-              next = document.getElementById("next");
-
-        playAll.addEventListener("click", function(e) {
-            e.preventDefault();
-            if (player.getPlayerState() != YT.PlayerState.PLAYING) {
-                player.playVideo();
-            }
-        });
-        play.addEventListener("click", function() {
-            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-                player.pauseVideo();
-                play.innerHTML = "Play";
-            } else {
-                player.playVideo();
-                play.innerHTML = "Pause";
-            }
-        });
-        stop.addEventListener("click", function() {
-            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-                player.stopVideo();
-                play.innerHTML = "Play";
-            }
-        });
-        prev.addEventListener("click", function() {
-            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-                player.previousVideo();
-            } else {
-                player.previousVideo();
-                player.pauseVideo();
-            }
-        });
-        next.addEventListener("click", function() {
-            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-                player.nextVideo();
-            } else {
-                player.nextVideo();
-                player.pauseVideo();
-            }
-        });
-    }
-});
-</script>

@@ -1,6 +1,6 @@
 <div class="track" data-track="<%= track.id %>">
     <% if track.source == 'youtube' %>
-        <a href="#" class="play-track" data-id="<%= track.track_id %>" data-index="<%= index %>">
+        <%= link_to '#', class: 'play-tracks', data:  {id: track.track_id, index: index, turbo_frame: 'mediaplayer'} do |x| %>
             <h3 style="pointer-events: none"><%= track.title %></h3>
             <%= link_to "Search related", playlists_path(track: track.track_id) %>
 
@@ -10,7 +10,7 @@
             <% if @is_user || (current_user && track.addedby === current_user.id) %>
                 <%= button_to "Remove", {controller: :tracks, action: :destroy, params: {track: track.id, playlist: track.playlist_id}}, method: :delete %>            
             <% end %>
-        </a>
+        <% end %>
     <% else %>
         <audio class="play-track" preload="none" id="player-1" onloadedmetadata="mDur('1')" ontimeupdate="mPlay('1')" data-title="spiritual paralysis">
             <source src="https://feeds.soundcloud.com/stream/1830873042-generalexpletive-spiritual-paralysis.mp3" type="audio/mpeg">

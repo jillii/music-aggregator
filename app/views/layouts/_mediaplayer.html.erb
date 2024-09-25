@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "mediaplayer" do %>
+<div id="media-player" class="windows active playing">
+    <marquee>Now playing: <span id="track-title"></span></marquee>
+    <div class="controls"> 
+    <button aria-label="play" id="play" class="play">Play</button> 
+    <button aria-label="stop" id="stop" class="stop">Stop</button>
+    <button aria-label="previous track" id="prev" class="prev">Prev</button>
+    <button aria-label="next track" id="next" class="next">Next</button>
+    <div class="current-time-container">
+        <span id="curr-main" class="current-time">6.799571</span>
+    </div>
+    </div>
+    <div class="range-container">
+    <input id="dur-main" type="range" name="rng" min="0" value="0" max="252.029388">
+    </div>
+</div>
+
+<div controls data-autoplay="0" data-loop="1" id="youtube-player">Youtube Player</div>
+<% end %>

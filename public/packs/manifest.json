@@ -1,0 +1,14 @@
+{
+  "entrypoints": {
+    "index": {
+      "js": [
+        "/packs/js/index-dbae6100d6edb24572c7.js"
+      ],
+      "js.map": [
+        "/packs/js/index-dbae6100d6edb24572c7.js.map"
+      ]
+    }
+  },
+  "index.js": "/packs/js/index-dbae6100d6edb24572c7.js",
+  "index.js.map": "/packs/js/index-dbae6100d6edb24572c7.js.map"
+}
