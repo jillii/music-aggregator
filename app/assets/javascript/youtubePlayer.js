@@ -16,7 +16,7 @@ let player,
     prev = document.getElementById("prev"),
     next = document.getElementById("next");
 
-document.addEventListener('turbo:load', function() {
+addEventListener('turbo:load', () => {
     // initiallize youtube player
     player = new YT.Player('youtube-player', {
         width: 300,
@@ -69,8 +69,8 @@ document.addEventListener('turbo:load', function() {
     }
 });
 
-document.addEventListener('turbo:load', youtube_player, false);
-document.addEventListener('turbo:frame-load', youtube_player, false);
+addEventListener('turbo:load', youtube_player, false);
+addEventListener('turbo:frame-load', youtube_player, false);
 
 function youtube_player () {
     const playTracks = document.getElementsByClassName('play-tracks');
