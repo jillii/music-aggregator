@@ -10,12 +10,7 @@ if (window.YT) { return; };
 };
 reloadYoutube();
 
-let player,
-    play = document.getElementById("play"),
-    stop = document.getElementById("stop"),
-    prev = document.getElementById("prev"),
-    next = document.getElementById("next");
-
+let player;
 addEventListener('turbo:load', () => {
     // check if playlist already exists
     const currentPlaylist = player ? player.getPlaylist() : null,
@@ -36,6 +31,11 @@ addEventListener('turbo:load', () => {
             player.loadPlaylist(currentPlaylist, currentIndex, currentStart);
         }
     }
+
+    const play = document.getElementById("play"),
+          stop = document.getElementById("stop"),
+          prev = document.getElementById("prev"),
+          next = document.getElementById("next");
 
     play.addEventListener("click", function() {
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
