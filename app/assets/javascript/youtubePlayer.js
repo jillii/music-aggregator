@@ -17,14 +17,25 @@ let player,
     next = document.getElementById("next");
 
 addEventListener('turbo:load', () => {
+    // check if playlist already exists
+    const currentPlaylist = player ? player.getPlaylist() : null,
+          currentIndex    = player ? player.getPlaylistIndex() : null,
+          currentStart    = player ? player.getCurrentTime() : null;
     // initiallize youtube player
     player = new YT.Player('youtube-player', {
         width: 300,
         height: 200,
         events: {
+            onReady: onReadyEvent,
             onStateChange: updateTitle
         }
     });
+
+    function onReadyEvent () {
+        if (currentPlaylist) {
+            player.loadPlaylist(currentPlaylist, currentIndex, currentStart);
+        }
+    }
 
     play.addEventListener("click", function() {
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
