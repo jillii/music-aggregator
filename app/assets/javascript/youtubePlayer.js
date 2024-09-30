@@ -15,7 +15,8 @@ addEventListener('turbo:load', () => {
     // check if playlist already exists
     const currentPlaylist = player ? player.getPlaylist() : null,
           currentIndex    = player ? player.getPlaylistIndex() : null,
-          currentStart    = player ? player.getCurrentTime() : null;
+          currentStart    = player ? player.getCurrentTime() : null,
+          currentState    = player ? player.getPlayerState() : null;
     // initiallize youtube player
     player = new YT.Player('youtube-player', {
         width: 300,
@@ -28,7 +29,11 @@ addEventListener('turbo:load', () => {
 
     function onReadyEvent () {
         if (currentPlaylist) {
-            player.loadPlaylist(currentPlaylist, currentIndex, currentStart);
+            if (currentState == YT.PlayerState.PLAYING) { // player is playing
+                player.loadPlaylist(currentPlaylist, currentIndex, currentStart);
+            } else {
+                player.cuePlaylist(currentPlaylist, currentIndex, currentStart);
+            }
         }
     }
 
