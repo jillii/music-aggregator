@@ -11,6 +11,8 @@ if (window.YT) { return; };
 reloadYoutube();
 
 let player;
+let is_looping = false;
+
 addEventListener('turbo:load', () => {
     // check if playlist already exists
     const currentPlaylist = player ? player.getPlaylist() : null,
@@ -34,13 +36,18 @@ addEventListener('turbo:load', () => {
             } else {
                 player.cuePlaylist(currentPlaylist, currentIndex, currentStart);
             }
+
+            if (is_looping) {
+                player.setLoop(1); // set loop to true
+            }
         }
     }
 
     const play = document.getElementById("play"),
           stop = document.getElementById("stop"),
           prev = document.getElementById("prev"),
-          next = document.getElementById("next");
+          next = document.getElementById("next"),
+          loop = document.getElementById("loop");
 
     play.addEventListener("click", function() {
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
@@ -71,6 +78,15 @@ addEventListener('turbo:load', () => {
         } else {
             player.nextVideo();
             player.pauseVideo();
+        }
+    });
+    loop.addEventListener("click", function() {
+        if (is_looping) {
+            player.setLoop(0);
+            is_looping = false;
+        } else {
+            player.setLoop(1);
+            is_looping = true;
         }
     });
     // update title that displays in media player marquee
