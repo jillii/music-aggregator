@@ -1,6 +1,6 @@
 <% user = User.find(playlist.user_id) %>
 
-<%= link_to playlist_path(playlist), class: "playlist card", data: {turbo_action: 'advance'} do %>
+<%= link_to playlist_path(playlist), class: "playlist card" do %>
     <% if playlist.image.attached? %>
         <%= image_tag playlist.image, size: "100x100", alt: "#{playlist.title} image", class: "playlist-image"  %>
     <% end %>
