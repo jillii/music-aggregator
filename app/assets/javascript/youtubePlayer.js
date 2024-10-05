@@ -29,6 +29,33 @@ addEventListener('turbo:load', () => {
             onStateChange: updateTitle
         }
     });
+    
+    // handle seek / ff
+    const range = document.getElementById('range');
+    const time = document.getElementById('current-time');
+    function updateTimerDisplay() {
+        // Update current time text display.
+        if (player) {
+            time.innerHTML = formatTime( player.getCurrentTime() );
+        }
+    }
+    function updateProgressBar() {
+        // Update the value of our progress bar accordingly.
+        if (player) {
+            range.value = (player.getCurrentTime() / player.getDuration()) * 100;
+        }
+    }
+
+    range.addEventListener('changemouseup touchend', updateTime, false);
+    range.addEventListener('touchend', updateTime, false);
+
+    function updateTime (e) {
+        // Calculate the new time for the video.
+        // new time in seconds = total duration in seconds * ( value of range input / 100 )
+        var newTime = player.getDuration() * (e.target.value / 100);
+        // Skip video to new time.
+        player.seekTo(newTime);
+    }
 
     function onReadyEvent () {
         if (currentPlaylist) {
@@ -41,7 +68,20 @@ addEventListener('turbo:load', () => {
             if (is_looping) {
                 player.setLoop(1); // set loop to true
             }
+            range.value = currentStart;
+            time.innerHTML = formatTime(currentStart);
         }
+        // Update the controls on load
+        updateTimerDisplay();
+        updateProgressBar();
+
+        
+        // Start interval to update elapsed time display and
+        // the elapsed part of the progress bar every second.
+        const time_update_interval = setInterval(function () {
+            updateTimerDisplay();
+            updateProgressBar();
+        }, 1000)
     }
 
     const play = document.getElementById("play"),
@@ -99,19 +139,6 @@ addEventListener('turbo:load', () => {
         } else {
             document.title = 'Greatdj3';
         }
-        // Update the controls on load
-        updateTimerDisplay();
-        updateProgressBar();
-
-        // Clear any old interval.
-        // clearInterval(time_update_interval);
-
-        // Start interval to update elapsed time display and
-        // the elapsed part of the progress bar every second.
-        time_update_interval = setInterval(function () {
-            updateTimerDisplay();
-            updateProgressBar();
-        }, 1000)
     }
 });
 
@@ -159,15 +186,6 @@ function youtube_player () {
     }
 }
 
-function updateTimerDisplay() {
-    // Update current time text display.
-    document.getElementById('current-time').innerHTML = formatTime( player.getCurrentTime() );
-}
-function updateProgressBar() {
-    // Update the value of our progress bar accordingly.
-    range.value = (player.getCurrentTime() / player.getDuration()) * 100;
-}
-
 function formatTime(time){
     time = Math.round(time);
 
@@ -175,15 +193,4 @@ function formatTime(time){
     seconds = time - minutes * 60;
     seconds = seconds < 10 ? '0' + seconds : seconds;
     return minutes + ":" + seconds;
-}
-
-range.addEventListener('changemouseup touchend', updateTime, false);
-range.addEventListener('touchend', updateTime, false);
-
-function updateTime (e) {
-    // Calculate the new time for the video.
-    // new time in seconds = total duration in seconds * ( value of range input / 100 )
-    var newTime = player.getDuration() * (e.target.value / 100);
-    // Skip video to new time.
-    player.seekTo(newTime);
 }
