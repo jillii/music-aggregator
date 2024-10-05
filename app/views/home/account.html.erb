@@ -9,7 +9,7 @@
             <p class="user-age">User for <%= days %> <%= days > 1 ? 'days' : 'day' %></p>
             <% if current_user && current_user.id === @user.id %>
                 <div class="user-actions">
-                    <%= link_to "Edit", edit_user_registration_path(@user) %> |
+                    <%= link_to "Edit", edit_user_registration_path(@user), data: {turbo_action: 'advance'} %> |
                     <%= button_to "Cancel my account", registration_path(:user), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
                 </div>
             <% end %>

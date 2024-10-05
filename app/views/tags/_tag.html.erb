@@ -1,5 +1,5 @@
 <div class="tag">
-    <%= link_to tag.label, playlists_path(tag: tag.label) %>
+    <%= link_to tag.label, playlists_path(tag: tag.label), data: {turbo_action: 'advance'} %>
 
     <% if is_user %>
         <%= button_to "Delete", {controller: :tags, action: :destroy, id: tag.id}, method: :delete %>

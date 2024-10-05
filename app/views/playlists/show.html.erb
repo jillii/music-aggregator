@@ -11,8 +11,8 @@
       <% if @is_user %>
         <p class="playlist_user">By you</p>
         <div class="playlist-actions">
-            <%= link_to "Add editor", search_users_path %>
-            <%= link_to "Edit", edit_playlist_path(@playlist) %>
+            <%= link_to "Add editor", search_users_path, data: {turbo_action: 'advance'} %>
+            <%= link_to "Edit", edit_playlist_path(@playlist), data: {turbo_action: 'advance'} %>
             <%= button_to "Delete", @playlist, method: :delete %>
         </div>
       <% else %>
@@ -22,7 +22,7 @@
       <% if @playlist.editors.present? %>
         <div class="playlist-editors">
             <% @playlist.editors.each do |editor| %>
-                <%= link_to editor.username, user_account_path(editor) %>
+                <%= link_to editor.username, user_account_path(editor), data: {turbo_action: 'advance'} %>
             <% end %>
         </div>
       <% end %>
@@ -50,7 +50,7 @@
     <% end %>
 
     <% if @is_user || @is_editor %>
-        <%= link_to "Add track", add_track_path(@playlist) %>
+        <%= link_to "Add track", add_track_path(@playlist), data: {turbo_action: 'advance'} %>
     <% end %>
   </div>
 </section>

@@ -6,7 +6,7 @@
 <br>
 
 <div>
-  <%= link_to "Show this playlist", playlist_path(@playlist) %> |
-  <%= link_to "Back to playlists", playlists_path %>
+  <%= link_to "Show this playlist", playlist_path(@playlist), data: {turbo_action: 'advance'} %> |
+  <%= link_to "Back to playlists", playlists_path, data: {turbo_action: 'advance'} %>
 </div>
 <% end %>
