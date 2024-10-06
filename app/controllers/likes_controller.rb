@@ -4,9 +4,9 @@ class LikesController < ApplicationController
   def create
     @playlist = Playlist.find(params[:playlist_id])
     current_user.likes.create!(playlist: @playlist)
-    
+
     respond_to do |format|
-      format.js   # This will look for create.js.erb
+      format.html { redirect_to playlist_path(@playlist)}
     end
   end
 
@@ -16,7 +16,7 @@ class LikesController < ApplicationController
     like.destroy if like
 
     respond_to do |format|
-      format.js   # This will look for destroy.js.erb
+      format.html { redirect_to playlist_path(@playlist)}
     end
   end
 end
