@@ -114,11 +114,13 @@ addEventListener('turbo:load', () => {
         }
     });
     next.addEventListener("click", function() {
-        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-            player.nextVideo();
-        } else {
-            player.nextVideo();
-            player.pauseVideo();
+        if (player.getPlaylistIndex() + 1 < player.getPlaylist().length || is_looping) {
+            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+                player.nextVideo();
+            } else {
+                player.nextVideo();
+                player.pauseVideo();
+            }
         }
     });
     loop.addEventListener("click", function() {
