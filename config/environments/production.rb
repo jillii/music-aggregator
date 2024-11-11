@@ -7,7 +7,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address => "178.128.157.11",
-    :port    => 25,
+    :port    => 465,
     :domain  => 'playlist.creator'
   }
   # Code is not reloaded between requests.
