@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   # Defines the root path route ("/")
-  root to: "playlists#index"
+  root to: "home#index"
   get 'users/:id', to: 'home#account', as: :user_account
 
   # Defines route to search
