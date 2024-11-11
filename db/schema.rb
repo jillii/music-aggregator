@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_11_185034) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_11_191523) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,8 +67,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_11_185034) do
     t.index ["sender_id"], name: "index_notifications_on_sender_id"
   end
 
-# Could not dump table "playlists" because of following StandardError
-#   Unknown type '' for column 'image'
+  create_table "playlists", force: :cascade do |t|
+    t.string "title"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "editor_id"
+    t.index ["editor_id"], name: "index_playlists_on_editor_id"
+    t.index ["user_id"], name: "index_playlists_on_user_id"
+  end
 
   create_table "tags", force: :cascade do |t|
     t.string "label"
@@ -91,7 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_11_185034) do
   end
 
 # Could not dump table "users" because of following StandardError
-#   Unknown type 'attachment' for column 'avatar'
+#   Unknown type '' for column 'avatar'
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
