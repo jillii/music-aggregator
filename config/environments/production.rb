@@ -3,12 +3,16 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   # change before going live
-  config.action_mailer.default_url_options = {:host => 'playlist.creator'}
+  config.action_mailer.default_url_options = { host: 'playlist.builder' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => "178.128.157.11",
-    :port    => 465,
-    :domain  => 'playlist.creator'
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
+    domain: 'playlist.builder',
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
   }
   # Code is not reloaded between requests.
   config.cache_classes = true
