@@ -10,9 +10,7 @@
     <%= stylesheet_link_tag 'main', 'data-turbo-track': 'reload' %>
     <%= javascript_include_tag "https://www.youtube.com/iframe_api" %>
     <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js" %>
-    <%= javascript_include_tag "/assets/youtubePlayer.js", defer: true %>
-    <%= javascript_include_tag "/assets/reorderTracks.js", defer: true %>
-    <%= javascript_include_tag "/assets/pageReloadHandler.js", defer: true %>
+    <%= javascript_include_tag "/assets/application.js", defer: true %>
   </head>
   <body>
     <%= turbo_frame_tag "nav" do %>

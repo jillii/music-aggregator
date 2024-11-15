@@ -1,3 +1,5 @@
 //= require rails-ujs
 //= require_tree .
-import "@hotwired/turbo-rails"
+//= require pageReloadHandler
+//= require reorderTracks
+//= require youtubePlayer
