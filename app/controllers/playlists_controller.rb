@@ -11,13 +11,13 @@ class PlaylistsController < ApplicationController
     
     if @search
       @title = @search
-      search_query = "%#{@search}%"
+      search_query = "%#{@search.downcase}%"
 
-      by_tag = Tag.where("label LIKE ?", search_query).pluck(:playlist_id)
-      by_track = Track.where("title LIKE ?", search_query).pluck(:playlist_id)
+      by_tag = Tag.where("lower(label) LIKE ?", search_query).pluck(:playlist_id)
+      by_track = Track.where("lower(title) LIKE ?", search_query).pluck(:playlist_id)
       children_search = by_tag.union(by_track)
 
-      @playlists = Playlist.where("title LIKE ? OR id IN (?)", search_query, children_search).page params[:page]
+      @playlists = Playlist.where("lower(title) LIKE ? OR id IN (?)", search_query, children_search).page params[:page]
 
     elsif @track 
       @title = Track.find_by(track_id: @track).title
