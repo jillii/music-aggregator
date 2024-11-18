@@ -50,6 +50,15 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
 
+    tags = params[:playlist][:tag_id].split(',')
+    tags_attributes = []
+
+    tags.each do |tag|
+      tags_attributes.push({:label => tag})
+    end
+
+    @playlist.tags_attributes = tags_attributes
+
     respond_to do |format|
       if @playlist.save
         format.html { redirect_to playlist_path(@playlist), notice: "Playlist was successfully created." }
@@ -143,6 +152,6 @@ class PlaylistsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def playlist_params
-      params.require(:playlist).permit(:title, :image)
+      params.require(:playlist).permit(:title, :image, :tags_attributes => [:label])
     end
 end
