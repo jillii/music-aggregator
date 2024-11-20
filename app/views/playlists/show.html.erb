@@ -7,7 +7,9 @@
     <% end %>
     <div class="copy-area">
       <h1 class="playlist-title"><%= @playlist.title %></h1>
-      <%= @playlist.likes.size %><%= render 'likes/like_button', playlist: @playlist %>
+      <% if playlist.likes %>
+          <p class="playlist-likes"><%= playlist.likes.size %> likes</p>
+      <% end %>      
       <% if @is_user %>
         <p class="playlist_user">By you</p>
         <div class="playlist-actions">

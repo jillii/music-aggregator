@@ -3,5 +3,8 @@
         <%= image_tag playlist.image, size: "100x100", alt: "#{playlist.title} image", class: "playlist-image"  %>
     <% end %>
     <h2 class="playlist-title"><%= playlist.title %></h2>
+    <% if playlist.likes.present? %>
+        <p class="playlist-likes"><%= playlist.likes.size %> likes</p>
+    <% end %>
     <p class="playlist-user">By <%= user.username ? user.username : user.email %></p>
 <% end %>
