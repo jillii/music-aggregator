@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "app" do %>
   <section>
     <div class="site-container">
-      <div> Welcome <%= current_user.username ? current_user.username : current_user.email %> </div> 
+      <div> Welcome<% if current_user %> <%= current_user.username ? current_user.username : current_user.email %><% end %></div> 
     </div>
   </section>
   <% if @tags %>
