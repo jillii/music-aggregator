@@ -46,8 +46,7 @@ addEventListener('turbo:load', () => {
         }
     }
 
-    range.addEventListener('changemouseup touchend', updateTime, false);
-    range.addEventListener('touchend', updateTime, false);
+    range.addEventListener('change', updateTime, false);
 
     function updateTime (e) {
         // Calculate the new time for the video.
