@@ -15,7 +15,6 @@
         <% if @users.present? %>
             <% @users.each do |user| %>
                 <div class="user">
-                    <%= link_to user.username, add_editor_path, params: {user: user.id} %>
                     <p><%= user.username %></p>
                     <%= button_to "Add", add_editor_path, params: {user: user.id}, method: :put %>
                 </div>
