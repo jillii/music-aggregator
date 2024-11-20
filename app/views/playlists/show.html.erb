@@ -9,7 +9,8 @@
       <h1 class="playlist-title"><%= @playlist.title %></h1>
       <% if @playlist.likes.present? %>
           <p class="playlist-likes"><%= @playlist.likes.size %> likes</p>
-      <% end %>      
+      <% end %>
+      <%= render 'likes/like_button', playlist: @playlist %>
       <% if @is_user %>
         <p class="playlist_user">By you</p>
         <div class="playlist-actions">
