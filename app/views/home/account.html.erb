@@ -7,6 +7,8 @@
             <% end %>
             <% days = ((Time.now - @user.created_at) / 24 / 60 / 60).ceil %>
             <p class="user-age">User for <%= days %> <%= days > 1 ? 'days' : 'day' %></p>
+            <p class="user-playlist-amount">PLaylists: <%= @playlists.size %></p>
+            <p class="user-collab-amount">Collabs: <%= @editor_playlists.size %></p>
             <% if current_user && current_user.id === @user.id %>
                 <div class="user-actions">
                     <%= link_to "Edit", edit_user_registration_path(@user) %> |
