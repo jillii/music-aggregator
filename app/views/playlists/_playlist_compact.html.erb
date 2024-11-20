@@ -1,0 +1,7 @@
+<%= link_to playlist_path(playlist), class: "playlist card" do %>
+    <% if playlist.image.attached? %>
+        <%= image_tag playlist.image, size: "100x100", alt: "#{playlist.title} image", class: "playlist-image"  %>
+    <% end %>
+    <h2 class="playlist-title"><%= playlist.title %></h2>
+    <p class="playlist-user">By <%= user.username ? user.username : user.email %></p>
+<% end %>

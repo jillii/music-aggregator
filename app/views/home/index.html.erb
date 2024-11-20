@@ -1,12 +1,29 @@
 <%= turbo_frame_tag "app" do %>
-<section>
-  <div class="site-container">
-    <% if user_signed_in? %> 
-    <div> Welcome <%= current_user.username ? current_user.username : current_user.email %> </div> 
-      <%= button_to "Sign out", destroy_user_session_path, method: :delete, data: {turbo_frame: '_top'} %> 
-    <% else %>
-      <%= button_to "Sign in", new_user_session_path %> 
-    <% end %>
-  </div>
-</section>
+  <section>
+    <div class="site-container">
+      <div> Welcome <%= current_user.username ? current_user.username : current_user.email %> </div> 
+    </div>
+  </section>
+  <% if @tags %>
+    <section id="recent-tags">
+      <div class="site-container">
+        <div class="tags">
+          <% for tag in @tags %>
+            <div class="tag"><%= link_to tag.label, playlists_path(tag: tag.label) %></div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+  <% end %>
+  <% if @playlists %>
+    <section id="recent-playlists">
+      <div class="site-container">
+        <div class="playlists">
+          <% for playlist in @playlists %>
+            <%= render "playlists/playlist_compact", playlist: playlist, user: User.find(playlist.user_id) %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+  <% end %>
 <% end %>

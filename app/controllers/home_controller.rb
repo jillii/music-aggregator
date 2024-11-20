@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
     def index
-        render
+        @playlists = Playlist.order(id: :desc).limit(10)
+        @tags = Tag.order(id: :desc).limit(10)
     end
 
     def account
