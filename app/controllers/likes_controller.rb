@@ -6,7 +6,7 @@ class LikesController < ApplicationController
     current_user.likes.create!(playlist: @playlist)
 
     notification = Notification.new(
-      message: "<a href='/users/#{current_user.id}'>#{current_user.username ? current_user.username : current_user.email} likes #{@playlist.title}</a>",
+      message: "<a href='/users/#{current_user.id}'>#{current_user.username ? current_user.username : current_user.email}</a> likes <a href='/playlists/#{@playlist.id}'>#{@playlist.title}</a>",
       sender_id: current_user.id,
       recipient_id: @playlist.user_id,
       read: false

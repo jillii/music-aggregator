@@ -105,7 +105,7 @@ class PlaylistsController < ApplicationController
   def add_editor
     editor = User.find(params[:user])
     notification = Notification.new(
-      message: "<a href='/playlists/#{@playlist.id}'>You've been invited to edit #{@playlist.title}</a>",
+      message: "You've been invited to edit <a href='/playlists/#{@playlist.id}'>#{@playlist.title}</a>",
       sender_id: current_user.id,
       recipient_id: editor.id,
       read: false
