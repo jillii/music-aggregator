@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
 
   def index
     if (current_user)
-      @notifications = current_user.received_notifications.reverse_order
+      @notifications = current_user.received_notifications.reverse_order.page(params[:page])
       @prev_notifications_viewed_at = current_user.notifications_viewed_at # store former notifications viewed at state
       current_user.notifications_viewed_at = DateTime.current # update viewed at time
       current_user.save

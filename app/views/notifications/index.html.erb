@@ -2,10 +2,11 @@
     <section>
         <div class="site-container">
             <h1>Notifications</h1>
-            <% if @notifications %>
+            <% if @notifications.present? %>
                 <% @notifications.each do |n| %>
                     <%= render "preview", notification: n, prev_viewed_at: @prev_notifications_viewed_at %>
                 <% end %>
+                <%= paginate @notifications %>
             <% else %>
                 <p>You do not have any notifications</p>
             <% end %>

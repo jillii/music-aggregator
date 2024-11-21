@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get 'users/:id/notifications', to: 'notifications#index', as: :user_notifications
+
+
   resources :playlists do
     get '/page/:page', action: :index, on: :collection
     # liking routes
