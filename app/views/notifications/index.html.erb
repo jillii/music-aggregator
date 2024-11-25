@@ -4,9 +4,7 @@
             <h1>Notifications</h1>
             <% if @notifications.present? %>
                 <% @notifications.each do |n| %>
-                    <%= link_to notification_path(id: n.id) do %>
-                        <%= render "preview", notification: n, prev_viewed_at: @prev_notifications_viewed_at %>
-                    <% end %>
+                    <%= render "preview", notification: n  %>
                 <% end %>
                 <%= paginate @notifications %>
             <% else %>

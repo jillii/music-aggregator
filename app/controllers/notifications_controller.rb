@@ -3,14 +3,16 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = current_user.received_notifications.reverse_order.page(params[:page])
-    @prev_notifications_viewed_at = current_user.notifications_viewed_at # store former notifications viewed at state
-    current_user.notifications_viewed_at = DateTime.current # update viewed at time
-    current_user.save
   end
 
   # GET /notification/:id
   def show
     @notification = Notification.find(params[:id])
+
+    if !@notification.read
+      @notification.update(read: true)
+      Turbo::StreamsChannel.broadcast_replace_to("notification_#{@notification.id}", target: "notification_#{@notification.id}")
+    end
   end
 
   protected
