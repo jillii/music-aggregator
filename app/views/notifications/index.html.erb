@@ -6,6 +6,7 @@
                 <% @notifications.each do |n| %>
                     <%= button_to 'Mark as read', read_notification_path(n.id), method: :post %>
                     <%= render "preview", notification: n  %>
+                    <%= button_to 'Delete', notification_path(n.id), method: :delete %>
                 <% end %>
                 <%= paginate @notifications %>
             <% else %>

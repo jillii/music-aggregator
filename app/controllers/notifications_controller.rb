@@ -25,6 +25,15 @@ class NotificationsController < ApplicationController
     end
   end
 
+  def destroy
+    @notification = Notification.find(params[:id])
+    @notification.destroy
+
+    respond_to do |format|
+      format.html { redirect_back_or_to user_notifications_path }
+    end
+  end
+
   protected
 
     # Protect notifications from unauthorized users
