@@ -4,6 +4,7 @@
             <h1>Notifications</h1>
             <% if @notifications.present? %>
                 <% @notifications.each do |n| %>
+                    <%= button_to 'Mark as read', read_notification_path(n.id), method: :post %>
                     <%= render "preview", notification: n  %>
                 <% end %>
                 <%= paginate @notifications %>

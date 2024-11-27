@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'notifications', to: 'notifications#index', as: :user_notifications
   get 'notification/:id', to: 'notifications#show', as: :notification
+  post 'notification/:id', to: 'notifications#read', as: :read_notification
 
   resources :playlists do
     get '/page/:page', action: :index, on: :collection

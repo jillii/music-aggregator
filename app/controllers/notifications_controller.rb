@@ -15,6 +15,16 @@ class NotificationsController < ApplicationController
     end
   end
 
+  def read
+    @notification = Notification.find(params[:id])
+    @notification.update(read: true)
+
+    respond_to do |format|
+      @notification.save
+      format.html { redirect_back_or_to user_notifications_path }
+    end
+  end
+
   protected
 
     # Protect notifications from unauthorized users
