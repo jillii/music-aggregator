@@ -63,6 +63,8 @@ gem 'kaminari'
 # Use Sass to process CSS
 gem "sassc-rails"
 
+gem 'whenever', require: false
+
 gem 'sidekiq', '~>6.0.0'
 
 group :development, :test do
