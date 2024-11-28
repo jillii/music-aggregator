@@ -1,0 +1,11 @@
+<%= turbo_frame_tag 'app' do %>
+    <section id="single-notification">
+        <div class="site-container">
+            <%= link_to "Back", :back %></br>
+            <% if @notification.present? %>
+                <%= turbo_stream_from "notification_#{@notification.id}" %>
+                <%= @notification.message.html_safe %>
+            <% end %>
+        </div>
+    </section>
+<% end %>
