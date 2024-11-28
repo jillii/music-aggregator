@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   post '/tracks/reorder', to: 'tracks#reorder'
 
   devise_for :users
+
+  get 'users', to: 'home#users'
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   

@@ -16,4 +16,6 @@ class User < ApplicationRecord
 
   has_many :likes, dependent: :destroy
   has_many :liked_playlists, through: :likes, source: :playlist
+
+  paginates_per 20
 end

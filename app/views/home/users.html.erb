@@ -1,0 +1,28 @@
+<%= turbo_frame_tag 'app' do %>
+    <section id="users">
+        <div class="site-container">
+            <h1>Users</h1>
+            <%= form_with url: users_path, method: :get do |form| %>
+                <%= form.text_field :search %>
+                <%= form.submit "Search" %>
+            <% end %>
+            <% if @users.present? %>
+                <div class="users">
+                    <% @users.each do |u| %>
+                        <div class="user">
+                            <% if u.username %>
+                                <a class="user-username" href="/users/<%= u.id %>"><%= u.username %></a>
+                            <% end %>
+                            <% if u.playlists.length > 0 %>
+                                <p class="user-playlists">Playlists: <%= u.playlists.length %></p>
+                                <% playlist = u.playlists.order(:likes).first %>
+                                <p class="user-popular-playlist">Popular playlist: <%= link_to playlist.title, playlist_path(playlist.id) %></p>
+                            <% end %>
+                        </div>
+                    <% end %>
+                    <%= paginate @users %>
+                </div>
+            <% end %>
+        </div>
+    </section>
+<% end %>

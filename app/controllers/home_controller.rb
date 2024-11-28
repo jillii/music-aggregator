@@ -9,4 +9,13 @@ class HomeController < ApplicationController
         @playlists = @user.playlists
         @editor_playlists = @user.playlists_editing
     end
+
+    def users
+        @search = params[:search]
+        if @search and @search != ''
+            @users = User.where("username LIKE ?", "%" + @search + "%").page(params[:page])
+        else  
+            @users = User.all.page(params[:page])
+        end
+    end
 end
