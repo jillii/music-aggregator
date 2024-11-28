@@ -4,7 +4,9 @@
             <h1>Notifications</h1>
             <% if @notifications.present? %>
                 <% @notifications.each do |n| %>
-                    <%= button_to 'Mark as read', read_notification_path(n.id), method: :post %>
+                    <% unless n.read %>
+                        <%= button_to 'Mark as read', read_notification_path(n.id), method: :post %>
+                    <% end %>
                     <%= render "preview", notification: n  %>
                     <%= button_to 'Delete', notification_path(n.id), method: :delete %>
                 <% end %>
