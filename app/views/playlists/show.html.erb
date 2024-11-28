@@ -19,7 +19,11 @@
             <%= button_to "Delete", @playlist, method: :delete %>
         </div>
       <% else %>
-        <p class="playlist-user">By <%= @user.username ? @user.username : @user.email %></p>
+        By
+        <%= link_to user_account_path(@user.id), class: 'playlist-user' do %>
+          <%= @user.username ? @user.username : @user.email %>
+        <% end %>
+        <br>
       <% end %>
       # Editors
       <% if @playlist.editors.present? %>
