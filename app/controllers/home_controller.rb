@@ -13,7 +13,8 @@ class HomeController < ApplicationController
     def users
         @search = params[:search]
         if @search and @search != ''
-            @users = User.where("username LIKE ?", "%" + @search + "%").page(params[:page])
+            search_query = "%#{@search.downcase}%"
+            @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ?", search_query, search_query).page params[:page]
         else  
             @users = User.all.page(params[:page])
         end
