@@ -7,16 +7,24 @@ class HomeController < ApplicationController
     def account
         @user = User.find(params[:id])
         @playlists = @user.playlists
+        @followers = @user.followers
+        @following = @user.following
         @editor_playlists = @user.playlists_editing
     end
 
     def users
-        @search = params[:search]
-        if @search and @search != ''
-            search_query = "%#{@search.downcase}%"
-            @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ?", search_query, search_query).page params[:page]
+        if params[:followers]
+            @users = User.find(params[:followers]).followers.page(params[:page])
+        elsif params[:following]
+            @users = User.find(params[:following]).following.page(params[:page])
         else  
-            @users = User.all.page(params[:page])
+            @search = params[:search]
+            if @search and @search != ''
+                search_query = "%#{@search.downcase}%"
+                @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ?", search_query, search_query).page params[:page]
+            else  
+                @users = User.all.page(params[:page])
+            end
         end
     end
 end

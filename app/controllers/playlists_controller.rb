@@ -63,6 +63,15 @@ class PlaylistsController < ApplicationController
       if @playlist.save
         format.html { redirect_to playlist_path(@playlist), notice: "Playlist was successfully created." }
         format.json { render :show, status: :created, location: @playlist }
+        # send followers a notification
+        current_user.followers.each do |follower|
+          Notification.create(
+            message: "<a href='/users/#{current_user.id}/'>#{current_user.username}</a> has created a new playlist: <a href='/playlists/#{@playlist.id}'>#{@playlist.title}</a>",
+            sender_id: current_user.id,
+            recipient_id: follower.id,
+            read: false
+          )
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @playlist.errors, status: :unprocessable_entity }

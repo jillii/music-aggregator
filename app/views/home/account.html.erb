@@ -9,11 +9,19 @@
             <p class="user-age">User for <%= days %> <%= days > 1 ? 'days' : 'day' %></p>
             <p class="user-playlist-amount">PLaylists: <%= @playlists.size %></p>
             <p class="user-collab-amount">Collabs: <%= @editor_playlists.size %></p>
+            <% if @followers.present? %>
+                <p class="user-followers">Followers: <%= link_to @followers.length, users_path(followers: @user.id) %></p>
+            <% end %>
+            <% if @following.present? %>
+                <p class="user-following">Following: <%= link_to @following.length, users_path(following: @user.id) %></p>
+            <% end %>
             <% if current_user && current_user.id === @user.id %>
                 <div class="user-actions">
                     <%= link_to "Edit", edit_user_registration_path(@user) %> |
                     <%= button_to "Cancel my account", registration_path(:user), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
                 </div>
+            <% else %>
+                <%= render 'follows/follow_button' %>
             <% end %>
         </div>
     </div>
