@@ -10,6 +10,7 @@ class HomeController < ApplicationController
         @followers = @user.followers
         @following = @user.following
         @editor_playlists = @user.playlists_editing
+        @collab_requests = @user.collab_requests_received
     end
 
     def users

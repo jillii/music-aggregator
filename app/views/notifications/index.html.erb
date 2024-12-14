@@ -2,6 +2,13 @@
     <section>
         <div class="site-container">
             <h1>Notifications</h1>
+            <% if @collab_requests.present? %>
+                <% @collab_requests.each do |r| %>
+                    <%= render "collab_requests/preview", request: r  %>
+                    <%= button_to 'Delete', collab_requests_destroy_path(r.id), method: :delete %>
+                <% end %>
+                <%= paginate @notifications %>
+            <% end %>
             <% if @notifications.present? %>
                 <% @notifications.each do |n| %>
                     <% unless n.read %>

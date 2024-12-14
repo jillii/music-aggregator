@@ -41,6 +41,11 @@
             <% end %>
         </div>
       <% end %>
+      <% unless @is_user || @is_editor %>
+        <% unless @collab_request_sent %>
+          <%= button_to 'Request Collab', collab_request_path(@playlist.id) %>
+        <% end %>
+      <% end %>
       # Tags
       <% if @playlist.tags %>
         <div class="playlist-tags">

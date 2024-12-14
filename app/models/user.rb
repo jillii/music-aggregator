@@ -24,4 +24,7 @@ class User < ApplicationRecord
   
   has_many :following_relationships, class_name: 'Follow', foreign_key: 'follower_id'
   has_many :following, through: :following_relationships, source: :followed
+
+  has_many :collab_requests_received, class_name: 'CollabRequest', foreign_key: 'reciever_id'
+  has_many :collab_requests_sent, class_name: 'CollabRequest', foreign_key: 'sender_id'
 end

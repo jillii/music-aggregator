@@ -20,6 +20,11 @@
                     <%= link_to "Edit", edit_user_registration_path(@user) %> |
                     <%= button_to "Cancel my account", registration_path(:user), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
                 </div>
+                <% if @collab_requests.present? %>
+                    <% @collab_requests.each do |request| %>
+                        <%= request.inspect %>
+                    <% end %>
+                <% end %>
             <% else %>
                 <%= render 'follows/follow_button' %>
             <% end %>

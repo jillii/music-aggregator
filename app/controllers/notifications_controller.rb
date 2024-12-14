@@ -3,11 +3,16 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = current_user.received_notifications.reverse_order.page(params[:page])
+    @collab_requests = current_user.collab_requests_received.reverse_order.page(params[:page])
   end
 
   # GET /notification/:id
   def show
     @notification = Notification.find(params[:id])
+
+    unless @notification.recipient_id == current_user.id
+      redirect_to user_notifications_path, notice: "you don't have access to that page"
+    end
 
     if !@notification.read
       @notification.update(read: true)
@@ -39,7 +44,7 @@ class NotificationsController < ApplicationController
     # Protect notifications from unauthorized users
     def is_current_user
       unless current_user
-        redirect_to user_account_path(current_user), notice: "you need to be signed in to see that page"
+        redirect_to root_path, notice: "you need to be signed in to see that page"
       end
     end
 end

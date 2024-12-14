@@ -1,0 +1,13 @@
+<%= turbo_frame_tag 'app' do %>
+    <section id="collab-request">
+        <div class="site-container">
+            <div class="collab-request-message">
+                <%= link_to @sender.username, user_account_path(@sender.id) %> would like to collab on <%= link_to @playlist.title, playlist_path(@playlist.id) %>
+            </div>
+            <div class="collab-request-actions">
+                <%= button_to "Accept", accept_request_path, params: {playlist: @playlist.id, user: @sender.id}, method: :put %>
+                <%= button_to 'Decline', collab_requests_destroy_path, method: :delete %>
+            </div>
+        </div>
+    </section>
+<% end %>

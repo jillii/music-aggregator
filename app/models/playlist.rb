@@ -11,8 +11,10 @@ class Playlist < ApplicationRecord
   has_one_attached :image do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
-  paginates_per 3
+  paginates_per 10
 
   has_many :likes, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
+
+  has_many :collab_requests
 end
