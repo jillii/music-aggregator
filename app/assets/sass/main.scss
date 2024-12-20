@@ -24,6 +24,9 @@ main {
 	margin-top: 66.6px;
 	min-height: calc(100vh - 112px);
 }
+#flash {
+	position: relative;
+}
 .site-nav {
 	position: fixed;
 	top: 0;

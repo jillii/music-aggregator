@@ -12,7 +12,7 @@ class CollabRequestsController < ApplicationController
 
     respond_to do |format|
       if collab_request.save
-        format.html { redirect_to playlist_path(playlist.id) }
+        format.html { redirect_to playlist_path(playlist.id), notice: 'Collab request sent.' }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: collab_request.errors, status: :unprocessable_entity }
