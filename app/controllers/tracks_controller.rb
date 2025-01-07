@@ -8,9 +8,14 @@ class TracksController < ApplicationController
     @track = Track.new
     @query = params[:query]
     @playlist = Playlist.find(params[:id])
+    page_token = params[:page_token]
+
     if @query.present?
       service = Search.new(Rails.application.credentials.youtube[:api_key])
-      @results = service.search(@query).parsed_response['items']
+      data = service.search(@query, page_token).parsed_response
+      @results = data['items']
+      @next = data['nextPageToken']
+      @prev = data['prevPageToken']
     else
       @results = []
     end

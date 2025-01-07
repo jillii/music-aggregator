@@ -6,13 +6,14 @@ class Search
       @api_key = api_key
     end
   
-    def search(query, max_results = 100)
+    def search(query, page_token = nil)
       options = {
         query: {
           part: 'snippet',
           q: query,
-          maxResults: max_results,
-          key: @api_key
+          maxResults: 30,
+          key: @api_key,
+          pageToken: page_token
         }
       }
       self.class.get('/search', options)

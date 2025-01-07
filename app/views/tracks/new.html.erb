@@ -23,6 +23,15 @@
                     <a href="https://www.youtube.com/watch?v=<%= video['id']['videoId'] %>">Watch</a>
                     <%= button_to "Add", add_track_path, params: {track_id: @id, track_title: title}, method: :put %>
                     <br>
+                <% if @next || @prev %>
+                    <div class="page-controls">
+                        <% if @prev %>
+                            <%= link_to "Previous", add_track_path(@playlist, query: @query, page_token: @prev) %>
+                        <% end %>
+                        <% if @next %>
+                            <%= link_to "Next", add_track_path(@playlist, query: @query, page_token: @next) %>
+                        <% end %>
+                    </div>
                 <% end %>
             <% end %>
         </div>
