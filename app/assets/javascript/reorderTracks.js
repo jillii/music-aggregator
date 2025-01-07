@@ -1,5 +1,5 @@
 // Reorder tracks
-document.addEventListener("turbo:load", function() {
+const reorderTracks = () => {
     var tracklist = document.getElementById("sortable-tracklist");
 
     if (tracklist) {
@@ -19,4 +19,6 @@ document.addEventListener("turbo:load", function() {
             }
         });
     }
-});
+}
+addEventListener('turbo:frame-load', reorderTracks)
+addEventListener('turbo:load', reorderTracks)
