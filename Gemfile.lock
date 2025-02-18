@@ -102,7 +102,7 @@ GEM
       xpath (~> 3.2)
     childprocess (5.0.0)
     chronic (0.10.2)
-    concurrent-ruby (1.3.3)
+    concurrent-ruby (1.3.5)
     connection_pool (2.4.1)
     crass (1.0.6)
     csv (3.3.0)
@@ -323,6 +323,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   capybara
+  concurrent-ruby (= 1.3.5)
   debug
   devise (= 4.9.4)
   httparty

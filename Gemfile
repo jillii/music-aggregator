@@ -69,6 +69,8 @@ gem 'sidekiq', '~>6.0.0'
 
 gem 'resend'
 
+# Solve for push fail (post-receive hook declined)
+gem 'concurrent-ruby', '1.3.5'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
