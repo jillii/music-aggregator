@@ -2,23 +2,23 @@
 
 <%= link_to playlist_path(playlist), class: "playlist card" do %>
     <% if playlist.image.attached? %>
-        <%= image_tag playlist.image, size: "100x100", alt: "#{playlist.title} image", class: "playlist-image"  %>
+        <%= image_tag playlist.image, size: "100x100", alt: "#{playlist.title} image", class: "card-image"  %>
     <% end %>
-    <h2 class="playlist-title"><%= playlist.title %></h2>
-    <% if playlist.likes.present? %>
-        <p class="playlist-likes"><%= playlist.likes.size %> likes</p>
-    <% end %>
-    <p class="playlist-user">By <%= user.username ? user.username : user.email %></p>
-    <% if playlist.tracks.present? %>
-        <% for i in 0..2 do %>
-            <% if playlist.tracks[i] %>
-                <% track = playlist.tracks[i] %>
-                <div class="track">
-                    <p class="track-title"><%= track.title %></p>
-                </div>
+    <div class="copy-area">
+        <h2 class="card-title"><%= playlist.title %></h2>
+        <p class="card-user">By <%= user.username ? user.username : user.email %></p>
+        <%= render 'playlists/playlist-likes', playlist: playlist %>
+        <% if playlist.tracks.present? %>
+            <% for i in 0..2 do %>
+                <% if playlist.tracks[i] %>
+                    <% track = playlist.tracks[i] %>
+                    <div class="track">
+                        <p class="track-title"><%= track.title %></p>
+                    </div>
+                <% end %>
             <% end %>
+        <% else %>
+        No tracks :(
         <% end %>
-    <% else %>
-    No tracks :(
-    <% end %>
+    </div>
 <% end %>

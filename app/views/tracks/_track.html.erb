@@ -1,14 +1,14 @@
 <div class="track" data-track="<%= track.id %>">
     <% if track.source == 'youtube' %>
         <%= link_to '#', class: 'play-tracks', data:  {id: track.track_id, index: index, turbo_frame: 'mediaplayer'} do |x| %>
-            <h3 style="pointer-events: none"><%= track.title %></h3>
-            <%= link_to "Search related", playlists_path(track: track.track_id) %>
+            <h3 class="track-title"><%= track.title %></h3>
+            <%= link_to "Search related", playlists_path(track: track.track_id), class: 'search-related' %>
 
             <% if track.addedby %>
                 Added by: <%= User.find(track.addedby).username %>
             <% end %>
             <% if @is_user || (current_user && track.addedby === current_user.id) %>
-                <%= button_to "Remove", {controller: :tracks, action: :destroy, params: {track: track.id, playlist: track.playlist_id}}, method: :delete %>            
+                <%= button_to "", {controller: :tracks, action: :destroy, params: {track: track.id, playlist: track.playlist_id}}, method: :delete, form_class: "btn-trash" %>            
             <% end %>
         <% end %>
     <% else %>

@@ -3,6 +3,7 @@ addEventListener('turbo:click', (e) => {
 })
 
 addEventListener('turbo:submit-end', (e) => {
+    console.log(e.detail.fetchResponse.response.url);
     history.pushState({}, null, e.detail.fetchResponse.response.url);
 })
 

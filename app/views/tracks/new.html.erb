@@ -1,28 +1,36 @@
 <%= turbo_frame_tag "app" do %>
     <section class="playlist">
         <div class="site-container">
-            <h1>Add track to: <%= @playlist.title %></h1>
-            <h2># Search</h2>
+            <h1>Adding track to: <%= @playlist.title %></h1>
+
             <%= form_with url: add_track_path, method: :get, local: true do %>
-                <%= label_tag :query, "Search for:" %>
-                <%= text_field_tag :query, params[:query] %>
+                <%= label_tag :search, "Search for:" %>
+                <%= text_field_tag :search, params[:search] %>
                 <%= submit_tag "Search" %>
             <% end %>
-            
+
             <% if @results.present? %>
                 <h2>Results:</h2>
-                <% @results.each do |video| %>
-                    <% title = video['snippet']['title'] %>
-                    <% image = video['snippet']['thumbnails']['default']['url'] %>
-                    <% @id = video['id']['videoId'] %>
-                    <% if image.present? %>
-                        <%= image_tag image, alt: "Image for #{video['snippet']['title']}", class: "video-image"  %>
+                <div class="card-container horizontal emerge">
+                    <% @results.each do |video| %>
+                        <% if video['id']['kind'] == 'youtube#video' %>
+                            <div class="card">
+                                <% title = video['snippet']['title'] %>
+                                <% image = video['snippet']['thumbnails']['high']['url'] %>
+                                <% @id = video['id']['videoId'] %>
+                                <% if image.present? %>
+                                    <%= image_tag image, alt: "Image for #{video['snippet']['title']}", class: "card-image"  %>
+                                <% end %>
+                                <div class="copy-area">
+                                    <h3 class="card-title"><%= title %></h3>
+                                    <p class="card-copy"><%= video['snippet']['description'] %></p>
+                                    <%= link_to "Watch", "https://www.youtube.com/watch?v=#{video['id']['videoId']}", class: "card-link", target: "_blank" %>
+                                    <%= button_to "Add", add_track_path, params: {track_id: @id, track_title: title}, method: :put %>
+                                </div>
+                            </div>
+                        <% end %>
                     <% end %>
-                    <h3><%= title %></h3>
-                    <p><%= video['snippet']['description'] %></p>
-                    <a href="https://www.youtube.com/watch?v=<%= video['id']['videoId'] %>">Watch</a>
-                    <%= button_to "Add", add_track_path, params: {track_id: @id, track_title: title}, method: :put %>
-                    <br>
+                </div>
                 <% if @next || @prev %>
                     <div class="page-controls">
                         <% if @prev %>

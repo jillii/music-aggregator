@@ -1,0 +1,45 @@
+a {
+	color: var(--blue);
+}
+
+.btn {
+	flex-shrink: 0;
+	display: inline-block;
+	min-width: 130px;
+	padding: 8px 21px;
+	border-radius: 0;
+	border: 2px solid var(--black);
+	font-family: inherit;
+    text-decoration: none;
+	font-size: 18px;
+	line-height: 22px;
+    color: inherit;
+	background-color: var(--slate);
+	white-space: nowrap;
+	cursor: pointer;
+	transition: transform .25s, background-color .25s;
+    &:hover {
+		background-color: var(--black);
+		color: var(--white);
+		border-color: var(--black);
+	}
+	&:active {
+		transform: translateY(3px);
+	}
+}
+
+button {
+	@extend .btn;
+}
+
+.btn-trash {
+	button[type=submit] {
+		min-width: 0;
+		border: none;
+		background-color: transparent;
+		&:after {
+			content: url('trash.svg');
+		}
+	}
+
+}

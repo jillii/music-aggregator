@@ -8,17 +8,7 @@
     <% end %>
     <div class="copy-area">
       <h1 class="playlist-title"><%= @playlist.title %></h1>
-      <% if @playlist.likes.present? %>
-          <p class="playlist-likes"><%= @playlist.likes.size %> likes</p>
-          <div class="playlist-likers">
-            <% @playlist.likes[0..4].each do |like| %>
-              <%= User.find(like.user_id).username %>
-            <% end %>
-            <% if @playlist.likes.length > 5 %>
-            Among others
-            <% end %>
-          </div>
-      <% end %>
+      <%= render 'playlists/playlist-likes', playlist: @playlist %>
       <%= render 'likes/like_button', playlist: @playlist %>
       <% if @is_user %>
         <p class="playlist_user">By you</p>

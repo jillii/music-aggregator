@@ -1,0 +1,41 @@
+body {
+	margin: 100px 0;
+	font-family: "Ubuntu Mono", monospace;
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: 400;
+	color: var(--black);
+	text-align: center;
+	scroll-behavior: smooth;
+}
+
+#flash {
+	position: relative;
+}
+
+section {
+	padding: 51px 0;
+}
+.bg-gray {
+	background-color: var(--slate);
+}
+.bg-black {
+	background-color: var(--black);
+	color: #615e66;
+}
+
+.site-container {
+	max-width: 1400px;
+	width: 90%;
+	margin: 0 auto;
+}
+.small-container {
+	max-width: 660px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.flexbox {
+	display: flex;
+	justify-content: center;
+	gap: 16px;
+}

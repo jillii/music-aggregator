@@ -6,7 +6,7 @@ class TracksController < ApplicationController
   # GET /playlist/:id/tracks/new
   def new
     @track = Track.new
-    @query = params[:query]
+    @query = params[:search]
     @playlist = Playlist.find(params[:id])
     page_token = params[:page_token]
 

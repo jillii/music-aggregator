@@ -1,0 +1,16 @@
+#intro {
+    padding: 102px 0;
+}
+
+.tags {
+    flex: 0 0 250px;
+    text-align: left;
+}
+.slider-container {
+    padding-right: 0;
+    width: calc(100% - 250px - 16px);
+
+    &-headline {
+        text-align: left;
+    }
+}

@@ -1,0 +1,12 @@
+<% if playlist.likes.present? %>
+    <% likes = playlist.likes %>
+    <p class="playlist-likes"><%= likes.size %> <%= likes.size === 1 ? 'like' : 'likes' %></p>
+    <div class="playlist-likers">
+        <% likes[0..4].each do |like| %>
+            <%= User.find(like.user_id).username %>
+        <% end %>
+        <% if likes.size > 5 %>
+            Among others
+        <% end %>
+    </div>
+<% end %>

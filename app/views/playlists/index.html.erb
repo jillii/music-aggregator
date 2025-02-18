@@ -8,10 +8,8 @@
       <h1>Playlists</h1>
     <% end %>
 
-    <%= form_with url: playlists_path, method: :get do |form| %>
-      <%= form.text_field :search %>
-      <%= form.submit "Search" %>
-    <% end %>
+    <%= render 'shared/search', path: playlists_path %>
+
     <% if @playlists.present? %>
       <div id="playlists" class="card-container">
         <% @playlists.each do |playlist| %>

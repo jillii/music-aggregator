@@ -16,6 +16,7 @@ class Search
           pageToken: page_token
         }
       }
+
       self.class.get('/search', options)
     end
   end
