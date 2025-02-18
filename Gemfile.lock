@@ -323,7 +323,6 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   capybara
-  concurrent-ruby
   debug
   devise (= 4.9.4)
   httparty
