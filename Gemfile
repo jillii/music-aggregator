@@ -67,6 +67,11 @@ gem 'whenever', require: false
 
 gem 'sidekiq', '~>6.0.0'
 
+gem 'resend'
+
+# Solve for push fail (post-receive hook declined)
+gem 'concurrent-ruby'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -95,5 +100,4 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'resend'
 end
