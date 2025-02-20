@@ -65,7 +65,7 @@ a {
   color: var(--blue);
 }
 
-.btn, button {
+.btn, button:not(.link-btn) {
   flex-shrink: 0;
   display: inline-block;
   min-width: 130px;
@@ -82,13 +82,26 @@ a {
   cursor: pointer;
   transition: transform 0.25s, background-color 0.25s;
 }
-.btn:hover, button:hover {
+.btn:hover, button:hover:not(.link-btn) {
   background-color: var(--black);
   color: var(--white);
   border-color: var(--black);
 }
-.btn:active, button:active {
+.btn:active, button:active:not(.link-btn) {
   transform: translateY(3px);
+}
+
+.link-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.button_to:has(.link-btn) {
+  display: inline;
 }
 
 .btn-trash button[type=submit] {
@@ -291,6 +304,7 @@ a {
 
 .site-nav {
   position: fixed;
+  max-width: 1300px;
   width: 80%;
   top: 16px;
   left: 50%;
@@ -457,10 +471,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .slider-container {
   padding-right: 0;
-  width: calc(100% - 250px - 16px);
 }
 .slider-container-headline {
   text-align: left;
+}
+
+.tags + .slider-container {
+  width: calc(100% - 250px - 16px);
+}
+
+.user-profile-header {
+  justify-content: space-between;
+  align-items: center;
+}
+.user-profile-header .pull-left {
+  text-align: left;
+}
+.user-profile-header .pull-right {
+  text-align: right;
 }
 
 .break {

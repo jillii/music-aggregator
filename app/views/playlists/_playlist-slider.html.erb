@@ -1,0 +1,12 @@
+<div class="card-container box slider-container">
+    <h2 class="user-playlists-headline slider-container-headline"><%= title %></h2>
+    <div class="slider-nav">
+        <a href="#" class="control prev" id="slider-prev"></a>
+        <a href="#" class="control next" id="slider-next"></a>
+    </div>
+    <div class="playlists slider overlap">
+        <% playlists.each do |playlist| %>
+            <%= render playlist %>
+        <% end %>
+    </div>
+</div>

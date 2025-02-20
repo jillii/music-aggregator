@@ -28,8 +28,21 @@ a {
 	}
 }
 
-button {
+button:not(.link-btn) {
 	@extend .btn;
+}
+
+.link-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.button_to:has(.link-btn) {
+	display: inline;
 }
 
 .btn-trash {

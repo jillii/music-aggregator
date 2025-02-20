@@ -2,40 +2,39 @@
 <%= render 'shared/flash' %>
 <section class="user-profile">
     <div class="site-container">
-        <div class="user-profile-header">
-            <% if @user.username %>
-                <h1 class="user-username"><%= @user.username %></h1>
-            <% end %>
-            <% days = ((Time.now - @user.created_at) / 24 / 60 / 60).ceil %>
-            <p class="user-age">User for <%= days %> <%= days > 1 ? 'days' : 'day' %></p>
-            <p class="user-playlist-amount">PLaylists: <%= @playlists.size %></p>
-            <p class="user-collab-amount">Collabs: <%= @editor_playlists.size %></p>
-            <% if @followers.present? %>
-                <p class="user-followers">Followers: <%= link_to @followers.length, users_path(followers: @user.id) %></p>
-            <% end %>
-            <% if @following.present? %>
-                <p class="user-following">Following: <%= link_to @following.length, users_path(following: @user.id) %></p>
-            <% end %>
-            <% if current_user && current_user.id === @user.id %>
-                <div class="user-actions">
-                    <%= link_to "Edit", edit_user_registration_path(@user) %> |
-                    <%= button_to "Cancel my account", registration_path(:user), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
-                </div>
-            <% else %>
-                <%= render 'follows/follow_button' %>
-            <% end %>
+        <div class="user-profile-header flexbox">
+            <div class="pull-left">
+                <% if @user.username %>
+                    <h1 class="user-username"><%= @user.username %></h1>
+                <% end %>
+                <% days = ((Time.now - @user.created_at) / 24 / 60 / 60).ceil %>
+                <p class="user-age">User for <%= days %> <%= days > 1 ? 'days' : 'day' %></p>
+                <% if current_user && current_user.id === @user.id %>
+                    <div class="user-actions">
+                        <%= link_to "Edit", edit_user_registration_path(@user) %> |
+                        <%= button_to "Cancel my account", registration_path(:user), class: 'link-btn', data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+                    </div>
+                <% else %>
+                    <%= render 'follows/follow_button' %>
+                <% end %>
+            </div>
+            <div class="pull-right">
+                <p class="user-playlist-amount">PLaylists: <%= @playlists.size %></p>
+                <p class="user-collab-amount">Collabs: <%= @editor_playlists.size %></p>
+                <% if @followers.present? %>
+                    <p class="user-followers">Followers: <%= link_to @followers.length, users_path(followers: @user.id) %></p>
+                <% end %>
+                <% if @following.present? %>
+                    <p class="user-following">Following: <%= link_to @following.length, users_path(following: @user.id) %></p>
+                <% end %>
+            </div>
         </div>
     </div>
 </section>
 <section class="user-playlists bg-gray">
     <div class="site-container">
-        <h2 class="user-playlists-headline"><%= @user.username %>'s Playlists</h2>
         <% if @playlists.present? %>
-            <div class="card-container">
-                <% @playlists.each do |playlist| %>
-                    <%= render playlist %>
-                <% end %>
-            </div>
+            <%= render 'playlists/playlist-slider', title: "#{@user.username}'s Playlists", playlists: @playlists %>
         <% else %>
             No playlists
         <% end %>
@@ -44,9 +43,16 @@
 <% if @editor_playlists.present? %>
     <section class="user-playlists">
         <div class="site-container">
-            <h2 class="user-playlists-headline"><%= @user.username %>'s Collabs</h2>
+            <%= render 'playlists/playlist-slider', title: "#{@user.username}'s Collabs", playlists: @editor_playlists %>
+        </div>
+    </section>
+<% end %>
+<% if @liked_playlists.present? %>
+    <section class="user-likes">
+        <div class="site-container">
+            <h2 class="user-likes-headline"><%= @user.username %>'s Likes</h2>
             <div class="card-container">
-                <% @editor_playlists.each do |playlist| %>
+                <% @liked_playlists.each do |playlist| %>
                     <%= render playlist %>
                 <% end %>
             </div>

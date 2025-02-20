@@ -1,0 +1,13 @@
+.user-profile {
+    &-header {
+        justify-content: space-between;
+        align-items: center;
+        
+        .pull-left {
+            text-align: left;
+        }
+        .pull-right {
+            text-align: right;
+        }
+    }
+}
