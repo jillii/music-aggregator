@@ -347,6 +347,20 @@ footer {
   padding: 33px 0 38px;
 }
 
+.playlist-likes {
+  display: inline-flex;
+  gap: 3px;
+  font-family: monospace;
+  font-size: 12px;
+}
+.playlist .heart {
+  font-family: system-ui;
+  text-decoration: none;
+}
+.playlist-likers {
+  position: absolute;
+}
+
 .slider-container {
   position: relative;
   display: flex;

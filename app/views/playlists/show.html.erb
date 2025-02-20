@@ -9,7 +9,6 @@
     <div class="copy-area">
       <h1 class="playlist-title"><%= @playlist.title %></h1>
       <%= render 'playlists/playlist-likes', playlist: @playlist %>
-      <%= render 'likes/like_button', playlist: @playlist %>
       <% if @is_user %>
         <p class="playlist_user">By you</p>
         <div class="playlist-actions">
