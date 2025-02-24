@@ -106,9 +106,9 @@ class PlaylistsController < ApplicationController
 
     if (@search)
       search_query = "%#{@search}%"
-      @users = User.where("username LIKE ? OR email LIKE ? AND id NOT IN (?)", search_query, search_query, not_in)
+      @users = User.where("username LIKE ? OR email LIKE ? AND id NOT IN (?) AND confirmed_at", search_query, search_query, not_in)
     else
-      @users = User.where("id NOT IN (?)", not_in)
+      @users = User.where("id NOT IN (?) AND confirmed_at", not_in)
     end
   end
 
