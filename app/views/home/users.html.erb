@@ -10,14 +10,17 @@
             <% if @users.present? %>
                 <div class="users">
                     <% @users.each do |u| %>
+                        <% playlists = u.playlists %>
                         <div class="user">
                             <% if u.username %>
                                 <a class="user-username" href="/users/<%= u.id %>"><%= u.username %></a>
                             <% end %>
-                            <% if u.playlists.length > 0 %>
-                                <p class="user-playlists">Playlists: <%= u.playlists.length %></p>
-                                <% playlist = u.playlists.order(:likes).first %>
-                                <p class="user-popular-playlist">Popular playlist: <%= link_to playlist.title, playlist_path(playlist.id) %></p>
+                            <% if playlists.length > 0 %>
+                                <p class="user-playlists">Playlists: <%= playlists.length %></p>
+                                <% if playlists.order(:likes) %>
+                                    <% pop_playlist = playlists.order(:likes).first %>
+                                    <p class="user-popular-playlist">Popular playlist: <%= link_to pop_playlist.title, playlist_path(pop_playlist.id) %></p>
+                                <% end %>
                             <% end %>
                         </div>
                     <% end %>
