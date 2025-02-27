@@ -1,0 +1,16 @@
+.playlist {
+    &-likes {
+        display: inline-flex;
+        gap: 3px;
+        font-family: monospace;
+        font-size: 12px;
+    }
+    .heart {
+        font-family: system-ui;
+        text-decoration: none;
+    }
+
+    &-likers {
+        position: absolute;
+    }
+}
