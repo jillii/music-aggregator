@@ -17,10 +17,8 @@
                             <% end %>
                             <% if playlists.length > 0 %>
                                 <p class="user-playlists">Playlists: <%= playlists.length %></p>
-                                <% if playlists.order(:likes) %>
-                                    <% pop_playlist = playlists.order(:likes).first %>
-                                    <p class="user-popular-playlist">Popular playlist: <%= link_to pop_playlist.title, playlist_path(pop_playlist.id) %></p>
-                                <% end %>
+                                <% pop_playlist = playlists.popular %>
+                                <p class="user-popular-playlist.first">Popular playlist: <%= link_to pop_playlist.first.title, playlist_path(pop_playlist.first.id) %></p>
                             <% end %>
                         </div>
                     <% end %>

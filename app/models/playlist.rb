@@ -17,4 +17,8 @@ class Playlist < ApplicationRecord
   has_many :liking_users, through: :likes, source: :user
 
   has_many :collab_requests
+
+  scope :popular, -> {
+    order("likes_count DESC")
+  }
 end
