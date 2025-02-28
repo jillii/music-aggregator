@@ -65,7 +65,7 @@ a {
   color: var(--blue);
 }
 
-.btn, button:not(.link-btn) {
+.btn, button:not(.link-btn):not(.btn-add-user) {
   flex-shrink: 0;
   display: inline-block;
   min-width: 130px;
@@ -82,15 +82,19 @@ a {
   cursor: pointer;
   transition: transform 0.25s, background-color 0.25s;
 }
-.btn:hover, button:hover:not(.link-btn) {
+.btn:hover, button:hover:not(.link-btn):not(.btn-add-user) {
   background-color: var(--black);
   color: var(--white);
   border-color: var(--black);
 }
-.btn:active, button:active:not(.link-btn) {
+.btn:active, button:active:not(.link-btn):not(.btn-add-user) {
   transform: translateY(3px);
 }
 
+button {
+  font: inherit;
+  cursor: pointer;
+}
 .link-btn {
   background-color: transparent;
   border: none;

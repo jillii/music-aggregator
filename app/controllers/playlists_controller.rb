@@ -104,11 +104,13 @@ class PlaylistsController < ApplicationController
     not_in = @playlist.editors.ids
     not_in << current_user.id
 
+    followers_followees = current_user.followers.ids + current_user.following.ids
+
     if (@search)
       search_query = "%#{@search}%"
-      @users = User.where("username LIKE ? OR email LIKE ? AND id NOT IN (?) AND confirmed_at IS NOT NULL", search_query, search_query, not_in).page params[:page]
+      @users = User.where("username LIKE ? OR email LIKE ? AND id NOT IN (?) AND confirmed_at IS NOT NULL", search_query, search_query, not_in).in_order_of(:id, followers_followees).page(params[:page])
     else
-      @users = User.where("id NOT IN (?) AND confirmed_at IS NOT NULL", not_in).page params[:page]
+      @users = User.where("id NOT IN (?) AND confirmed_at IS NOT NULL", not_in).in_order_of(:id, followers_followees).page(params[:page])
     end
   end
 

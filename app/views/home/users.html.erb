@@ -7,24 +7,7 @@
                 <%= form.text_field :search %>
                 <%= form.submit "Search" %>
             <% end %>
-            <% if @users.present? %>
-                <div class="users">
-                    <% @users.each do |u| %>
-                        <% playlists = u.playlists %>
-                        <div class="user">
-                            <% if u.username %>
-                                <a class="user-username" href="/users/<%= u.id %>"><%= u.username %></a>
-                            <% end %>
-                            <% if playlists.length > 0 %>
-                                <p class="user-playlists">Playlists: <%= playlists.length %></p>
-                                <% pop_playlist = playlists.popular %>
-                                <p class="user-popular-playlist.first">Popular playlist: <%= link_to pop_playlist.first.title, playlist_path(pop_playlist.first.id) %></p>
-                            <% end %>
-                        </div>
-                    <% end %>
-                    <%= paginate @users %>
-                </div>
-            <% end %>
+            <%= render 'home/user-list', users: @users %>
         </div>
     </section>
 <% end %>

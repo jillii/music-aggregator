@@ -28,8 +28,12 @@ a {
 	}
 }
 
-button:not(.link-btn) {
-	@extend .btn;
+button {
+	font: inherit;
+	cursor: pointer;
+	&:not(.link-btn):not(.btn-add-user) {
+		@extend .btn;
+	}
 }
 
 .link-btn {

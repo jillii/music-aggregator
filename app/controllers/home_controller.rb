@@ -19,13 +19,15 @@ class HomeController < ApplicationController
             @users = User.find(params[:followers]).followers.page(params[:page])
         elsif params[:following]
             @users = User.find(params[:following]).following.page(params[:page])
-        else  
+        else
             @search = params[:search]
+            followers_followees = current_user.followers.ids + current_user.following.ids
+
             if @search and @search != ''
                 search_query = "%#{@search.downcase}%"
-                @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ?", search_query, search_query).page params[:page]
+                @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ? AND id != ? AND confirmed_at IS NOT null", search_query, search_query, current_user.id).in_order_of(id: followers_followees.ids).page params[:page]
             else  
-                @users = User.all.page(params[:page])
+                @users = User.where("id != ? AND confirmed_at IS NOT null", current_user.id).page(params[:page])
             end
         end
     end
