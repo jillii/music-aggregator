@@ -9,7 +9,7 @@
                 Users
             <% end %>
         </h1>
-        <%= form_with url: search_users_path, method: :get do |form| %>
+        <%= form_with url: add_editor_path, method: :get do |form| %>
             <%= form.text_field :search %>
             <%= form.submit "Search" %>
         <% end %>
@@ -19,6 +19,7 @@
                     <%= button_to "Add #{ user.username }", add_editor_path, params: {user: user.id}, method: :put, class: 'btn-add-user box card' %>
                 <% end %>
             </div>
+            <%= paginate @users %>
         <% else %>
             <p>No users found.</p>
         <% end %>
