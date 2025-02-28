@@ -25,10 +25,10 @@ class HomeController < ApplicationController
 
             if @search and @search != ''
                 search_query = "%#{@search.downcase}%"
-                @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ? AND confirmed_at IS NOT null", search_query, search_query)
+                @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ? AND id IS NOT ? AND confirmed_at IS NOT null", search_query, search_query, current_user.id)
                              .order(User.arel_table[:id].in(followers_followees).desc.nulls_last).page params[:page]
             else  
-                @users = User.where("confirmed_at IS NOT null")
+                @users = User.where("id IS NOT ? AND confirmed_at IS NOT null", current_user.id)
                              .order(User.arel_table[:id].in(followers_followees).desc.nulls_last).page params[:page]
             end
         end
