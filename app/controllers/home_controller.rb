@@ -21,14 +21,14 @@ class HomeController < ApplicationController
             @users = User.find(params[:following]).following.page(params[:page])
         else
             @search = params[:search]
-            followers_followees = current_user.followers.ids + current_user.following.ids
+            followers_followees = current_user ? current_user.followers.ids + current_user.following.ids : Array.new
 
             if @search and @search != ''
                 search_query = "%#{@search.downcase}%"
-                @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ? AND id IS NOT ? AND confirmed_at IS NOT null", search_query, search_query, current_user.id)
+                @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ? AND id IS NOT ? AND confirmed_at IS NOT null", search_query, search_query, current_user ? current_user.id : -1)
                              .order(User.arel_table[:id].in(followers_followees).desc.nulls_last).page params[:page]
             else  
-                @users = User.where("id IS NOT ? AND confirmed_at IS NOT null", current_user.id)
+                @users = User.where("id IS NOT ? AND confirmed_at IS NOT null", current_user ? current_user.id : -1)
                              .order(User.arel_table[:id].in(followers_followees).desc.nulls_last).page params[:page]
             end
         end
