@@ -5,6 +5,12 @@
             <h1>Users</h1>
             <%= form_with url: users_path, method: :get do |form| %>
                 <%= form.text_field :search %>
+                <% if params[:followers] %>
+                    <%= form.hidden_field :followers, value: params[:followers] %>
+                <% end %>
+                <% if params[:following] %>
+                    <%= form.hidden_field :following, value: params[:following] %>
+                <% end %>
                 <%= form.submit "Search" %>
             <% end %>
             <%= render 'home/user-list', users: @users %>

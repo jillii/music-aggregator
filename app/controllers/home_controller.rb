@@ -15,22 +15,19 @@ class HomeController < ApplicationController
     end
 
     def users
-        if params[:followers]
-            @users = User.find(params[:followers]).followers.page(params[:page])
-        elsif params[:following]
-            @users = User.find(params[:following]).following.page(params[:page])
-        else
-            @search = params[:search]
-            followers_followees = current_user ? current_user.followers.ids + current_user.following.ids : Array.new
+        @users = User.where(nil)
 
-            if @search and @search != ''
-                search_query = "%#{@search.downcase}%"
-                @users = User.where("lower(email) LIKE ? OR lower(username) LIKE ? AND id IS NOT ? AND confirmed_at IS NOT null", search_query, search_query, current_user ? current_user.id : -1)
-                             .order(User.arel_table[:id].in(followers_followees).desc.nulls_last).page params[:page]
-            else  
-                @users = User.where("id IS NOT ? AND confirmed_at IS NOT null", current_user ? current_user.id : -1)
-                             .order(User.arel_table[:id].in(followers_followees).desc.nulls_last).page params[:page]
-            end
+        if params[:followers].present?
+            user = User.find(params[:followers])  # Find the user with the given id
+            @users = @users.merge(user.followers)  # Merge the following users into the query
+          end
+        if params[:following].present?
+            user = User.find(params[:following])  # Find the user with the given id
+            @users = @users.merge(user.following)  # Merge the following users into the query
         end
+
+        @users = @users.where('lower(users.email) LIKE ? OR lower(users.username) LIKE ?', "%#{params[:search].downcase}%", "%#{params[:search].downcase}%") if params[:search].present?
+        @users = @users.where('users.id IS NOT ?', current_user.id) if current_user.present?
+        @users = @users.where('users.confirmed_at IS NOT null').page params[:page]
     end
 end
