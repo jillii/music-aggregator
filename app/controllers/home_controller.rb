@@ -27,7 +27,7 @@ class HomeController < ApplicationController
         end
 
         @users = @users.where('lower(users.email) LIKE ? OR lower(users.username) LIKE ?', "%#{params[:search].downcase}%", "%#{params[:search].downcase}%") if params[:search].present?
-        @users = @users.where('users.id IS NOT ?', current_user.id) if current_user.present?
+        # @users = @users.where('users.id IS NOT ?', current_user.id) if current_user.present?
         @users = @users.where('users.confirmed_at IS NOT null').page params[:page]
     end
 end
