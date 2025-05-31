@@ -55,10 +55,11 @@ class PlaylistsController < ApplicationController
 
     tags.each do |tag|
       exists = Tag.where(label: tag)
-      if exists
-        @playlist.tags.push(exists) # push existing tag to playlist
+      if exists.exists?
+        @playlist.tags.push(exists.first) # push existing tag to playlist
       else
-        @playlist.tags.push({:label => tag})
+        new_tag = Tag.create(label: tag.strip)
+        @playlist.tags.push(new_tag)
       end
     end
 
@@ -88,11 +89,11 @@ class PlaylistsController < ApplicationController
 
     tags.each do |tag|
       exists = Tag.where(label: tag)
-      if exists
-        @playlist.tags.push(exists) # push existing tag to playlist
+      if exists.exists?
+        @playlist.tags.push(exists.first) # push existing tag to playlist
       else
-        tag = Tag.create(label: tag.strip)
-        @playlist.tags.push(tag)
+        new_tag = Tag.create(label: tag.strip)
+        @playlist.tags.push(new_tag)
       end
     end
 
