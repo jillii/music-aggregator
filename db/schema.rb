@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_26_235316) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_30_003729) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -98,6 +98,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_26_235316) do
     t.integer "likes_count", default: 0
     t.index ["editor_id"], name: "index_playlists_on_editor_id"
     t.index ["user_id"], name: "index_playlists_on_user_id"
+  end
+
+  create_table "playlists_tags", id: false, force: :cascade do |t|
+    t.integer "playlist_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["playlist_id", "tag_id"], name: "index_playlists_tags_on_playlist_id_and_tag_id"
+    t.index ["tag_id", "playlist_id"], name: "index_playlists_tags_on_tag_id_and_playlist_id"
   end
 
   create_table "tags", force: :cascade do |t|

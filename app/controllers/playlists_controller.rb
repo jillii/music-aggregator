@@ -52,13 +52,15 @@ class PlaylistsController < ApplicationController
     @playlist.user_id = current_user.id
 
     tags = params[:playlist][:tag_id].split(',')
-    tags_attributes = []
 
     tags.each do |tag|
-      tags_attributes.push({:label => tag})
+      exists = Tag.where(label: tag)
+      if exists
+        @playlist.tags.push(exists) # push existing tag to playlist
+      else
+        @playlist.tags.push({:label => tag})
+      end
     end
-
-    @playlist.tags_attributes = tags_attributes
 
     respond_to do |format|
       if @playlist.save
@@ -85,7 +87,13 @@ class PlaylistsController < ApplicationController
     tags = params[:playlist][:tag_id].split(',')
 
     tags.each do |tag|
-      Tag.create(label: tag.strip, playlist_id: @playlist.id)
+      exists = Tag.where(label: tag)
+      if exists
+        @playlist.tags.push(exists) # push existing tag to playlist
+      else
+        tag = Tag.create(label: tag.strip)
+        @playlist.tags.push(tag)
+      end
     end
 
     respond_to do |format|

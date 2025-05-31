@@ -5,7 +5,7 @@ class Playlist < ApplicationRecord
                           join_table: :editors_playlists, 
                           association_foreign_key: :user_id
   has_many :tracks, -> { order(order: :asc) }, dependent: :destroy
-  has_many :tags
+  has_and_belongs_to_many :tags
   accepts_nested_attributes_for :tags
   validates :title, presence: true
   has_one_attached :image do |attachable|
