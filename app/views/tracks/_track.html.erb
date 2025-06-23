@@ -5,7 +5,7 @@
             <%= link_to "Search related", playlists_path(track: track.track_id), class: 'search-related' %>
 
             <% if track.addedby %>
-                Added by: <%= User.find(track.addedby).username %>
+                <div class="added-by">Added by: <%= User.find(track.addedby).username %></div>
             <% end %>
             <% if @is_user || (current_user && track.addedby === current_user.id) %>
                 <%= button_to "", {controller: :tracks, action: :destroy, params: {track: track.id, playlist: track.playlist_id}}, method: :delete, form_class: "btn-trash" %>            

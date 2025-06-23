@@ -1,4 +1,39 @@
 .playlist {
+    &.full {
+        .playlist-actions {
+            display: flex;
+            gap: 4px;
+        }
+        .flexbox {
+            .pull-left {
+                flex: 1 0 360px;
+            }
+            .pull-right {
+                flex: 0 0 calc(100% - 360px);
+            }
+            .copy-area {
+                position: sticky;
+                top: 120px;
+            }
+            .playlist-image {
+                position: fixed;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                opacity: .1;
+                object-fit: cover;
+            }
+        }
+        .playlist-actions {
+            display: flex;
+            gap: 6px;
+        }
+        .play-tracks {
+            margin-right: auto;
+        }
+    }
     &-likes {
         display: inline-flex;
         gap: 3px;

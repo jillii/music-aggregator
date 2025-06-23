@@ -1,4 +1,8 @@
 a {
+	font-size: 14px;
+	font-weight: 800;
+	letter-spacing: 1px;
+	text-decoration: none;
 	color: var(--blue);
 }
 
@@ -28,13 +32,13 @@ a {
 	}
 }
 
-button {
-	font: inherit;
-	cursor: pointer;
-	&:not(.link-btn):not(.btn-add-user) {
-		@extend .btn;
-	}
-}
+// button {
+// 	font: inherit;
+// 	cursor: pointer;
+// 	&:not(.icon):not(.heart) {
+// 		@extend .btn;
+// 	}
+// }
 
 .link-btn {
     background-color: transparent;
@@ -49,21 +53,94 @@ button {
 	display: inline;
 }
 
-.btn-trash {
-	button[type=submit] {
-		display: flex;
-		gap:12px;
-		min-width: 0;
-		border: none;
-		background-color: transparent;
-		&:after {
-			content: url('trash.svg');
-		}
-		&:hover {
-			background-color: transparent;
-			color: initial;
-			text-decoration: underline;
+.btn {
+	&-trash {
+		&:before {
+			content: '';
+			background-image: url('trash.svg');
+			background-position: center;
+			background-repeat: no-repeat;
 		}
 	}
+	&-edit {
+		&:before {
+			content: '';
+			background-image: url('pencil.svg');
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+	&-add-user {
+		&:before {
+			content: '';
+			background-image: url('add-friend.svg');
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+	&-play {
+		&:before {
+			content: '';
+			background-image: url('play.svg');
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+	&-load {
+		&:before {
+			content: '';
+			background-image: url('load.svg');
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+}
 
+form.btn-trash {
+	&:before {
+		display: inline-block;
+		width: 21px;
+		height: 21px;
+	}
+}
+
+.icon {
+	display: inline-flex;
+	padding: 6px;
+	border-radius: 5px;
+	background-color: var(--slate);
+	&:before {
+		display: inline-block;
+		height: 21px;
+		width: 21px;
+		flex: 1 0 auto;
+		text-align: center;
+	}
+}
+
+.btn-trash {
+	position: relative;
+	button[type=submit] {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		opacity: 0;
+		cursor: pointer;
+	}
+}
+
+.add-track {
+	display: inline-block;
+	margin-top: 21px;
+	&:before {
+		content: '+';
+		display: inline-block;
+		margin-right: 4px;
+		transition: rotate 1s linear;
+	}
+	&:active:before {
+		rotate: 720deg;
+	}
 }

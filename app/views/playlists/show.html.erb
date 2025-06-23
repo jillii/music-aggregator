@@ -1,67 +1,73 @@
 <%= turbo_frame_tag "app" do %>
 <%= render 'shared/flash' %>
-<%= link_to "Back to playlists", playlists_path %>
-<section class="playlist">
+<section class="playlist full">
   <div class="site-container">
-    <% if @playlist.image.attached? %>
-      <%= image_tag @playlist.image, size: "100x100", alt: "#{@playlist.title} image", class: "playlist-image"  %>
-    <% end %>
-    <div class="copy-area">
-      <h1 class="playlist-title"><%= @playlist.title %></h1>
-      <%= render 'playlists/playlist-likes', playlist: @playlist %>
-      <% if @is_user %>
-        <p class="playlist_user">By you</p>
-        <div class="playlist-actions">
-            <%= link_to "Add editor", search_users_path %>
-            <%= link_to "Edit", edit_playlist_path(@playlist) %>
-            <%= button_to "Delete", @playlist, method: :delete %>
-        </div>
-      <% else %>
-        By
-        <%= link_to user_account_path(@user.id), class: 'playlist-user' do %>
-          <%= @user.username ? @user.username : @user.email %>
+    <div class="flexbox">
+      <div class="pull-left">
+        <% if @playlist.image.attached? %>
+          <%= image_tag @playlist.image, size: "100x100", alt: "#{@playlist.title} image", class: "playlist-image"  %>
         <% end %>
-        <br>
-      <% end %>
-      # Editors
-      <% if @playlist.editors.present? %>
-        <div class="playlist-editors">
-            <% @playlist.editors.each do |editor| %>
-                <%= link_to editor.username, user_account_path(editor) %>
+        <div class="copy-area">
+          <h1 class="playlist-title"><%= @playlist.title %></h1>
+          <%= render 'playlists/playlist-likes', playlist: @playlist %>
+          <% if @is_user %>
+            <p class="playlist_user">By you</p>
+            <div class="playlist-actions">
+                <%= link_to "", search_users_path, class: "icon btn-add-user", title: "Add friend" %>
+                <%= link_to "", edit_playlist_path(@playlist), class: "icon btn-edit", title: "Edit playlist" %>
+                <%= button_to "", @playlist, method: :delete, form_class: "icon btn-trash", title: "Delete playlist" %>
+            </div>
+          <% else %>
+            By
+            <%= link_to user_account_path(@user.id), class: 'playlist-user' do %>
+              <%= @user.username ? @user.username : @user.email %>
             <% end %>
+            <br>
+          <% end %>
+          <% if @playlist.editors.present? %>
+            # Editors
+            <div class="playlist-editors">
+                <% @playlist.editors.each do |editor| %>
+                    <%= link_to editor.username, user_account_path(editor) %>
+                <% end %>
+            </div>
+          <% end %>
+          <% unless @is_user || @is_editor %>
+            <% unless @collab_request_sent %>
+              <%= button_to 'Request Collab', collab_request_path(@playlist.id) %>
+            <% end %>
+          <% end %>
+          <% if @playlist.tags.present? %>
+            # Tags
+            <div class="playlist-tags">
+                <% @playlist.tags.each do |tag| %>
+                    <%= render "tags/tag", tag: tag, is_user: @is_user %>
+                <% end %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
-      <% unless @is_user || @is_editor %>
-        <% unless @collab_request_sent %>
-          <%= button_to 'Request Collab', collab_request_path(@playlist.id) %>
+      </div><!-- pull-left -->
+      <div class="pull-right">
+        <% if @tracks.present? %>
+            <% index = 0 %>
+            <div class="playlist-actions">
+              <%= link_to "", '#', id: 'playPlaylist', data: {turbo_frame: 'mediaplayer'}, class: "icon btn-play", title: "Play playlist" %>
+              <%= link_to "", '#', id: 'cuePlaylist', data: {'playlist' => @track_ids.join(','), turbo_frame: 'mediaplayer'}, class: "icon btn-load", title: "Add playlist to queue"  %>
+            </div>
+
+            <div id="<%= @is_user || @is_editor ? 'sortable-' : '' %>tracklist" class="playlist-track">
+                <% for track in @tracks %>
+                    <%= render "tracks/track", track: track, index: index, user: @user %>
+                    <% index += 1 %>
+                <% end %>
+            </div>
         <% end %>
-      <% end %>
-      # Tags
-      <% if @playlist.tags %>
-        <div class="playlist-tags">
-            <% @playlist.tags.each do |tag| %>
-                <%= render "tags/tag", tag: tag, is_user: @is_user %>
-            <% end %>
-        </div>
-      <% end %>
-    </div>
-    # Tracks
-    <% if @tracks %>
-        <% index = 0 %>
-        <%= link_to "Play Playlist", '#', id: 'playPlaylist', data: {turbo_frame: 'mediaplayer'} %>
-        <%= link_to "Add to queue", '#', id: 'cuePlaylist', data: {'playlist' => @track_ids.join(','), turbo_frame: 'mediaplayer'}  %>
 
-        <div id="<%= @is_user || @is_editor ? 'sortable-' : '' %>tracklist" class="playlist-tracks">
-            <% for track in @tracks %>
-                <%= render "tracks/track", track: track, index: index, user: @user %>
-                <% index += 1 %>
-            <% end %>
-        </div>
-    <% end %>
-
-    <% if @is_user || @is_editor %>
-        <%= link_to "Add track", add_track_path(@playlist) %>
-    <% end %>
+        <% if @is_user || @is_editor %>
+            <%= link_to "Add track", add_track_path(@playlist), class: 'add-track' %>
+        <% end %>
+      </div><!-- pull-right -->
+    </div><!-- .flexbox -->
   </div>
 </section>
 <% end%>

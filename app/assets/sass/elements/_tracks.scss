@@ -13,13 +13,17 @@
 	}
 
 	.play-tracks {
-		flex: 1 0 auto;
+		position: relative;
 		padding: 12px 0;
 		text-align: left;
+		overflow: hidden;
 	}
-
+	
 	&-title {
 		margin: 0;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 
 	&-move {
@@ -28,20 +32,21 @@
 		width: 30px;
 	}
 
-	.search-related {
-		margin-left: auto;
-	}
-
 	.btn-trash {
+		margin-left: 12px;
+	}
+	.added-by {
 		margin-left: 12px;
 	}
 }
 
 #sortable-tracklist {
 	.track {
+		cursor: pointer;
 		&:before {
 			content: url('grab.svg');
-			padding: 0 21px;
+			flex-shrink: 0;
+			padding-right: 21px;
 			height: 14px;
 			width: 14px;
 			pointer-events: none;
