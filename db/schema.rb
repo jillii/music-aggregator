@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_23_144749) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_23_150446) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -103,8 +103,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_23_144749) do
   create_table "playlists_tags", force: :cascade do |t|
     t.integer "playlist_id", null: false
     t.integer "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["playlist_id", "tag_id"], name: "index_playlists_tags_on_playlist_id_and_tag_id", unique: true
     t.index ["playlist_id"], name: "index_playlists_tags_on_playlist_id"
     t.index ["tag_id"], name: "index_playlists_tags_on_tag_id"
