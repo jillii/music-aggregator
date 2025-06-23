@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_30_003729) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_23_144128) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -69,6 +69,17 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_30_003729) do
     t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
 
+  create_table "friendships", force: :cascade do |t|
+    t.integer "requester_id", null: false
+    t.integer "receiver_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_friendships_on_receiver_id"
+    t.index ["requester_id", "receiver_id"], name: "index_friendships_on_requester_id_and_receiver_id", unique: true
+    t.index ["requester_id"], name: "index_friendships_on_requester_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "playlist_id", null: false
@@ -100,11 +111,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_30_003729) do
     t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
-  create_table "playlists_tags", id: false, force: :cascade do |t|
+  create_table "playlists_tags", force: :cascade do |t|
     t.integer "playlist_id", null: false
     t.integer "tag_id", null: false
-    t.index ["playlist_id", "tag_id"], name: "index_playlists_tags_on_playlist_id_and_tag_id"
-    t.index ["tag_id", "playlist_id"], name: "index_playlists_tags_on_tag_id_and_playlist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["playlist_id", "tag_id"], name: "index_playlists_tags_on_playlist_id_and_tag_id", unique: true
+    t.index ["playlist_id"], name: "index_playlists_tags_on_playlist_id"
+    t.index ["tag_id"], name: "index_playlists_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -135,11 +149,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_30_003729) do
   add_foreign_key "collab_requests", "playlists"
   add_foreign_key "editors_playlists", "playlists"
   add_foreign_key "editors_playlists", "users"
+  add_foreign_key "friendships", "users", column: "receiver_id"
+  add_foreign_key "friendships", "users", column: "requester_id"
   add_foreign_key "likes", "playlists"
   add_foreign_key "likes", "users"
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "notifications", "users", column: "sender_id"
   add_foreign_key "playlists", "users"
+  add_foreign_key "playlists_tags", "playlists"
+  add_foreign_key "playlists_tags", "tags"
   add_foreign_key "tags", "playlists"
   add_foreign_key "tracks", "playlists"
 end
