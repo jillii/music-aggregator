@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_23_144128) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_23_144749) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,17 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_23_144128) do
     t.index ["followed_id"], name: "index_follows_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_follows_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_follows_on_follower_id"
-  end
-
-  create_table "friendships", force: :cascade do |t|
-    t.integer "requester_id", null: false
-    t.integer "receiver_id", null: false
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_friendships_on_receiver_id"
-    t.index ["requester_id", "receiver_id"], name: "index_friendships_on_requester_id_and_receiver_id", unique: true
-    t.index ["requester_id"], name: "index_friendships_on_requester_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -149,8 +138,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_23_144128) do
   add_foreign_key "collab_requests", "playlists"
   add_foreign_key "editors_playlists", "playlists"
   add_foreign_key "editors_playlists", "users"
-  add_foreign_key "friendships", "users", column: "receiver_id"
-  add_foreign_key "friendships", "users", column: "requester_id"
   add_foreign_key "likes", "playlists"
   add_foreign_key "likes", "users"
   add_foreign_key "notifications", "users", column: "recipient_id"
