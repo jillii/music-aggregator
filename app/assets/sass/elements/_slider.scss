@@ -1,8 +1,23 @@
+.slider-wrapper {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 51px;
+}
 .slider-container {
     position: relative;
     display: flex;
     flex-direction: column;
+    min-width: 300px;
     margin: 69px 0;
+    &.box {
+        padding: 0;
+        .slider-container-headline {
+            padding: 33px 33px 0 33px;
+        }
+        .slider {
+            padding: 33px;
+        }
+    }
 }
 .slider {
     display: flex;
