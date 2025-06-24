@@ -10,8 +10,8 @@
   --white: #fff;
   --gray: #575350;
   --slate: #f0f0f0;
-  --lime: chartreuse;
-  --blue: #4c8bff;
+  --lime: #8dff65;
+  --blue: #003aa5;
   --almond: blanchedalmond;
 }
 
@@ -59,13 +59,18 @@ section {
   display: flex;
   justify-content: center;
   gap: 16px;
+  text-align: left;
 }
 
 a {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-decoration: none;
   color: var(--blue);
 }
 
-.btn, button:not(.link-btn):not(.btn-add-user) {
+.btn {
   flex-shrink: 0;
   display: inline-block;
   min-width: 130px;
@@ -82,19 +87,15 @@ a {
   cursor: pointer;
   transition: transform 0.25s, background-color 0.25s;
 }
-.btn:hover, button:hover:not(.link-btn):not(.btn-add-user) {
+.btn:hover {
   background-color: var(--black);
   color: var(--white);
   border-color: var(--black);
 }
-.btn:active, button:active:not(.link-btn):not(.btn-add-user) {
+.btn:active {
   transform: translateY(3px);
 }
 
-button {
-  font: inherit;
-  cursor: pointer;
-}
 .link-btn {
   background-color: transparent;
   border: none;
@@ -108,13 +109,82 @@ button {
   display: inline;
 }
 
-.btn-trash button[type=submit] {
-  min-width: 0;
-  border: none;
-  background-color: transparent;
+.btn-trash:before {
+  content: "";
+  background-image: url("trash.svg");
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.btn-trash button[type=submit]:after {
-  content: url("trash.svg");
+.btn-edit:before {
+  content: "";
+  background-image: url("pencil.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.btn-add-user:before {
+  content: "";
+  background-image: url("add-friend.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.btn-play:before {
+  content: "";
+  background-image: url("play.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.btn-load:before {
+  content: "";
+  background-image: url("load.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+form.btn-trash:before {
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+}
+
+.icon {
+  display: inline-flex;
+  padding: 6px;
+  border-radius: 5px;
+  background-color: var(--slate);
+}
+.icon:before {
+  display: inline-block;
+  height: 21px;
+  width: 21px;
+  flex: 1 0 auto;
+  text-align: center;
+}
+
+.btn-trash {
+  position: relative;
+}
+.btn-trash button[type=submit] {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.add-track {
+  display: inline-block;
+  margin-top: 21px;
+}
+.add-track:before {
+  content: "+";
+  display: inline-block;
+  margin-right: 4px;
+  transition: rotate 1s linear;
+}
+.add-track:active:before {
+  rotate: 720deg;
 }
 
 .card-container {
@@ -351,6 +421,37 @@ footer {
   padding: 33px 0 38px;
 }
 
+.playlist.full .playlist-actions {
+  display: flex;
+  gap: 4px;
+}
+.playlist.full .flexbox .pull-left {
+  flex: 1 0 360px;
+}
+.playlist.full .flexbox .pull-right {
+  flex: 0 0 calc(100% - 360px);
+}
+.playlist.full .flexbox .copy-area {
+  position: sticky;
+  top: 120px;
+}
+.playlist.full .flexbox .playlist-image {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.1;
+  object-fit: cover;
+}
+.playlist.full .playlist-actions {
+  display: flex;
+  gap: 6px;
+}
+.playlist.full .play-tracks {
+  margin-right: auto;
+}
 .playlist-likes {
   display: inline-flex;
   gap: 3px;
@@ -437,31 +538,49 @@ footer {
   border-top: 1px solid var(--slate);
 }
 .track .play-tracks {
-  flex: 1 0 auto;
+  position: relative;
   padding: 12px 0;
   text-align: left;
+  overflow: hidden;
 }
 .track-title {
   margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .track-move {
   margin-left: auto;
   height: 30px;
   width: 30px;
 }
-.track .search-related {
-  margin-left: auto;
-}
 .track .btn-trash {
   margin-left: 12px;
 }
+.track .added-by {
+  margin-left: 12px;
+}
 
+#sortable-tracklist .track {
+  cursor: pointer;
+}
 #sortable-tracklist .track:before {
   content: url("grab.svg");
-  padding: 0 21px;
+  flex-shrink: 0;
+  padding-right: 21px;
   height: 14px;
   width: 14px;
   pointer-events: none;
+}
+
+.playlist-tags {
+  display: flex;
+  justify-content: center;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
 }
 
 h1, h2, h3, h4, h5, h6 {
