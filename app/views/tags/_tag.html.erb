@@ -2,6 +2,6 @@
     <%= link_to tag.label, playlists_path(tag: tag.label) %>
 
     <% if is_user %>
-        <%= button_to "", {controller: :tags, action: :destroy, id: tag.id, playlist_id: @playlist.id}, method: :delete, class: "btn-trash" %>
+        <%= button_to "", {controller: :tags, action: :destroy, id: tag.id, playlist_id: @playlist.id}, method: :delete, form_class: "btn-trash" %>
     <% end %>
 </div>

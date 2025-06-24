@@ -162,6 +162,8 @@ form.btn-trash:before {
 
 .btn-trash {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .btn-trash button[type=submit] {
   position: absolute;
@@ -593,7 +595,7 @@ footer {
 
 .playlist-tags {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .tag {
