@@ -10,6 +10,7 @@
             }
             .pull-right {
                 flex: 0 0 calc(100% - 360px);
+                width: calc(100% - 360px);
             }
             .copy-area {
                 position: sticky;
@@ -47,5 +48,25 @@
 
     &-likers {
         position: absolute;
+    }
+    &-track {
+        margin: 21px 0;
+    }
+}
+
+@media (max-width: 768px) {
+	.playlist {
+        &.full {
+            .flexbox {
+                flex-direction: column;
+                gap: 44px;
+                .pull-left, .pull-right {
+                    flex-basis: auto;
+                }
+                .pull-right {
+                    width: auto;
+                }
+            }
+        }
     }
 }

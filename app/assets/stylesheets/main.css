@@ -175,7 +175,6 @@ form.btn-trash:before {
 
 .add-track {
   display: inline-block;
-  margin-top: 21px;
 }
 .add-track:before {
   content: "+";
@@ -430,6 +429,7 @@ footer {
 }
 .playlist.full .flexbox .pull-right {
   flex: 0 0 calc(100% - 360px);
+  width: calc(100% - 360px);
 }
 .playlist.full .flexbox .copy-area {
   position: sticky;
@@ -465,7 +465,22 @@ footer {
 .playlist-likers {
   position: absolute;
 }
+.playlist-track {
+  margin: 21px 0;
+}
 
+@media (max-width: 768px) {
+  .playlist.full .flexbox {
+    flex-direction: column;
+    gap: 44px;
+  }
+  .playlist.full .flexbox .pull-left, .playlist.full .flexbox .pull-right {
+    flex-basis: auto;
+  }
+  .playlist.full .flexbox .pull-right {
+    width: auto;
+  }
+}
 .slider-container {
   position: relative;
   display: flex;
@@ -559,6 +574,9 @@ footer {
 }
 .track .added-by {
   margin-left: 12px;
+}
+.track .search-related, .track .added-by {
+  flex-shrink: 0;
 }
 
 #sortable-tracklist .track {

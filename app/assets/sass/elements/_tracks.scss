@@ -38,6 +38,9 @@
 	.added-by {
 		margin-left: 12px;
 	}
+	.search-related, .added-by {
+		flex-shrink: 0;
+	}
 }
 
 #sortable-tracklist {
