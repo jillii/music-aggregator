@@ -17,13 +17,13 @@
     <%= turbo_frame_tag "nav" do %>
       <nav class="site-nav">
         <div class="site-container">
-          <button class="hamburger" onclick="this.classList.toggle('active');document.getElementById('nav-inner').classList.toggle('active')">
+          <button id="hamburger" class="hamburger" onclick="this.classList.toggle('active');document.getElementById('nav-inner').classList.toggle('active')">
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
           </button>
         </div>
-        <div id="nav-inner" class="site-nav-inner">
+        <div id="nav-inner" class="site-nav-inner" onclick="this.classList.remove('active'); document.getElementById('hamburger').classList.remove('active')">
           <div class="site-container">
             <%= link_to "home", root_path, class: "home menu-item", data: {turbo_frame: 'app'} %>
             <%= link_to "about", '#', class: "menu-item", data: {turbo_frame: 'app'} %>
