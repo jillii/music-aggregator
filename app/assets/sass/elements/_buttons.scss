@@ -16,6 +16,8 @@ a {
 	font-family: inherit;
     text-decoration: none;
 	font-size: 18px;
+	font-weight: 800;
+	text-align: center;
 	line-height: 22px;
     color: inherit;
 	background-color: var(--slate);
@@ -32,13 +34,10 @@ a {
 	}
 }
 
-// button {
-// 	font: inherit;
-// 	cursor: pointer;
-// 	&:not(.icon):not(.heart) {
-// 		@extend .btn;
-// 	}
-// }
+button {
+	font: inherit;
+	cursor: pointer;
+}
 
 .link-btn {
     background-color: transparent;

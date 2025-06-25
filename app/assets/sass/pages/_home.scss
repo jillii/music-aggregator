@@ -4,14 +4,9 @@
 
 .tags {
     flex: 0 0 250px;
-    text-align: left;
 }
 .slider-container {
     padding-right: 0;
-    
-    &-headline {
-        text-align: left;
-    }
 }
 
 .tags + .slider-container {

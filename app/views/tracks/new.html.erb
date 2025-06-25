@@ -3,11 +3,7 @@
         <div class="site-container">
             <h1>Adding track to: <%= @playlist.title %></h1>
 
-            <%= form_with url: add_track_path, method: :get, local: true do %>
-                <%= label_tag :search, "Search for:" %>
-                <%= text_field_tag :search, params[:search] %>
-                <%= submit_tag "Search" %>
-            <% end %>
+            <%= render 'shared/search', path: add_track_path %>
 
             <% if @results.present? %>
                 <h2>Results:</h2>
