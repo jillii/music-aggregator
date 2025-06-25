@@ -34,10 +34,10 @@
                 <% if @next || @prev %>
                     <div class="page-controls">
                         <% if @prev %>
-                            <%= link_to "Previous", add_track_path(@playlist, query: @query, page_token: @prev), target: "_top" %>
+                            <%= link_to "Previous", add_track_path(@playlist, search: @query, page_token: @prev), target: "_top" %>
                         <% end %>
                         <% if @next %>
-                            <%= link_to "Next", add_track_path(@playlist, query: @query, page_token: @next), target: "_top" %>
+                            <%= link_to "Next", add_track_path(@playlist, search: @query, page_token: @next), target: "_top" %>
                         <% end %>
                     </div>
                 <% end %>
