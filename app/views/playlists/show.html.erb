@@ -28,7 +28,12 @@
             # Editors
             <div class="playlist-editors">
                 <% @playlist.editors.each do |editor| %>
+                  <div class="editor">
                     <%= link_to editor.username, user_account_path(editor) %>
+                    <% if @is_user %>
+                      <%= button_to "", {controller: :playlists, action: :delete_editor, editor_id: editor.id, id: @playlist.id}, method: :put, form_class: "btn-trash" %>
+                    <% end %>
+                  </div>
                 <% end %>
             </div>
           <% end %>

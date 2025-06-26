@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   # Defines route to add editors to playlist
   get '/playlists/:id/editors/new', to: 'playlists#search_editors', as: :search_users
   put '/playlists/:id/editors/new', to: 'playlists#add_editor', as: :add_editor
+  put 'playlists/:id/editor/:editor_id', to: 'playlists#delete_editor'
   
   post 'playlists/:id/collab_requests/create', to: 'collab_requests#create', as: :collab_request
   get 'collab_requests/:id', to: 'collab_requests#show', as: :collab_request_view

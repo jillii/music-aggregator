@@ -368,6 +368,12 @@ form.btn-trash:before {
     text-align: center;
   }
 }
+.editor {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
 input:not([type=range]):not([type=file]):not([type=checkbox]), textarea:not([type=range]):not([type=file]):not([type=checkbox]) {
   appearance: none;
   padding: 12px;
