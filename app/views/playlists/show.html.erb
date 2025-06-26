@@ -33,6 +33,9 @@
                     <% if @is_user %>
                       <%= button_to "", {controller: :playlists, action: :delete_editor, editor_id: editor.id, id: @playlist.id}, method: :put, form_class: "btn-trash" %>
                     <% end %>
+                    <% if current_user.id === editor.id %>
+                      <%= button_to "Remove yourself", {controller: :playlists, action: :delete_editor, editor_id: editor.id, id: @playlist.id}, method: :put %>
+                    <% end %>
                   </div>
                 <% end %>
             </div>

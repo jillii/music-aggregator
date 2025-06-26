@@ -1,6 +1,6 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [ :correct_user, :correct_editor, :show, :edit, :update, :destroy, :add_editor, :delete_editor ,:search_editors ]
-  before_action :correct_user, only: [:edit, :update, :destroy, :add_editor, :delete_editor, :search_editors]
+  before_action :correct_user, only: [:edit, :update, :destroy, :add_editor, :search_editors]
   before_action :correct_editor, only: [ :show ]
 
   # GET /playlists or /playlists.json
@@ -146,13 +146,18 @@ class PlaylistsController < ApplicationController
 
   def delete_editor
     editor = User.find(params[:editor_id])
-    playlist = Playlist.find(params[:id])
+    @is_user = (current_user && current_user.id === @playlist.user_id) || (current_user && current_user.id === editor.id)
+    unless @is_user
+        redirect_to playlist_path(@playlist), notice: "You can't remove that editor."
+        return
+    end
+
     begin
-      playlist.editors.delete(editor)
+      @playlist.editors.delete(editor)
     rescue Exception => e
-      redirect_to playlist_path(playlist), notice: 'Could not remove user.'
+      redirect_to playlist_path(@playlist), notice: 'Could not remove user.'
     else
-      redirect_to playlist_path(playlist), notice: "Editor was successfully removed."
+      redirect_to playlist_path(@playlist), notice: "Editor was successfully removed."
     end
   end
 
