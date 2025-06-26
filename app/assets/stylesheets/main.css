@@ -685,6 +685,24 @@ footer {
     font: inherit;
   }
 }
+.notification-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  border-top: 1px solid var(--slate);
+}
+.notification .btn-read {
+  margin-right: 6px;
+}
+.notification .btn-trash {
+  margin-left: auto;
+}
+
 .playlist.full .playlist-actions {
   display: flex;
   gap: 4px;

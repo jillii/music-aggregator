@@ -1,0 +1,16 @@
+.notification-container {
+    display: flex;
+    flex-direction: column;
+}
+.notification {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+    border-top: 1px solid var(--slate);
+    .btn-read {
+        margin-right: 6px;
+    }
+    .btn-trash {
+        margin-left: auto;
+    }
+}

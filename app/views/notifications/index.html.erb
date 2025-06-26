@@ -3,25 +3,31 @@
     <section>
         <div class="site-container">
             <h1>Notifications</h1>
-            <% if @collab_requests.present? %>
-                <% @collab_requests.each do |r| %>
-                    <%= render "collab_requests/preview", request: r  %>
-                    <%= button_to 'Delete', collab_requests_destroy_path(r.id), method: :delete %>
-                <% end %>
-                <%= paginate @notifications %>
-            <% end %>
-            <% if @notifications.present? %>
-                <% @notifications.each do |n| %>
-                    <% unless n.read %>
-                        <%= button_to 'Mark as read', read_notification_path(n.id), method: :post %>
+            <div class="notification-container">
+                <% if @collab_requests.present? %>
+                    <% @collab_requests.each do |r| %>
+                        <div class="notification">
+                            <%= render "collab_requests/preview", request: r  %>
+                            <%= button_to '', collab_requests_destroy_path(r.id), method: :delete, form_class: "btn-trash", title: "Delete" %>
+                        </div>
                     <% end %>
-                    <%= render "preview", notification: n  %>
-                    <%= button_to 'Delete', notification_path(n.id), method: :delete %>
+                    <%= paginate @collab_requests %>
                 <% end %>
-                <%= paginate @notifications %>
-            <% else %>
-                <p>You do not have any notifications</p>
-            <% end %>
+                <% if @notifications.present? %>
+                    <% @notifications.each do |n| %>
+                        <div class="notification">
+                            <% unless n.read %>
+                                <%= button_to 'Mark as read', read_notification_path(n.id), method: :post, form_class: "btn-read" %>
+                            <% end %>
+                            <%= render "preview", notification: n  %>
+                            <%= button_to '', notification_path(n.id), method: :delete, form_class: "btn-trash", title: "Delete message" %>
+                        </div>
+                    <% end %>
+                    <%= paginate @notifications %>
+                <% else %>
+                    <p>You do not have any notifications</p>
+                <% end %>
+            </div>
         </div>
     </section>
 <% end %>
