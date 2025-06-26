@@ -8,7 +8,14 @@
     padding: 4px 0;
     border-top: 1px solid var(--slate);
     .btn-read {
+        flex-shrink: 0;
         margin-right: 6px;
+    }
+    .preview {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     .btn-trash {
         margin-left: auto;

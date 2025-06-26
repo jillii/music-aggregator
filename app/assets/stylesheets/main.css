@@ -697,7 +697,14 @@ footer {
   border-top: 1px solid var(--slate);
 }
 .notification .btn-read {
+  flex-shrink: 0;
   margin-right: 6px;
+}
+.notification .preview {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .notification .btn-trash {
   margin-left: auto;

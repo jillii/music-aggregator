@@ -7,7 +7,7 @@
                 <% if @collab_requests.present? %>
                     <% @collab_requests.each do |r| %>
                         <div class="notification">
-                            <%= render "collab_requests/preview", request: r  %>
+                            <%= render "collab_requests/preview", request: r %>
                             <%= button_to '', collab_requests_destroy_path(r.id), method: :delete, form_class: "btn-trash", title: "Delete" %>
                         </div>
                     <% end %>

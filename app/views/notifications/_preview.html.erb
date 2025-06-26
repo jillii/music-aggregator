@@ -1,4 +1,4 @@
-<%= link_to notification_path(id: notification.id) do %>
+<%= link_to notification_path(id: notification.id), class: "preview" do %>
     <% if notification.read %>(read) <% end %>
     <%= strip_tags(notification.message) %><br>
 <% end %>
