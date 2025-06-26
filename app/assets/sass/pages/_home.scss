@@ -1,5 +1,6 @@
 #intro {
     padding: 102px 0;
+    text-align: center;
 }
 
 .tags {
@@ -11,4 +12,10 @@
 
 .tags + .slider-container {
     flex: 1 0 0;
+}
+
+@media (max-width: 560px) {
+    #intro {
+        padding: 88px 0;
+    }
 }

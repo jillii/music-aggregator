@@ -359,25 +359,34 @@ form.btn-trash:before {
     text-align: center;
   }
 }
-input:not([type=range]):not([type=file]), textarea:not([type=range]):not([type=file]) {
+input:not([type=range]):not([type=file]):not([type=checkbox]), textarea:not([type=range]):not([type=file]):not([type=checkbox]) {
   appearance: none;
-  padding: 6px 12px;
+  padding: 12px;
   border: 1.2px solid var(--gray);
   font-size: 16px;
   font-family: inherit;
   transition: background-color 0.2s ease;
 }
-input:not([type=range]):not([type=file])::placeholder, textarea:not([type=range]):not([type=file])::placeholder {
+input:not([type=range]):not([type=file]):not([type=checkbox])::placeholder, textarea:not([type=range]):not([type=file]):not([type=checkbox])::placeholder {
   color: var(--gray);
 }
-input:not([type=range]):not([type=file]):focus, textarea:not([type=range]):not([type=file]):focus {
+input:not([type=range]):not([type=file]):not([type=checkbox]):focus, textarea:not([type=range]):not([type=file]):not([type=checkbox]):focus {
   outline: none;
 }
+input:not([type=submit]), textarea:not([type=submit]) {
+  margin-bottom: 16px;
+}
+input:not([type=submit]):not([type=checkbox]), textarea:not([type=submit]):not([type=checkbox]) {
+  width: 100%;
+}
 input[type=submit], textarea[type=submit] {
-  align-self: baseline;
+  margin-top: 21px;
   background-color: var(--dark-slate);
-  border-width: 2px !important;
+  border: none !important;
   cursor: pointer;
+}
+input[type=submit]:hover, textarea[type=submit]:hover {
+  background-color: var(--slate);
 }
 input[type=file], textarea[type=file] {
   display: block;
@@ -391,6 +400,7 @@ textarea {
   position: relative;
   height: 200px;
   width: 200px;
+  margin-bottom: 16px;
   border-radius: 12px;
   border: 2px dashed var(--black);
   background-image: url("image.svg");
@@ -424,9 +434,10 @@ textarea {
 form {
   position: relative;
   max-width: 500px;
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
+}
+form label {
+  display: inline-block;
+  margin-bottom: 6px;
 }
 form.button_to {
   max-width: max-content;
@@ -439,6 +450,9 @@ form button.fill {
   left: 0;
   background-color: transparent;
   border: none;
+}
+form .actions {
+  margin-bottom: 28px;
 }
 
 .searchbox {
@@ -881,6 +895,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #intro {
   padding: 102px 0;
+  text-align: center;
 }
 
 .tags {
@@ -895,6 +910,11 @@ h1, h2, h3, h4, h5, h6 {
   flex: 1 0 0;
 }
 
+@media (max-width: 560px) {
+  #intro {
+    padding: 88px 0;
+  }
+}
 .user-profile-header {
   justify-content: space-between;
   align-items: center;
