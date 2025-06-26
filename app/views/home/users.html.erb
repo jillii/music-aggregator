@@ -3,7 +3,7 @@
     <section id="users">
         <div class="site-container">
             <h1>Users</h1>
-            <%= form_with url: users_path, method: :get do |form| %>
+            <%= form_with url: users_path, class: "searchbox", method: :get do |form| %>
                 <%= form.text_field :search %>
                 <% if params[:followers] %>
                     <%= form.hidden_field :followers, value: params[:followers] %>
