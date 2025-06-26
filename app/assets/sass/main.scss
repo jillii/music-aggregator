@@ -6,17 +6,8 @@
 * {
 	box-sizing: border-box;
 }
-:root {
-    --black: #3e3c41;
-    --white: #fff;
-    --gray: #575350;
-	--slate: #f0f0f0;
-	--dark-slate: #b9b8b8;
-	--lime: #8dff65;
-	--blue: #003aa5;
-	--almond: blanchedalmond;
-}
 
+@import "abstract/global";
 @import "abstract/mixins";
 @import "elements/body";
 @import "elements/buttons";

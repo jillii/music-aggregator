@@ -49,7 +49,7 @@
         @include centerContent;
         height: 50px;
         width: 50px;
-        border: 2px solid var(--black);
+        border: var(--border-width) solid var(--black);
         border-radius: 50%;
         transition: border-color .25s;
 

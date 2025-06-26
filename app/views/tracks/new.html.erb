@@ -6,8 +6,8 @@
             <%= render 'shared/search', path: add_track_path %>
 
             <% if @results.present? %>
-                <h2>Results:</h2>
                 <div class="card-container horizontal emerge">
+                    <h2>Results:</h2>
                     <% @results.each do |video| %>
                         <% if video['id']['kind'] == 'youtube#video' %>
                             <div class="card">
@@ -20,8 +20,10 @@
                                 <div class="copy-area">
                                     <h3 class="card-title"><%= title %></h3>
                                     <p class="card-copy"><%= video['snippet']['description'] %></p>
-                                    <%= link_to "Watch", "https://www.youtube.com/watch?v=#{video['id']['videoId']}", class: "card-link", target: "_blank" %>
-                                    <%= button_to "Add", add_track_path, params: {track_id: @id, track_title: title}, method: :put %>
+                                    <div class="btn-container">
+                                        <%= button_to "Add", add_track_path, params: {track_id: @id, track_title: title}, method: :put, class: "btn" %>
+                                        <%= link_to "Watch", "https://www.youtube.com/watch?v=#{video['id']['videoId']}", class: "card-link", target: "_blank" %>
+                                    </div>
                                 </div>
                             </div>
                         <% end %>

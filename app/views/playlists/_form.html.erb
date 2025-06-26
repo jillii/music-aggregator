@@ -1,3 +1,15 @@
+  <script>
+
+    console.log('i happened!')
+    var loadFile = function(event) {
+      var reader = new FileReader();
+      reader.onload = function(){
+        var output = document.getElementById('output');
+        output.src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    };
+  </script>
 <%= form_with(model: playlist) do |form| %>
   <% if playlist.errors.any? %>
     <div style="color: red">
@@ -10,13 +22,18 @@
       </ul>
     </div>
   <% end %>
-  <%= form.text_field :title %>
-  <%= form.file_field :image %>
-  <div>
-    <%= form.text_area :tag_id, size: "40x5" %><br>
-    <label>Enter tags separated by commas</label>
+  <%= form.label :title, "Playlist Title" %>
+  <%= form.text_field :title, required: true %>
+
+  <%= form.label :image, "Add an image" %>
+  <div class="input-add-image">
+    <%= form.file_field :image, required: true, accept: "image/*", onchange: "loadFile(event)" %>
+    <img id="output" class="output" src=""/>
   </div>
-  <div>
-    <%= form.submit %>
-  </div>
+
+
+  <%= form.label :tag_id, "Enter tags separated by commas" %>
+  <%= form.text_area :tag_id, size: "40x5", placeholder: 'jazz, country, breakcore...' %><br>
+  <%= form.submit %>
 <% end %>
+

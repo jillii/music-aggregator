@@ -6,13 +6,18 @@ a {
 	color: var(--blue);
 }
 
+.btn-container {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+
 .btn {
 	flex-shrink: 0;
 	display: inline-block;
-	min-width: 130px;
 	padding: 8px 21px;
 	border-radius: 0;
-	border: 2px solid var(--black);
+	border: none;
 	font-family: inherit;
     text-decoration: none;
 	font-size: 18px;
@@ -25,9 +30,7 @@ a {
 	cursor: pointer;
 	transition: transform .25s, background-color .25s;
     &:hover {
-		background-color: var(--black);
-		color: var(--white);
-		border-color: var(--black);
+		background-color: var(--dark-slate);
 	}
 	&:active {
 		transform: translateY(3px);

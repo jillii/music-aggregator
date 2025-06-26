@@ -14,6 +14,7 @@
   --lime: #8dff65;
   --blue: #003aa5;
   --almond: blanchedalmond;
+  --border-width: 1.9px;
 }
 
 body {
@@ -70,13 +71,18 @@ a {
   color: var(--blue);
 }
 
+.btn-container {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
 .btn {
   flex-shrink: 0;
   display: inline-block;
-  min-width: 130px;
   padding: 8px 21px;
   border-radius: 0;
-  border: 2px solid var(--black);
+  border: none;
   font-family: inherit;
   text-decoration: none;
   font-size: 18px;
@@ -90,9 +96,7 @@ a {
   transition: transform 0.25s, background-color 0.25s;
 }
 .btn:hover {
-  background-color: var(--black);
-  color: var(--white);
-  border-color: var(--black);
+  background-color: var(--dark-slate);
 }
 .btn:active {
   transform: translateY(3px);
@@ -214,8 +218,9 @@ form.btn-trash:before {
   flex-direction: row;
 }
 .horizontal .card-image {
-  height: 100%;
+  height: unset;
   width: 400px;
+  max-width: 25%;
 }
 .horizontal .card .copy-area {
   height: auto;
@@ -243,7 +248,7 @@ form.btn-trash:before {
 
 .emerge .card {
   width: 90%;
-  margin: auto;
+  margin: auto 0;
   opacity: 0;
   transition: all 0.25s ease;
 }
@@ -258,7 +263,7 @@ form.btn-trash:before {
   min-width: 280px;
   border-radius: 24px;
   overflow: hidden;
-  border: 2px solid var(--black);
+  border: var(--border-width) solid var(--black);
   background-color: var(--white);
   color: var(--black);
   text-decoration: none;
@@ -300,7 +305,7 @@ form.btn-trash:before {
   display: inline-block;
   min-width: 91px;
   padding: 2px 12px;
-  border: 2px solid var(--black);
+  border: var(--border-width) solid var(--black);
   border-radius: 20px;
   font-weight: 600;
   color: var(--black);
@@ -323,13 +328,13 @@ form.btn-trash:before {
 }
 
 .box {
-  border: 2px solid var(--black);
+  border: var(--border-width) solid var(--black);
   border-radius: 13px;
   padding: 33px;
 }
 
 @media (max-width: 1050px) {
-  .card-container {
+  .card-container:not(.horizontal) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -337,30 +342,94 @@ form.btn-trash:before {
   .card-container {
     grid-template-columns: repeat(1, 1fr);
   }
+  .card-container.horizontal .card .copy-area {
+    padding: 33px 28px;
+  }
 }
-input:not([type=range]) {
+@media (max-width: 480px) {
+  .card-container.horizontal .card {
+    flex-direction: column;
+  }
+  .card-container.horizontal .card-image {
+    max-width: 100%;
+    height: 130px;
+  }
+  .card-container.horizontal .card .copy-area {
+    padding: 25px;
+    text-align: center;
+  }
+}
+input:not([type=range]):not([type=file]), textarea:not([type=range]):not([type=file]) {
   appearance: none;
   padding: 6px 12px;
-  border: 2px solid var(--gray);
+  border: 1.2px solid var(--gray);
   font-size: 16px;
   font-family: inherit;
-  background-color: var(--slate);
   transition: background-color 0.2s ease;
 }
-input:not([type=range])::placeholder {
+input:not([type=range]):not([type=file])::placeholder, textarea:not([type=range]):not([type=file])::placeholder {
   color: var(--gray);
 }
-input:not([type=range]):focus {
-  background-color: transparent;
+input:not([type=range]):not([type=file]):focus, textarea:not([type=range]):not([type=file]):focus {
   outline: none;
 }
-input:not([type=range])[type=submit] {
+input[type=submit], textarea[type=submit] {
+  align-self: baseline;
   background-color: var(--dark-slate);
+  border-width: 2px !important;
   cursor: pointer;
+}
+input[type=file], textarea[type=file] {
+  display: block;
+}
+
+textarea {
+  width: 100%;
+}
+
+.input-add-image {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  border-radius: 12px;
+  border: 2px dashed var(--black);
+  background-image: url("image.svg");
+  background-size: 51px;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+.input-add-image input[type=file], .input-add-image textarea[type=file] {
+  opacity: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+.input-add-image .output {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-height: 100%;
+  max-width: 100%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+.input-add-image .output:not([src=""]) {
+  background-color: #fff;
 }
 
 form {
   position: relative;
+  max-width: 500px;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+form.button_to {
+  max-width: max-content;
 }
 form button.fill {
   position: absolute;
@@ -370,6 +439,22 @@ form button.fill {
   left: 0;
   background-color: transparent;
   border: none;
+}
+
+.searchbox {
+  flex-direction: row;
+  gap: 0;
+}
+.searchbox input:not([type=submit]), .searchbox textarea:not([type=submit]) {
+  background-color: var(--slate);
+  transition: background-color 0.2s ease;
+}
+.searchbox input:not([type=submit]):focus, .searchbox textarea:not([type=submit]):focus {
+  background-color: transparent;
+}
+.searchbox input:not([type=submit]) + input[type=submit], .searchbox textarea:not([type=submit]) + input[type=submit], .searchbox input:not([type=submit]) + textarea[type=submit], .searchbox textarea:not([type=submit]) + textarea[type=submit] {
+  border-left: none;
+  border-width: var(--border-width) !important;
 }
 
 #youtube-player {
@@ -484,17 +569,17 @@ form button.fill {
   gap: 24px;
   align-items: center;
 }
-.site-nav .menu-item:not(.btn) {
+.site-nav .menu-item:not(.btn):not(form) {
   position: relative;
   color: inherit;
   text-decoration: none;
   border-bottom: 0 solid var(--blue);
   transition: border-bottom-width 0.25s;
 }
-.site-nav .menu-item:not(.btn):hover {
+.site-nav .menu-item:not(.btn):not(form):hover {
   border-bottom-width: 2px;
 }
-.site-nav .menu-item:not(.btn):not(:first-of-type):before {
+.site-nav .menu-item:not(.btn):not(form):not(:first-of-type):before {
   content: "//";
   position: absolute;
   top: 50%;
@@ -514,7 +599,7 @@ footer {
     position: fixed;
     top: 0;
     width: 100%;
-    border-bottom: 1px solid;
+    border-bottom: var(--border-width) solid;
     border-radius: 0;
   }
   .site-nav .hamburger {
@@ -679,7 +764,7 @@ footer {
   align-items: center;
   height: 50px;
   width: 50px;
-  border: 2px solid var(--black);
+  border: var(--border-width) solid var(--black);
   border-radius: 50%;
   transition: border-color 0.25s;
 }
