@@ -1,6 +1,6 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [ :correct_user, :correct_editor, :show, :edit, :update, :destroy, :add_editor, :search_editors ]
-  before_action :correct_user, only: [:edit, :update, :destroy, :add_editor, :search_editors]
+  before_action :set_playlist, only: [ :correct_user, :correct_editor, :show, :edit, :update, :destroy, :add_editor, :delete_editor ,:search_editors ]
+  before_action :correct_user, only: [:edit, :update, :destroy, :add_editor, :delete_editor, :search_editors]
   before_action :correct_editor, only: [ :show ]
 
   # GET /playlists or /playlists.json
@@ -137,10 +137,22 @@ class PlaylistsController < ApplicationController
     begin
       @playlist.editors.push(editor)
     rescue Exception => e
-      redirect_to add_editor_path(@playlist), notice: 'Could not add user'
+      redirect_to add_editor_path(@playlist), notice: 'Could not add user.'
     else
       notification.save
       redirect_to playlist_path(@playlist), notice: "Editor was successfully added."
+    end
+  end
+
+  def delete_editor
+    editor = User.find(params[:editor_id])
+    playlist = Playlist.find(params[:id])
+    begin
+      playlist.editors.delete(editor)
+    rescue Exception => e
+      redirect_to playlist_path(playlist), notice: 'Could not remove user.'
+    else
+      redirect_to playlist_path(playlist), notice: "Editor was successfully removed."
     end
   end
 
