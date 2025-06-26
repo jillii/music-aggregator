@@ -382,7 +382,7 @@ input:not([type=submit]):not([type=checkbox]), textarea:not([type=submit]):not([
 input[type=submit], textarea[type=submit] {
   margin-top: 21px;
   background-color: var(--dark-slate);
-  border: none !important;
+  border: none;
   cursor: pointer;
 }
 input[type=submit]:hover, textarea[type=submit]:hover {
@@ -456,10 +456,13 @@ form .actions {
 }
 
 .searchbox {
+  display: flex;
   flex-direction: row;
   gap: 0;
 }
 .searchbox input:not([type=submit]), .searchbox textarea:not([type=submit]) {
+  width: auto;
+  margin-bottom: 0;
   background-color: var(--slate);
   transition: background-color 0.2s ease;
 }
@@ -468,7 +471,10 @@ form .actions {
 }
 .searchbox input:not([type=submit]) + input[type=submit], .searchbox textarea:not([type=submit]) + input[type=submit], .searchbox input:not([type=submit]) + textarea[type=submit], .searchbox textarea:not([type=submit]) + textarea[type=submit] {
   border-left: none;
-  border-width: var(--border-width) !important;
+}
+.searchbox input[type=submit], .searchbox textarea[type=submit] {
+  margin-top: 0;
+  border: var(--border-width) solid var(--black);
 }
 
 #youtube-player {

@@ -22,7 +22,7 @@ input {
     &[type=submit] {
         margin-top: 21px;
         background-color: var(--dark-slate);
-        border: none !important;
+        border: none;
         cursor: pointer;
         &:hover {
             background-color: var(--slate);
@@ -98,9 +98,12 @@ form {
 }
 
 .searchbox {
+    display: flex;
     flex-direction: row;
     gap: 0;
     input:not([type=submit]) {
+        width: auto;
+        margin-bottom: 0;
         background-color: var(--slate);
         transition: background-color .2s ease;
         &:focus {
@@ -108,7 +111,10 @@ form {
         }
         & + input[type=submit] {
             border-left: none;
-            border-width: var(--border-width) !important;
         }
+    }
+    input[type=submit] {
+        margin-top: 0;
+        border: var(--border-width) solid var(--black);
     }
 }
