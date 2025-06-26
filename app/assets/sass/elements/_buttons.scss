@@ -80,6 +80,15 @@ button {
 			background-repeat: no-repeat;
 		}
 	}
+	&-add-editor {
+		margin-top: 18px;
+		background-color: transparent;
+		border: none;
+		&:before {
+			content: '+';
+			margin-right: 4px;
+		}
+	}
 	&-play {
 		&:before {
 			content: '';

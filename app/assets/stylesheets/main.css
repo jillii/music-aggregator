@@ -138,6 +138,15 @@ button {
   background-position: center;
   background-repeat: no-repeat;
 }
+.btn-add-editor {
+  margin-top: 18px;
+  background-color: transparent;
+  border: none;
+}
+.btn-add-editor:before {
+  content: "+";
+  margin-right: 4px;
+}
 .btn-play:before {
   content: "";
   background-image: url("play.svg");
