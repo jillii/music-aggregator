@@ -21,14 +21,9 @@ input {
         }
     }
     &[type=submit] {
+        @extend button;
         margin-top: 21px;
-        background-color: var(--dark-slate);
-        border: none;
-        color: inherit;
-        cursor: pointer;
-        &:hover {
-            background-color: var(--slate);
-        }
+        padding: 1px 6px !important;
     }
     &[type=file] {
         display: block;

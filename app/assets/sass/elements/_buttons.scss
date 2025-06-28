@@ -38,8 +38,17 @@ a {
 }
 
 button {
+	padding: 1px 6px;
 	font: inherit;
 	cursor: pointer;
+	background-color: #f0f0f0;
+	border: 1px solid var(--black);
+	border-radius: 3px;
+	background-image: none;
+	transition: background-color .2s ease;
+	&:hover {
+		background-color: var(--dark-slate);
+	}
 }
 
 .link-btn {
