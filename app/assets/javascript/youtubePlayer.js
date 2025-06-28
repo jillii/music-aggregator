@@ -19,6 +19,7 @@ let is_looping = false;
 const range = document.getElementById('range');
 
 addEventListener('turbo:load', () => {
+    console.log("enter turbo load event")
     // check if playlist already exists
     const currentPlaylist = player ? player.getPlaylist() : null,
           currentIndex    = player ? player.getPlaylistIndex() : null,
@@ -33,17 +34,21 @@ addEventListener('turbo:load', () => {
             onStateChange: updateTitle
         }
     });
+    console.log("player loaded")
+    console.log(player)
     
     // handle seek / ff
     const range = document.getElementById('range');
     const time = document.getElementById('current-time');
     function updateTimerDisplay() {
+        console.log("entered update timer display")
         // Update current time text display.
         if (player) {
             time.innerHTML = formatTime( player.getCurrentTime() );
         }
     }
     function updateProgressBar() {
+        console.log("enter update progress bar")
         // Update the value of our progress bar accordingly.
         if (player) {
             const ratio = player.getCurrentTime() / player.getDuration() * 100;
@@ -55,6 +60,7 @@ addEventListener('turbo:load', () => {
     range.addEventListener('change', updateTime, false);
 
     function updateTime (e) {
+        console.log("entered update time")
         // Calculate the new time for the video.
         // new time in seconds = total duration in seconds * ( value of range input / 100 )
         var newTime = player.getDuration() * (e.target.value / 100);
@@ -63,6 +69,7 @@ addEventListener('turbo:load', () => {
     }
 
     function onReadyEvent () {
+        console.log("entered on ready event")
         if (currentPlaylist) {
             if (currentState == YT.PlayerState.PLAYING) { // player is playing
                 player.loadPlaylist(currentPlaylist, currentIndex, currentStart);
@@ -84,6 +91,7 @@ addEventListener('turbo:load', () => {
         // Start interval to update elapsed time display and
         // the elapsed part of the progress bar every second.
         const time_update_interval = setInterval(function () {
+            console.log("entered time update interval function")
             updateTimerDisplay();
             updateProgressBar();
         }, 1000)
@@ -96,6 +104,7 @@ addEventListener('turbo:load', () => {
           loop = document.getElementById("loop");
 
     play.addEventListener("click", function() {
+        console.log("clicked play")
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
             player.pauseVideo();
             play.innerHTML = playBtn;
@@ -105,12 +114,14 @@ addEventListener('turbo:load', () => {
         }
     });
     stop.addEventListener("click", function() {
+        console.log("clicked stop")
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
             player.stopVideo();
             play.innerHTML = playBtn;
         }
     });
     prev.addEventListener("click", function() {
+        console.log("clicked prev")
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
             player.previousVideo();
         } else {
@@ -119,6 +130,7 @@ addEventListener('turbo:load', () => {
         }
     });
     next.addEventListener("click", function() {
+        console.log("clicked next")
         if (player.getPlaylist() && player.getPlaylistIndex() + 1 < player.getPlaylist().length || is_looping) {
             if (player.getPlayerState() == YT.PlayerState.PLAYING) {
                 player.nextVideo();
@@ -129,6 +141,7 @@ addEventListener('turbo:load', () => {
         }
     });
     loop.addEventListener("click", function() {
+        console.log("clicked loop")
         if (is_looping) {
             player.setLoop(0);
             is_looping = false;
@@ -140,6 +153,7 @@ addEventListener('turbo:load', () => {
     // update title that displays in media player marquee
     let titleElem = document.getElementById('track-title') || null;
     function updateTitle(event) {
+        console.log("Entered update title function")
         if (event.target.videoTitle !== titleElem.innerHTML && player.getPlayerState() == YT.PlayerState.PLAYING) {
             titleElem.innerHTML = event.target.videoTitle;
             document.title = event.target.videoTitle;
@@ -153,6 +167,7 @@ addEventListener('turbo:load', youtube_player, false);
 addEventListener('turbo:frame-load', youtube_player, false);
 
 function youtube_player () {
+    console.log("Entered youtube player function")
     const playTracks = document.getElementsByClassName('play-tracks');
 
     if (playTracks.length > 0) {
@@ -194,6 +209,7 @@ function youtube_player () {
 }
 
 function formatTime(time){
+    console.log("Entered format time function")
     time = Math.round(time);
 
     var minutes = Math.floor(time / 60),
