@@ -95,7 +95,7 @@ a {
   cursor: pointer;
   transition: transform 0.25s, background-color 0.25s;
 }
-.btn:hover {
+.btn:not(.link-btn):hover {
   background-color: var(--dark-slate);
 }
 .btn:active {
@@ -110,6 +110,7 @@ button, input[type=submit], textarea[type=submit] {
   border: 1px solid var(--black);
   border-radius: 3px;
   background-image: none;
+  color: inherit;
   transition: background-color 0.2s ease;
 }
 button:hover, input[type=submit]:hover, textarea[type=submit]:hover {
