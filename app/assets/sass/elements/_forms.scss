@@ -2,6 +2,7 @@ input {
     &:not([type=range]):not([type=file]):not([type=checkbox]) {
         appearance: none;
         padding: 12px;
+        border-radius: 0;
         border: 1.2px solid var(--gray);
         font-size: 16px;
         font-family: inherit;
@@ -23,6 +24,7 @@ input {
         margin-top: 21px;
         background-color: var(--dark-slate);
         border: none;
+        color: inherit;
         cursor: pointer;
         &:hover {
             background-color: var(--slate);

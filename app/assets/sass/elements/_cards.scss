@@ -155,7 +155,9 @@
 
 @media (max-width: 768px) {
 	.card-container {
-		grid-template-columns: repeat(1, 1fr);
+		&:not(.horizontal) {
+			grid-template-columns: repeat(1, 1fr);
+		}
 		&.horizontal {
 			.card {
 				.copy-area {
@@ -166,6 +168,11 @@
 	}
 }
 @media (max-width: 480px) {
+	.card {
+		.copy-area {
+			padding: 18px 25px;
+		}
+	}
 	.card-container {
 		&.horizontal {
 			.card {

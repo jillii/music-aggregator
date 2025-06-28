@@ -12,6 +12,7 @@
     &.box {
         padding: 0;
         .slider-container-headline {
+            margin-bottom: 12px;
             padding: 33px 33px 0 33px;
         }
         .slider {
@@ -69,6 +70,16 @@
             &:before {
                 border-left-color: var(--lime);
             }
+        }
+    }
+}
+@media (max-width: 480px) {
+    .slider-nav {
+        bottom: calc(100% + 18px);
+    }
+    .slider {
+        &-container-headline {
+            margin-bottom: 0;
         }
     }
 }

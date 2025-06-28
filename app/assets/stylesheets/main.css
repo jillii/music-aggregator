@@ -348,7 +348,7 @@ form.btn-trash:before {
   }
 }
 @media (max-width: 768px) {
-  .card-container {
+  .card-container:not(.horizontal) {
     grid-template-columns: repeat(1, 1fr);
   }
   .card-container.horizontal .card .copy-area {
@@ -356,6 +356,9 @@ form.btn-trash:before {
   }
 }
 @media (max-width: 480px) {
+  .card .copy-area {
+    padding: 18px 25px;
+  }
   .card-container.horizontal .card {
     flex-direction: column;
   }
@@ -377,6 +380,7 @@ form.btn-trash:before {
 input:not([type=range]):not([type=file]):not([type=checkbox]), textarea:not([type=range]):not([type=file]):not([type=checkbox]) {
   appearance: none;
   padding: 12px;
+  border-radius: 0;
   border: 1.2px solid var(--gray);
   font-size: 16px;
   font-family: inherit;
@@ -398,6 +402,7 @@ input[type=submit], textarea[type=submit] {
   margin-top: 21px;
   background-color: var(--dark-slate);
   border: none;
+  color: inherit;
   cursor: pointer;
 }
 input[type=submit]:hover, textarea[type=submit]:hover {
@@ -788,6 +793,7 @@ footer {
   padding: 0;
 }
 .slider-container.box .slider-container-headline {
+  margin-bottom: 12px;
   padding: 33px 33px 0 33px;
 }
 .slider-container.box .slider {
@@ -845,6 +851,14 @@ footer {
   border-left-color: var(--lime);
 }
 
+@media (max-width: 480px) {
+  .slider-nav {
+    bottom: calc(100% + 18px);
+  }
+  .slider-container-headline {
+    margin-bottom: 0;
+  }
+}
 /* Tracks */
 .track {
   display: flex;
@@ -959,6 +973,12 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 560px) {
   #intro {
     padding: 88px 0;
+  }
+}
+@media (max-width: 480px) {
+  #intro {
+    text-align: left;
+    padding: 60px 0 38px;
   }
 }
 .user-profile-header {
