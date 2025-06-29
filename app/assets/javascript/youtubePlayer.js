@@ -99,9 +99,7 @@ addEventListener('turbo:load', () => {
             player.pauseVideo();
             play.innerHTML = playBtn;
         } else {
-            player.mute();
             player.playVideo();
-            player.unmute();
             play.innerHTML = pauseBtn;
         }
     });
@@ -189,6 +187,7 @@ function youtube_player () {
         playAll.addEventListener("click", function(e) {
             e.preventDefault();
             player.loadPlaylist(playlist);
+            player.playVideo()
             play.innerHTML = pauseBtn;
         });
     }
