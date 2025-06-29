@@ -17,6 +17,10 @@
   --border-width: 1.9px;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   margin: 100px 0;
   font-family: "Ubuntu Mono", monospace;
