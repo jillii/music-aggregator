@@ -59,7 +59,7 @@
         <% if @tracks.present? %>
             <% index = 0 %>
             <div class="playlist-actions">
-              <button button aria-label="play" id="playPlaylist" data_turbo_frame="mediaplayer" class="icon btn-play" title="Play playlist"></button>
+              <%= link_to "", '#', id: 'playPlaylist', data: {turbo_frame: 'mediaplayer'}, class: "icon btn-play", title: "Play playlist" %>
               <%= link_to "", '#', id: 'cuePlaylist', data: {'playlist' => @track_ids.join(','), turbo_frame: 'mediaplayer'}, class: "icon btn-load", title: "Add playlist to queue"  %>
             </div>
 
