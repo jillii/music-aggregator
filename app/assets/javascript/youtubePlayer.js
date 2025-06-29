@@ -187,6 +187,7 @@ function youtube_player () {
         playAll.addEventListener("click", function(e) {
             e.preventDefault();
             player.loadPlaylist(playlist);
+            player.stopVideo()
             player.playVideo()
             play.innerHTML = pauseBtn;
         });
