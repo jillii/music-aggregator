@@ -162,6 +162,7 @@ function youtube_player () {
                 e.preventDefault();
                 const index = this.getAttribute('data-index');
                 player.loadPlaylist(playlist, index);
+                player.playVideo()
             });
         }
 
@@ -187,7 +188,6 @@ function youtube_player () {
         playAll.addEventListener("click", function(e) {
             e.preventDefault();
             player.loadPlaylist(playlist);
-            player.stopVideo()
             player.playVideo()
             play.innerHTML = pauseBtn;
         });
