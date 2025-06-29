@@ -99,7 +99,9 @@ addEventListener('turbo:load', () => {
             player.pauseVideo();
             play.innerHTML = playBtn;
         } else {
+            player.mute();
             player.playVideo();
+            player.unmute();
             play.innerHTML = pauseBtn;
         }
     });
@@ -139,12 +141,11 @@ addEventListener('turbo:load', () => {
     // update title that displays in media player marquee
     let titleElem = document.getElementById('track-title') || null;
     function updateTitle(event) {
-        console.log("update title entered")
         if (event.target.videoTitle !== titleElem.innerHTML && player.getPlayerState() == YT.PlayerState.PLAYING) {
             titleElem.innerHTML = event.target.videoTitle;
             document.title = event.target.videoTitle;
         } else {
-            document.title = 'Greatdj3';
+            document.title = 'Playlists With Friends';
         }
     }
 });
