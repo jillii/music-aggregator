@@ -36,7 +36,7 @@
           <% if @is_user %>
             <p class="playlist_user">By you</p>
             <div class="playlist-actions">
-                <%= button_to "", @playlist, method: :delete, form_class: "icon btn-trash", title: "Delete playlist" %>
+                <%= button_to "", @playlist, method: :delete, form_class: "icon btn-trash", title: "Delete playlist", data: { turbo_confirm: "Are you sure?" } %>
                 <%= button_tag "", class: "icon btn-replace-image form-toggle no-hide", title: "Replace image", :'data-toggle' => "replace-image" %>
                 <%= link_to "", search_users_path, class: "icon btn-add-user", title: "Add friend" %>
               </div>
