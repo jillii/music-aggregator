@@ -69,6 +69,7 @@
             <br>
           <% end %>
           <% if @playlist.editors.present? %>
+            <br>
             # Editors
             <div class="playlist-editors">
                 <% @playlist.editors.each do |editor| %>
@@ -90,6 +91,7 @@
             <% end %>
           <% end %>
           <% if @playlist.tags.present? %>
+            <br>
             # Tags
             <div class="playlist-tags">
                 <% @playlist.tags.each do |tag| %>
@@ -97,8 +99,6 @@
                 <% end %>
             </div>
           <% end %>
-
-
           <% if @is_user %>
             <%= button_tag "Add Tags", class: "form-toggle", :'data-toggle' => "add-tags" %>
             <%= form_with(model: @playlist, html: {class: "form-togglable hidden", :'data-toggle-form' => "add-tags"}) do |form| %>
