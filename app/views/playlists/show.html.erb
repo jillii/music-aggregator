@@ -8,15 +8,57 @@
           <%= image_tag @playlist.image, size: "100x100", alt: "#{@playlist.title} image", class: "playlist-image"  %>
         <% end %>
         <div class="copy-area">
-          <h1 class="playlist-title"><%= @playlist.title %></h1>
+          <h1 class="playlist-title" data-toggle-original="edit-title"><%= @playlist.title %></h1>
+
+
+          <% if @is_user %>
+            <%= button_tag "Edit Title", class: "form-toggle", :'data-toggle' => "edit-title" %>
+            <%= form_with(model: @playlist, html: {class: "form-togglable hidden", :'data-toggle-form' => "edit-title"}) do |form| %>
+              <% if @playlist.errors.any? %>
+                <div style="color: red">
+                  <h2><%= pluralize(@playlist.errors.count, "error") %> prohibited this playlist from being saved:</h2>
+
+                  <ul>
+                    <% @playlist.errors.each do |error| %>
+                      <li><%= error.full_message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <%= form.text_field :title, required: true %>
+              <%= form.submit "Update" %>
+            <% end %>
+          <% end %>
+
+
+
           <%= render 'playlists/playlist-likes', playlist: @playlist %>
           <% if @is_user %>
             <p class="playlist_user">By you</p>
             <div class="playlist-actions">
-                <%= link_to "", search_users_path, class: "icon btn-add-user", title: "Add friend" %>
-                <%= link_to "", edit_playlist_path(@playlist), class: "icon btn-edit", title: "Edit playlist" %>
                 <%= button_to "", @playlist, method: :delete, form_class: "icon btn-trash", title: "Delete playlist" %>
-            </div>
+                <%= button_tag "", class: "icon btn-replace-image form-toggle no-hide", title: "Replace image", :'data-toggle' => "replace-image" %>
+                <%= link_to "", search_users_path, class: "icon btn-add-user", title: "Add friend" %>
+              </div>
+
+              <%= form_with(model: @playlist, html: {class: "form-togglable hidden", :'data-toggle-form' => "replace-image"}) do |form| %>
+                <% if @playlist.errors.any? %>
+                  <div style="color: red">
+                    <h2><%= pluralize(@playlist.errors.count, "error") %> prohibited this playlist from being saved:</h2>
+
+                    <ul>
+                      <% @playlist.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+                <div class="input-add-image">
+                  <%= form.file_field :image, required: true, accept: "image/*", onchange: "loadFile(event)" %>
+                  <img id="output" class="output" src=""/>
+                </div>
+                <%= form.submit "Update" %>
+              <% end %>
           <% else %>
             By
             <%= link_to user_account_path(@user.id), class: 'playlist-user' do %>
@@ -53,6 +95,29 @@
                 <% end %>
             </div>
           <% end %>
+
+
+          <% if @is_user %>
+            <%= button_tag "Add Tags", class: "form-toggle", :'data-toggle' => "add-tags" %>
+            <%= form_with(model: @playlist, html: {class: "form-togglable hidden", :'data-toggle-form' => "add-tags"}) do |form| %>
+              <% if @playlist.errors.any? %>
+                <div style="color: red">
+                  <h2><%= pluralize(@playlist.errors.count, "error") %> prohibited this playlist from being saved:</h2>
+
+                  <ul>
+                    <% @playlist.errors.each do |error| %>
+                      <li><%= error.full_message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+                <%= form.text_field :tag_id, size: "40x5", placeholder: "separate multiple tags with comma" %><br>
+              <%= form.submit "Update" %>
+            <% end %>
+          <% end %>
+
+
+
         </div>
       </div><!-- pull-left -->
       <div class="pull-right">

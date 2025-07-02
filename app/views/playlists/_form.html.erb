@@ -1,15 +1,3 @@
-  <script>
-
-    console.log('i happened!')
-    var loadFile = function(event) {
-      var reader = new FileReader();
-      reader.onload = function(){
-        var output = document.getElementById('output');
-        output.src = reader.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    };
-  </script>
 <%= form_with(model: playlist) do |form| %>
   <% if playlist.errors.any? %>
     <div style="color: red">

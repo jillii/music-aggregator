@@ -17,6 +17,16 @@
   --border-width: 1.9px;
 }
 
+.hidden {
+  height: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  border: none;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
 html, body {
   overflow-x: hidden;
 }
@@ -146,6 +156,12 @@ button:hover, input[type=submit]:hover, textarea[type=submit]:hover {
   background-position: center;
   background-repeat: no-repeat;
 }
+.btn-replace-image:before {
+  content: "";
+  background-image: url("replace-image.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .btn-add-user:before {
   content: "";
   background-image: url("add-friend.svg");
@@ -184,6 +200,7 @@ form.btn-trash:before {
   display: inline-flex;
   padding: 6px;
   border-radius: 5px;
+  border: none;
   background-color: var(--slate);
   transition: background-color 0.2s ease;
 }
@@ -744,10 +761,6 @@ footer {
 .playlist.full .flexbox .pull-right {
   flex: 0 0 calc(100% - 360px);
   width: calc(100% - 360px);
-}
-.playlist.full .flexbox .copy-area {
-  position: sticky;
-  top: 120px;
 }
 .playlist.full .flexbox .playlist-image {
   position: fixed;

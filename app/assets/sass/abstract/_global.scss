@@ -9,3 +9,13 @@
 	--almond: blanchedalmond;
     --border-width: 1.9px;
 }
+
+.hidden {
+	height: 0;
+	padding: 0;
+	margin: 0;
+	opacity: 0;
+	border: none;
+	pointer-events: none;
+	transition: all .2s ease;
+}

@@ -82,6 +82,14 @@ button {
 			background-repeat: no-repeat;
 		}
 	}
+	&-replace-image {
+		&:before {
+			content: '';
+			background-image: url('replace-image.svg');
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
 	&-add-user {
 		&:before {
 			content: '';
@@ -129,6 +137,7 @@ form.btn-trash {
 	display: inline-flex;
 	padding: 6px;
 	border-radius: 5px;
+	border: none;
 	background-color: var(--slate);
 	transition: background-color .2s ease;
 	&:before {

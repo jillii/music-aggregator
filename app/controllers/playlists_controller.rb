@@ -85,15 +85,17 @@ class PlaylistsController < ApplicationController
 
   # PATCH/PUT /playlists/1 or /playlists/1.json
   def update
-    tags = params[:playlist][:tag_id].split(',')
+    tags = params[:playlist][:tag_id].split(',') if params[:playlist][:tag_id]
 
-    tags.each do |tag|
-      exists = Tag.where(label: tag)
-      if exists.exists?
-        @playlist.tags.push(exists.first) # push existing tag to playlist
-      else
-        new_tag = Tag.create(label: tag.strip)
-        @playlist.tags.push(new_tag)
+    if tags
+      tags.each do |tag|
+        exists = Tag.where(label: tag)
+        if exists.exists?
+          @playlist.tags.push(exists.first) unless @playlist.tags.include? exists.first # push existing tag to playlist
+        else
+          new_tag = Tag.create(label: tag.strip)
+          @playlist.tags.push(new_tag)
+        end
       end
     end
 
