@@ -947,6 +947,7 @@ footer {
 .playlist-tags {
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .tag {
