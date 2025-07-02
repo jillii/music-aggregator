@@ -735,6 +735,11 @@ footer {
 }
 .playlist.full .flexbox .pull-left {
   flex: 1 0 360px;
+  overflow: hidden;
+}
+.playlist.full .flexbox .pull-left .playlist-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .playlist.full .flexbox .pull-right {
   flex: 0 0 calc(100% - 360px);

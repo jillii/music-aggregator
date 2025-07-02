@@ -7,6 +7,11 @@
         .flexbox {
             .pull-left {
                 flex: 1 0 360px;
+                overflow: hidden;
+                .playlist-title {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
             .pull-right {
                 flex: 0 0 calc(100% - 360px);
