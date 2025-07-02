@@ -27,6 +27,7 @@
               <% end %>
               <%= form.text_field :title, required: true %>
               <%= form.submit "Update" %>
+              <%= button_tag "Cancel", type: :reset %>
             <% end %>
           <% end %>
 
@@ -58,6 +59,7 @@
                   <img id="output" class="output" src=""/>
                 </div>
                 <%= form.submit "Update" %>
+                <%= button_tag "Cancel", type: :reset %>
               <% end %>
           <% else %>
             By
@@ -113,10 +115,9 @@
               <% end %>
                 <%= form.text_field :tag_id, size: "40x5", placeholder: "separate multiple tags with comma" %><br>
               <%= form.submit "Update" %>
+              <%= button_tag "Cancel", type: :reset %>
             <% end %>
           <% end %>
-
-
 
         </div>
       </div><!-- pull-left -->

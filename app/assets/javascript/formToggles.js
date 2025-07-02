@@ -21,14 +21,25 @@ addEventListener('turbo:load', () => {
     })
 })
 
-// const closeForm = (e) => {
-//     const form = e.target
-//     const btn = document.querySelectorAll('data-toggle="' + form.id + '"')
+const closeForm = (e) => {
+    const form = e.target.parentElement
+    const btn = document.querySelectorAll('[data-toggle="' + form.dataset.toggleForm + '"]')
+    const orig = document.querySelectorAll('[data-toggle-original="' + form.dataset.toggleForm + '"]')
 
-//     form.classList.add("hidden")
-//     btn.classList.remove("hidden")
-// }
+    form.classList.add("hidden")
+    btn.forEach(item => item.classList.remove("hidden"))
+    orig.forEach(item => item.classList.remove("hidden"))
+}
 
-// document.querySelectorAll(".form-togglable").forEach(form => {
-//     form.addEventListener("submit", "closeForm")
-// })
+
+
+addEventListener('turbo:frame-load', () => {
+    document.querySelectorAll("button[type='reset']").forEach(btn => {
+        btn.addEventListener("click", closeForm)
+    })
+})
+addEventListener('turbo:load', () => {
+    document.querySelectorAll("button[type='reset']").forEach(btn => {
+        btn.addEventListener("click", closeForm)
+    })
+})
