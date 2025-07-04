@@ -4,8 +4,8 @@ const activeColor = "limegreen";
 const inactiveColor = "#ccc";
 
 var reloadYoutube = function () {
-/* if YT already initialized return */
-if (window.YT) { return; };
+    /* if YT already initialized return */
+    if (window.YT) { return; };
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -20,9 +20,12 @@ const range = document.getElementById('range');
 addEventListener('turbo:load', () => {
     // check if playlist already exists
     const currentPlaylist = player ? player.getPlaylist() : null,
-          currentIndex    = player ? player.getPlaylistIndex() : null,
-          currentStart    = player ? player.getCurrentTime() : null,
-          currentState    = player ? player.getPlayerState() : null;
+    currentIndex    = player ? player.getPlaylistIndex() : null,
+    currentStart    = player ? player.getCurrentTime() : null,
+    currentState    = player ? player.getPlayerState() : null;
+
+    const queue = document.getElementById('queue');
+
     // initiallize youtube player
     player = new YT.Player('youtube-player', {
         width: 300,
@@ -145,6 +148,9 @@ addEventListener('turbo:load', () => {
         } else {
             document.title = 'Playlists With Friends';
         }
+        // set background of current track
+        queue.querySelectorAll('.play-track-wrapper').forEach(item => item.classList.remove('active'))
+        queue.querySelector(`.play-track-wrapper:nth-child(${player.getPlaylistIndex() + 1})`).classList.add('active')
     }
 });
 
@@ -156,12 +162,16 @@ function youtube_player () {
 
     if (playTracks.length > 0) {
         let playlist = document.getElementById('cuePlaylist').dataset.playlist.split(',');
+        const titles = document.getElementById('cuePlaylist').dataset.titles.split(',');
+        let index = 0;
+
         // start playlist from clicked item
         for (var i = 0; i < playTracks.length; i++) {
             playTracks[i].addEventListener("click", function(e){
                 e.preventDefault();
-                const index = this.getAttribute('data-index');
+                index = this.getAttribute('data-index');
                 player.loadPlaylist(playlist, index);
+                setQueue(index, titles, playlist, true)
             });
         }
 
@@ -171,6 +181,7 @@ function youtube_player () {
 
         cue.addEventListener("click", function(e){
             e.preventDefault();
+            setQueue(index, titles, playlist)
             if (player.getPlaylist()) {
                 const new_playlist = player.getPlaylist().concat(playlist);
                 if (player.getPlayerState() == YT.PlayerState.PLAYING) {
@@ -188,7 +199,53 @@ function youtube_player () {
             e.preventDefault();
             player.loadPlaylist(playlist);
             play.innerHTML = pauseBtn;
+            setQueue(index, titles, playlist, true)
         });
+    }
+
+    function setQueue(index, titles, playlist, reset = false) {
+        if (reset) {queue.innerHTML = ''}
+        // add track titles to queue
+        for (let j = 0; j < titles.length; j++) {
+            let container = document.createElement('div')
+            container.className = "play-track-wrapper"
+
+            let removeBtn = document.createElement('button')
+            removeBtn.className = "play-track-remove"
+            removeBtn.setAttribute("title", "Remove")
+            removeBtn.addEventListener("click", function(e) {
+                e.preventDefault()
+                const index = Array.from(queue.children).indexOf(this.parentElement)
+                const current_playlist = player.getPlaylist()
+                const new_playlist = current_playlist.filter((item, i) => index != i)
+                const current_index = player.getPlaylistIndex()
+        
+                // remove from player
+                if (current_index < j) {
+                    player.loadPlaylist(new_playlist, current_index, player.getCurrentTime())
+                } else {
+                    player.loadPlaylist(new_playlist, current_index - 1, player.getCurrentTime())
+                }
+        
+                // remove from queue
+                this.parentElement.remove()
+            })
+
+            let node = document.createElement('a')
+            node.className = "play-tracks"
+            node.setAttribute("data-index", j)
+            node.setAttribute("data-turbo-frame", "mediaplayer")
+            node.href = "#"
+            node.innerHTML += titles[j]
+            node.addEventListener("click", function(e) {
+                e.preventDefault();
+                const index = Array.from(queue.children).indexOf(this.parentElement)
+                player.playVideoAt(index)
+            })
+            container.appendChild(node)
+            container.appendChild(removeBtn)
+            queue.appendChild(container)
+        }
     }
 }
 

@@ -10,6 +10,7 @@
   --white: #fff;
   --gray: #575350;
   --slate: #f0f0f0;
+  --light-slate: #f7f7f7;
   --dark-slate: #b9b8b8;
   --lime: #8dff65;
   --blue: #003aa5;
@@ -532,12 +533,17 @@ form .actions {
   pointer-events: none;
 }
 
-#media-player {
+#mediaplayer {
   position: fixed;
   width: 100%;
   bottom: 0;
+}
+
+#media-player {
+  position: relative;
   padding-bottom: 21px;
   background-color: var(--slate);
+  z-index: 2;
 }
 #media-player button, #media-player input[type=submit], #media-player textarea[type=submit] {
   min-width: 0;
@@ -577,6 +583,80 @@ form .actions {
   font-size: 14px;
 }
 
+.queue-container {
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  transform: translateY(100%);
+  transition: transform 0.2s ease;
+}
+.queue-container:has(.queue:empty) {
+  display: none;
+}
+.queue-container.active {
+  transform: none;
+}
+.queue-container.active .toggle:before {
+  content: attr(data-expanded);
+}
+.queue-container .toggle {
+  position: absolute;
+  right: 10%;
+  bottom: 100%;
+  border-color: var(--slate);
+  border-bottom: none;
+  color: var(--gray);
+  background-color: var(--light-slate);
+}
+.queue-container .toggle:before {
+  content: attr(data-collapsed);
+}
+.queue-container .toggle:focus {
+  outline: none;
+}
+.queue-container .queue {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--light-slate);
+}
+.queue-container .queue .play-tracks {
+  flex: 1 0 auto;
+  padding: 6px calc((100% - min(1440px, 90vw)) / 2);
+  border-top: 1px solid var(--slate);
+  transition: background-color 0.2s ease;
+}
+.queue-container .queue .play-tracks:hover {
+  background-color: var(--slate) !important;
+}
+.queue-container .queue .play-track-wrapper {
+  display: flex;
+  align-items: center;
+}
+.queue-container .queue .play-track-wrapper.active {
+  animation: glow 1.5s infinite alternate ease;
+}
+.queue-container .queue .play-track-remove {
+  appearance: none;
+  position: absolute;
+  right: 6px;
+  border: none;
+  background-color: transparent;
+}
+.queue-container .queue .play-track-remove:before {
+  content: "+";
+  display: inline-block;
+  font-size: 31px;
+  rotate: 45deg;
+}
+
+@keyframes glow {
+  from {
+    background-color: rgba(255, 255, 255, 0.5490196078);
+  }
+  to {
+    background-color: rgba(255, 255, 255, 0.8745098039);
+  }
+}
 .site-nav {
   position: fixed;
   max-width: 1300px;

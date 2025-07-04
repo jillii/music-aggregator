@@ -126,7 +126,7 @@
             <% index = 0 %>
             <div class="playlist-actions">
               <%= link_to "", '#', id: 'playPlaylist', data: {turbo_frame: 'mediaplayer'}, class: "icon btn-play", title: "Play playlist" %>
-              <%= link_to "", '#', id: 'cuePlaylist', data: {'playlist' => @track_ids.join(','), turbo_frame: 'mediaplayer'}, class: "icon btn-load", title: "Add playlist to queue"  %>
+              <%= link_to "", '#', id: 'cuePlaylist', data: {'playlist' => @track_ids.join(','), 'titles' => @track_titles.join(','), turbo_frame: 'mediaplayer'}, class: "icon btn-load", title: "Add playlist to queue"  %>
             </div>
 
             <div id="<%= @is_user || @is_editor ? 'sortable-' : '' %>tracklist" class="playlist-track">

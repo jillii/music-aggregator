@@ -7,13 +7,16 @@
     opacity: 0;
     pointer-events: none;
 }
-
-#media-player {
+#mediaplayer {
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+#media-player {
+    position: relative;
     padding-bottom: 21px;
     background-color: var(--slate);
+    z-index: 2;
 
     button {
         min-width: 0;
@@ -63,4 +66,82 @@
             font-size: 14px;
         }
     }
+}
+
+.queue-container {
+    position: absolute;
+    bottom: 100%;
+    width: 100%;
+    transform: translateY(100%);
+    transition: transform .2s ease;
+    &:has(.queue:empty) {
+        display: none;
+    }
+    &.active {
+        transform: none;
+        .toggle:before {
+            content: attr(data-expanded);
+        }
+    }
+    .toggle {
+        position: absolute;
+        right: 10%;
+        bottom: 100%;
+        border-color: var(--slate);
+        border-bottom: none;
+        color: var(--gray);
+        background-color: var(--light-slate);
+        &:before {
+            content: attr(data-collapsed);
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    .queue {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--light-slate);
+        .play-tracks {
+            flex: 1 0 auto;
+            padding: 6px calc((100% - min(1440px, 90vw)) / 2);
+            border-top: 1px solid var(--slate);
+            transition: background-color .2s ease;
+            &:hover {
+                background-color: var(--slate) !important;
+            }
+        }
+        .play-track {
+            &-wrapper {
+                display: flex;
+                align-items: center;
+                &.active {
+                    animation: glow 1.5s infinite alternate ease;
+                }
+            }
+            &-remove {
+                appearance: none;
+                position: absolute;
+                right: 6px;
+                border: none;
+                background-color: transparent;
+                &:before {
+                    content: '+';
+                    display: inline-block;
+                    font-size: 31px;
+                    rotate: 45deg;
+                }
+            }
+        }
+    }
+}
+
+@keyframes glow {
+    from {
+        background-color: #ffffff8c;
+    }
+    to {
+        background-color: #ffffffdf;
+    }
+
 }

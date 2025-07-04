@@ -37,6 +37,7 @@ class PlaylistsController < ApplicationController
     @user = User.find(@playlist.user_id)
     @tracks = @playlist.tracks
     @track_ids = @tracks.pluck(:track_id)
+    @track_titles = @tracks.pluck(:title)
     @is_user = current_user && current_user.id === @playlist.user_id
     @collab_request_sent = CollabRequest.where(sender: current_user, receiver: @user, playlist: @playlist).present?
   end

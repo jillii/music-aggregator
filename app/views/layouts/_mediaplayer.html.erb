@@ -1,4 +1,8 @@
 <%= turbo_frame_tag "mediaplayer" do %>
+<div id="queue-container" class="queue-container">
+    <button class="toggle" data-expanded="Close playlist" data-collapsed="View playlist" onclick="document.getElementById('queue-container').classList.toggle('active')"></button>
+    <div id="queue" class="queue"></div>
+</div>
 <div id="media-player" class="windows active playing">
     <marquee>Now playing: <span id="track-title"></span></marquee>
     <div class="flexbox site-container">
