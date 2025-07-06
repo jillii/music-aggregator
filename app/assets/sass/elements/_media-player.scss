@@ -107,6 +107,9 @@
         &:focus {
             outline: none;
         }
+        &:active {
+            transform: none;
+        }
     }
     .queue {
         display: flex;

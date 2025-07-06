@@ -619,6 +619,9 @@ form .actions {
 .queue-container .toggle:focus {
   outline: none;
 }
+.queue-container .toggle:active {
+  transform: none;
+}
 .queue-container .queue {
   display: flex;
   flex-direction: column;
