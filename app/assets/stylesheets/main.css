@@ -940,6 +940,9 @@ footer {
   font-family: system-ui;
   text-decoration: none;
 }
+.playlist .heart:hover {
+  background-color: transparent;
+}
 .playlist-likers {
   position: absolute;
 }

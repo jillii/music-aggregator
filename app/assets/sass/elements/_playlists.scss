@@ -45,6 +45,9 @@
     .heart {
         font-family: system-ui;
         text-decoration: none;
+        &:hover {
+            background-color: transparent;
+        }
     }
 
     &-likers {
