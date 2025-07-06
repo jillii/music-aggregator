@@ -25,6 +25,16 @@
         line-height: 1;
     }
 
+    .controls {
+        .loop {
+            &.active {
+                svg path {
+                    fill: var(--blue);
+                }
+            }
+        }
+    }
+
     .range-container {
         flex: 1;
         align-items: center;

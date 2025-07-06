@@ -553,6 +553,9 @@ form .actions {
   background-color: transparent;
   line-height: 1;
 }
+#media-player .controls .loop.active svg path {
+  fill: var(--blue);
+}
 #media-player .range-container {
   flex: 1;
   align-items: center;
