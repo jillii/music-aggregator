@@ -14,6 +14,9 @@
                     <%= paginate @collab_requests %>
                 <% end %>
                 <% if @notifications.present? %>
+                    <% if check_for_new_notifications %>
+                        <%= button_to "Mark all as read", read_all_notifications_path, class: "read-all", data: {turbo_frame: '_top'} %>
+                    <% end %>
                     <% @notifications.each do |n| %>
                         <div class="notification">
                             <% unless n.read %>

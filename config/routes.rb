@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'notification/:id', to: 'notifications#show', as: :notification
   post 'notification/:id', to: 'notifications#read', as: :read_notification
   delete 'notification/:id', to: 'notifications#destroy'
+  post 'notifications', to: 'notifications#read_all', as: :read_all_notifications
 
   resources :playlists do
     get '/page/:page', action: :index, on: :collection

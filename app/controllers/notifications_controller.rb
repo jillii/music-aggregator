@@ -30,6 +30,10 @@ class NotificationsController < ApplicationController
     end
   end
 
+  def read_all
+    current_user.received_notifications.update_all(read: true)
+  end
+
   def destroy
     @notification = Notification.find(params[:id])
     @notification.destroy
