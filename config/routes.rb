@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "home#index"
   get 'users/:id', to: 'home#account', as: :user_account
+  get 'about', to: 'home#about', as: :about
 
   # Defines route to search
   get '/playlists/:id/tracks/new', to: 'tracks#new', as: :search_tracks

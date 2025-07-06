@@ -14,6 +14,9 @@ class HomeController < ApplicationController
         @collab_requests = @user.collab_requests_received
     end
 
+    def about  
+    end
+
     def users
         @users = User.where(nil)
 

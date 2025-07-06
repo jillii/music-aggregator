@@ -26,7 +26,7 @@
         <div id="nav-inner" class="site-nav-inner" onclick="this.classList.remove('active'); document.getElementById('hamburger').classList.remove('active')">
           <div class="site-container">
             <%= link_to "home", root_path, class: "home menu-item", data: {turbo_frame: 'app'} %>
-            <%= link_to "about", '#', class: "menu-item", data: {turbo_frame: 'app'} %>
+            <%= link_to "about", about_path, class: "menu-item", data: {turbo_frame: 'app'} %>
             <%= link_to "playlists", playlists_path, class: "menu-item", data: {turbo_frame: 'app'} %>
             <% if current_user %>
               <%= link_to 'account', user_account_path(current_user.id), class: "menu-item", data: {turbo_frame: 'app'} %>
