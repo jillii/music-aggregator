@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'errors/not_found'
+  get 'errors/internal_server_error'
   get 'notifications', to: 'notifications#index', as: :user_notifications
   get 'notification/:id', to: 'notifications#show', as: :notification
   post 'notification/:id', to: 'notifications#read', as: :read_notification
@@ -46,4 +48,8 @@ Rails.application.routes.draw do
 
   # Defines delete for tracks
   delete 'tracks/:id', to: 'tracks#destroy'
+
+  # errors
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
 end
