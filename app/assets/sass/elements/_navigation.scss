@@ -118,6 +118,37 @@ footer {
 	padding: 33px 0 38px;
 }
 
+.pagination {
+	position: relative;
+	margin-top: 22px;
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+	& > :is(.prev, .next, .first, .last) {
+		position: absolute;
+	}
+	.first {
+		left: 0;
+	}
+	.prev {
+		left: 72px;
+	}
+	.next {
+		right: 72px;
+	}
+	.last {
+		right: 0;
+	}
+	.page {
+		&.current {
+			text-decoration: underline;
+		}
+		a {
+			font-size: inherit;
+		}
+	}
+}
+
 @media (max-width: 768px) {
 	.site-nav {
 		position: fixed;

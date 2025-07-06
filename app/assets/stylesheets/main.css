@@ -807,6 +807,35 @@ footer {
   padding: 33px 0 38px;
 }
 
+.pagination {
+  position: relative;
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.pagination > :is(.prev, .next, .first, .last) {
+  position: absolute;
+}
+.pagination .first {
+  left: 0;
+}
+.pagination .prev {
+  left: 72px;
+}
+.pagination .next {
+  right: 72px;
+}
+.pagination .last {
+  right: 0;
+}
+.pagination .page.current {
+  text-decoration: underline;
+}
+.pagination .page a {
+  font-size: inherit;
+}
+
 @media (max-width: 768px) {
   .site-nav {
     position: fixed;
