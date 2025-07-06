@@ -50,7 +50,7 @@ class CollabRequestsController < ApplicationController
     else
       request.destroy
       notification.save
-      redirect_to playlist_path(playlist), notice: "Editor was successfully added."
+      redirect_to user_notifications_path, notice: "Editor was successfully added."
     end
   end
 
