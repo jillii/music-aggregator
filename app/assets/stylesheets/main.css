@@ -821,6 +821,15 @@ footer {
   .site-nav .menu-item:hover {
     background-color: var(--slate) !important;
   }
+  .site-nav .menu-item.active {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+  .site-nav .menu-item.active .notification-count {
+    position: relative;
+    right: unset;
+  }
   .site-nav .menu-item .btn, .site-nav .menu-item.btn {
     background-color: transparent;
     border: none;

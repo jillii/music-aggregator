@@ -159,6 +159,15 @@ footer {
 			&:hover {
 				background-color: var(--slate) !important;
 			}
+			&.active {
+				display: flex;
+				flex-direction: row-reverse;
+				justify-content: flex-end;
+				.notification-count {
+					position: relative;
+					right: unset;
+				}
+			}
 			.btn, &.btn {
 				background-color: transparent;
 				border: none;
