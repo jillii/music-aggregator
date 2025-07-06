@@ -15,6 +15,7 @@
   --lime: #8dff65;
   --blue: #003aa5;
   --almond: blanchedalmond;
+  --red: rgb(255, 71, 38);
   --border-width: 1.9px;
 }
 
@@ -719,6 +720,34 @@ form .actions {
   display: flex;
   gap: 24px;
   align-items: center;
+}
+.site-nav .menu-item svg {
+  transition: rotate 0.2s ease;
+}
+.site-nav .menu-item .notification-count {
+  transition: all 0.2s ease;
+}
+.site-nav .menu-item.active {
+  position: relative;
+}
+.site-nav .menu-item.active svg {
+  rotate: 20deg;
+}
+.site-nav .menu-item.active .notification-count {
+  min-width: 12px;
+  height: 12px;
+  padding: 0 2px;
+  position: absolute;
+  top: 0px;
+  right: -7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--red);
+  color: #fff;
+  font-size: 11px;
+  z-index: 1;
 }
 .site-nav .menu-item:not(.btn):not(form) {
   position: relative;
