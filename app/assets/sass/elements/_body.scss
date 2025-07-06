@@ -1,6 +1,9 @@
 html, body {
 	overflow-x: hidden;
 }
+html {
+	overflow-y: scroll;
+}
 body {
 	margin: 100px 0;
 	font-family: "Ubuntu Mono", monospace;
@@ -42,3 +45,25 @@ section {
 	gap: 16px;
 	text-align: left;
 }
+
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: transparent;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	border-radius: 0px;
+	background: var(--black);
+	box-shadow: inset -1px -1px 2px #ffffff;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: var(--slate);
+  }
