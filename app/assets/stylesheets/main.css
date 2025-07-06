@@ -127,10 +127,13 @@ button, input[type=submit], textarea[type=submit] {
   border-radius: 3px;
   background-image: none;
   color: inherit;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 button:hover, input[type=submit]:hover, textarea[type=submit]:hover {
   background-color: var(--dark-slate);
+}
+button:active, input[type=submit]:active, textarea[type=submit]:active {
+  transform: translateY(3px);
 }
 
 .link-btn {
@@ -148,27 +151,19 @@ button:hover, input[type=submit]:hover, textarea[type=submit]:hover {
 
 .btn-trash:before {
   content: "";
-  background-image: url("trash.svg");
-  background-position: center;
-  background-repeat: no-repeat;
+  mask-image: url("trash.svg");
 }
 .btn-edit:before {
   content: "";
-  background-image: url("pencil.svg");
-  background-position: center;
-  background-repeat: no-repeat;
+  mask-image: url("pencil.svg");
 }
 .btn-replace-image:before {
   content: "";
-  background-image: url("replace-image.svg");
-  background-position: center;
-  background-repeat: no-repeat;
+  mask-image: url("replace-image.svg");
 }
 .btn-add-user:before {
   content: "";
-  background-image: url("add-friend.svg");
-  background-position: center;
-  background-repeat: no-repeat;
+  mask-image: url("add-friend.svg");
 }
 .btn-add-editor {
   margin-top: 18px;
@@ -181,15 +176,11 @@ button:hover, input[type=submit]:hover, textarea[type=submit]:hover {
 }
 .btn-play:before {
   content: "";
-  background-image: url("play.svg");
-  background-position: center;
-  background-repeat: no-repeat;
+  mask-image: url("play.svg");
 }
 .btn-load:before {
   content: "";
-  background-image: url("load.svg");
-  background-position: center;
-  background-repeat: no-repeat;
+  mask-image: url("load.svg");
 }
 
 form.btn-trash:before {
@@ -207,14 +198,24 @@ form.btn-trash:before {
   transition: background-color 0.2s ease;
 }
 .icon:before {
+  mask-position: center;
+  mask-repeat: no-repeat;
+  background-color: var(--black);
   display: inline-block;
   height: 21px;
   width: 21px;
   flex: 1 0 auto;
   text-align: center;
+  transition: background-color 0.2s ease;
 }
 .icon:hover {
   background-color: var(--dark-slate);
+}
+.icon:active {
+  background-color: var(--gray);
+}
+.icon:active:before {
+  background-color: #fff;
 }
 
 .btn-trash {

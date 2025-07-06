@@ -46,9 +46,12 @@ button {
 	border-radius: 3px;
 	background-image: none;
 	color: inherit;
-	transition: background-color .2s ease;
+	transition: background-color .2s ease, transform .2s ease;
 	&:hover {
 		background-color: var(--dark-slate);
+	}
+	&:active {
+		transform: translateY(3px);
 	}
 }
 
@@ -69,33 +72,25 @@ button {
 	&-trash {
 		&:before {
 			content: '';
-			background-image: url('trash.svg');
-			background-position: center;
-			background-repeat: no-repeat;
+			mask-image: url('trash.svg');
 		}
 	}
 	&-edit {
 		&:before {
 			content: '';
-			background-image: url('pencil.svg');
-			background-position: center;
-			background-repeat: no-repeat;
+			mask-image: url('pencil.svg');
 		}
 	}
 	&-replace-image {
 		&:before {
 			content: '';
-			background-image: url('replace-image.svg');
-			background-position: center;
-			background-repeat: no-repeat;
+			mask-image: url('replace-image.svg');
 		}
 	}
 	&-add-user {
 		&:before {
 			content: '';
-			background-image: url('add-friend.svg');
-			background-position: center;
-			background-repeat: no-repeat;
+			mask-image: url('add-friend.svg');
 		}
 	}
 	&-add-editor {
@@ -110,17 +105,13 @@ button {
 	&-play {
 		&:before {
 			content: '';
-			background-image: url('play.svg');
-			background-position: center;
-			background-repeat: no-repeat;
+			mask-image: url('play.svg');
 		}
 	}
 	&-load {
 		&:before {
 			content: '';
-			background-image: url('load.svg');
-			background-position: center;
-			background-repeat: no-repeat;
+			mask-image: url('load.svg');
 		}
 	}
 }
@@ -141,14 +132,24 @@ form.btn-trash {
 	background-color: var(--slate);
 	transition: background-color .2s ease;
 	&:before {
+		mask-position: center;
+		mask-repeat: no-repeat;
+		background-color: var(--black);
 		display: inline-block;
 		height: 21px;
 		width: 21px;
 		flex: 1 0 auto;
 		text-align: center;
+		transition: background-color .2s ease;
 	}
 	&:hover {
 		background-color: var(--dark-slate);
+	}
+	&:active {
+		background-color: var(--gray);
+		&:before {
+			background-color: #fff;
+		}
 	}
 }
 
