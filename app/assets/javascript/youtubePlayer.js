@@ -15,6 +15,7 @@ reloadYoutube();
 
 let player;
 let is_looping = false;
+let is_shuffled = false;
 const range = document.getElementById('range');
 
 addEventListener('turbo:load', () => {
@@ -95,7 +96,8 @@ addEventListener('turbo:load', () => {
           stop = document.getElementById("stop"),
           prev = document.getElementById("prev"),
           next = document.getElementById("next"),
-          loop = document.getElementById("loop");
+          loop = document.getElementById("loop"),
+          shuffle = document.getElementById("shuffle");
 
     play.addEventListener("click", function() {
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
@@ -139,6 +141,16 @@ addEventListener('turbo:load', () => {
             is_looping = true;
         }
     });
+    shuffle.addEventListener("click", function() {
+        if (is_shuffled) {
+            player.setShuffle(0)
+            is_shuffled = false
+        } else {
+            player.setShuffle(1)
+            player.playVideoAt(0)
+            is_shuffled = true
+        }
+    })
     // update title that displays in media player marquee
     let titleElem = document.getElementById('track-title') || null;
     function updateTitle(event) {

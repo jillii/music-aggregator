@@ -34,7 +34,7 @@
     }
 
     .controls {
-        .loop {
+        button {
             &.active {
                 svg path {
                     fill: var(--blue);
