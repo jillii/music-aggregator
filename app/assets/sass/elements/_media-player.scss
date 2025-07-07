@@ -11,9 +11,9 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-    &:has(#queue:empty) button {
-        pointer-events: none;
-    }
+    // &:has(#queue:empty) button {
+    //     pointer-events: none;
+    // }
 }
 #media-player {
     position: relative;

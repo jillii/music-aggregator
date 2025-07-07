@@ -576,9 +576,6 @@ form .actions {
   width: 100%;
   bottom: 0;
 }
-#mediaplayer:has(#queue:empty) button, #mediaplayer:has(#queue:empty) input[type=submit], #mediaplayer:has(#queue:empty) textarea[type=submit] {
-  pointer-events: none;
-}
 
 #media-player {
   position: relative;
