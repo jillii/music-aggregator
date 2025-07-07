@@ -11,6 +11,7 @@
   --gray: #575350;
   --slate: #f0f0f0;
   --light-slate: #f7f7f7;
+  --mid-slate: #ccc;
   --dark-slate: #b9b8b8;
   --lime: #8dff65;
   --blue: #003aa5;
@@ -105,6 +106,11 @@ section {
   background: var(--slate);
 }
 
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
 a {
   font-size: 14px;
   font-weight: 800;
@@ -537,7 +543,7 @@ form .actions {
 .searchbox input:not([type=submit]), .searchbox textarea:not([type=submit]) {
   width: auto;
   margin-bottom: 0;
-  background-color: var(--slate);
+  background-color: var(--light-slate);
   transition: background-color 0.2s ease;
 }
 .searchbox input:not([type=submit]):focus, .searchbox textarea:not([type=submit]):focus {
@@ -549,6 +555,10 @@ form .actions {
 .searchbox input[type=submit], .searchbox textarea[type=submit] {
   margin-top: 0;
   border: var(--border-width) solid var(--black);
+}
+.searchbox input[type=submit]:active, .searchbox textarea[type=submit]:active {
+  background-color: var(--mid-slate);
+  transform: none;
 }
 
 #youtube-player {
@@ -565,6 +575,9 @@ form .actions {
   position: fixed;
   width: 100%;
   bottom: 0;
+}
+#mediaplayer:has(#queue:empty) button, #mediaplayer:has(#queue:empty) input[type=submit], #mediaplayer:has(#queue:empty) textarea[type=submit] {
+  pointer-events: none;
 }
 
 #media-player {
@@ -600,17 +613,17 @@ form .actions {
   appearance: none;
   flex: 1;
   height: 1px;
-  background: transparent;
+  background: var(--mid-slate);
   cursor: pointer;
 }
 #media-player .range-container #range::-ms-thumb, #media-player .range-container #range::-webkit-slider-thumb, #media-player .range-container #range::-moz-range-thumb {
   display: none;
   -webkit-appearance: none;
   appearance: none;
-  width: 11px;
-  height: 11px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background-color: var(--black);
+  background: var(--black) !important;
   box-shadow: none;
 }
 #media-player .range-container #range:hover::-webkit-slider-thumb, #media-player .range-container #range:hover::-moz-range-thumb {

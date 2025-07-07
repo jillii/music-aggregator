@@ -101,7 +101,7 @@ form {
     input:not([type=submit]) {
         width: auto;
         margin-bottom: 0;
-        background-color: var(--slate);
+        background-color: var(--light-slate);
         transition: background-color .2s ease;
         &:focus {
             background-color: transparent;
@@ -113,5 +113,9 @@ form {
     input[type=submit] {
         margin-top: 0;
         border: var(--border-width) solid var(--black);
+        &:active {
+            background-color: var(--mid-slate);
+            transform: none;
+        }
     }
 }

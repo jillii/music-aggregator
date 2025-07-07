@@ -49,7 +49,7 @@ addEventListener('turbo:load', () => {
     function updateProgressBar() {
         // Update the value of our progress bar accordingly.
         if (player) {
-            const ratio = player.getCurrentTime() / player.getDuration() * 100;
+            const ratio = player.getCurrentTime() / player.getDuration() * 100 || 0;
             range.value = ratio;
             range.style.background = `linear-gradient(90deg, ${activeColor} ${ratio}%, ${inactiveColor} ${ratio}%)`;
         }

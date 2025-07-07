@@ -11,6 +11,9 @@
     position: fixed;
     width: 100%;
     bottom: 0;
+    &:has(#queue:empty) button {
+        pointer-events: none;
+    }
 }
 #media-player {
     position: relative;
@@ -58,7 +61,7 @@
             appearance: none;
             flex: 1;
             height: 1px;
-            background: transparent;
+            background: var(--mid-slate);
             cursor: pointer;
 
             &::-ms-thumb,
@@ -67,10 +70,10 @@
                 display: none;
                 -webkit-appearance: none;
                 appearance: none;
-                width: 11px;
-                height: 11px;
+                width: 8px;
+                height: 8px;
                 border-radius: 50%;
-                background-color: var(--black);
+                background: var(--black) !important;
                 box-shadow: none;
             }
 
