@@ -18,6 +18,12 @@
     background-color: var(--slate);
     z-index: 2;
 
+    marquee {
+        &:has(#track-title:empty) {
+            visibility: hidden;
+        }
+    }
+
     button {
         min-width: 0;
         border: none;

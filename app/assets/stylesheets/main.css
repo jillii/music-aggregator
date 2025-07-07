@@ -573,6 +573,9 @@ form .actions {
   background-color: var(--slate);
   z-index: 2;
 }
+#media-player marquee:has(#track-title:empty) {
+  visibility: hidden;
+}
 #media-player button, #media-player input[type=submit], #media-player textarea[type=submit] {
   min-width: 0;
   border: none;
