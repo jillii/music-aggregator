@@ -33,7 +33,7 @@ addEventListener('turbo:load', () => {
         height: 200,
         events: {
             onReady: onReadyEvent,
-            onStateChange: updateTitle
+            onStateChange: handleChange
         }
     });
     
@@ -102,16 +102,13 @@ addEventListener('turbo:load', () => {
     play.addEventListener("click", function() {
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
             player.pauseVideo();
-            play.innerHTML = playBtn;
         } else {
             player.playVideo();
-            play.innerHTML = pauseBtn;
         }
     });
     stop.addEventListener("click", function() {
         if (player.getPlayerState() == YT.PlayerState.PLAYING) {
             player.stopVideo();
-            play.innerHTML = playBtn;
         }
     });
     prev.addEventListener("click", function() {
@@ -153,7 +150,9 @@ addEventListener('turbo:load', () => {
     })
     // update title that displays in media player marquee
     let titleElem = document.getElementById('track-title') || null;
-    function updateTitle(event) {
+
+    function handleChange(event) {
+        // update document title
         if (event.target.videoTitle !== titleElem.innerHTML && player.getPlayerState() == YT.PlayerState.PLAYING) {
             titleElem.innerHTML = event.target.videoTitle;
             document.title = event.target.videoTitle;
@@ -163,6 +162,13 @@ addEventListener('turbo:load', () => {
         // set background of current track
         queue.querySelectorAll('.play-track-wrapper').forEach(item => item.classList.remove('active'))
         queue.querySelector(`.play-track-wrapper:nth-child(${player.getPlaylistIndex() + 1})`).classList.add('active')
+
+        // set play or pause
+        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+            play.innerHTML = pauseBtn
+        } else {
+            play.innerHTML = playBtn
+        }
     }
 });
 
