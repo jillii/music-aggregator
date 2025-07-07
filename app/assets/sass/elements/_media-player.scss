@@ -22,7 +22,15 @@
         min-width: 0;
         border: none;
         background-color: transparent;
-        line-height: 1;
+        line-height: 1; 
+        svg path {
+            transition: fill .2s ease;
+        }
+        &:active {
+            svg path {
+                fill: var(--lime)
+            }
+        }
     }
 
     .controls {

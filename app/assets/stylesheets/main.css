@@ -452,10 +452,10 @@ input:not([type=range]):not([type=file]):not([type=checkbox])::placeholder, text
 input:not([type=range]):not([type=file]):not([type=checkbox]):focus, textarea:not([type=range]):not([type=file]):not([type=checkbox]):focus {
   outline: none;
 }
-input:not([type=submit]), textarea:not([type=submit]) {
+input:not([type=submit]):not([type=range]), textarea:not([type=submit]):not([type=range]) {
   margin-bottom: 16px;
 }
-input:not([type=submit]):not([type=checkbox]), textarea:not([type=submit]):not([type=checkbox]) {
+input:not([type=submit]):not([type=range]):not([type=checkbox]), textarea:not([type=submit]):not([type=range]):not([type=checkbox]) {
   width: 100%;
 }
 input[type=submit], textarea[type=submit] {
@@ -578,6 +578,12 @@ form .actions {
   border: none;
   background-color: transparent;
   line-height: 1;
+}
+#media-player button svg path, #media-player input[type=submit] svg path, #media-player textarea[type=submit] svg path {
+  transition: fill 0.2s ease;
+}
+#media-player button:active svg path, #media-player input[type=submit]:active svg path, #media-player textarea[type=submit]:active svg path {
+  fill: var(--lime);
 }
 #media-player .controls .loop.active svg path {
   fill: var(--blue);
@@ -971,6 +977,9 @@ footer {
 }
 .playlist .heart:hover {
   background-color: transparent;
+}
+.playlist .heart:active {
+  transform: none;
 }
 .playlist-likers {
   position: absolute;

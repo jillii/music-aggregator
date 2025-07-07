@@ -14,7 +14,7 @@ input {
             outline: none;
         }
     }
-    &:not([type=submit]) {
+    &:not([type=submit]):not([type=range]) {
         margin-bottom: 16px;
         &:not([type=checkbox]){
             width: 100%;

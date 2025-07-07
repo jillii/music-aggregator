@@ -48,6 +48,9 @@
         &:hover {
             background-color: transparent;
         }
+        &:active {
+            transform: none;
+        }
     }
 
     &-likers {
