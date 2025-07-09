@@ -837,7 +837,8 @@ footer {
 
 .pagination {
   position: fixed;
-  width: min(1400px, 90%);
+  width: 90%;
+  max-width: 1440px;
   left: 50%;
   bottom: 102px;
   padding: 12px;
