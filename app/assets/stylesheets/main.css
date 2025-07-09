@@ -176,6 +176,9 @@ button:active, input[type=submit]:active, textarea[type=submit]:active {
   text-decoration: underline;
   cursor: pointer;
 }
+.link-btn:hover {
+  background-color: transparent;
+}
 
 .button_to:has(.link-btn) {
   display: inline;
@@ -833,26 +836,33 @@ footer {
 }
 
 .pagination {
-  position: relative;
-  margin-top: 22px;
+  position: fixed;
+  width: min(1400px, 90%);
+  left: 50%;
+  bottom: 102px;
+  padding: 12px;
   display: flex;
   justify-content: center;
   gap: 12px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.811765);
+  backdrop-filter: blur(40px);
+  transform: translateX(-50%);
 }
 .pagination > :is(.prev, .next, .first, .last) {
   position: absolute;
 }
 .pagination .first {
-  left: 0;
+  left: 6px;
 }
 .pagination .prev {
-  left: 72px;
+  left: 78px;
 }
 .pagination .next {
-  right: 72px;
+  right: 78px;
 }
 .pagination .last {
-  right: 0;
+  right: 6px;
 }
 .pagination .page.current {
   text-decoration: underline;
