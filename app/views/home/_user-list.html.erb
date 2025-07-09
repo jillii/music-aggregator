@@ -1,15 +1,17 @@
 <% if users.present? %>
-    <div class="users card-container">
+    <div class="users">
         <% users.each do |u| %>
             <% playlists = u.playlists %>
-            <div class="user box card">
+            <div class="user">
                 <% if u.username %>
-                    <a class="user-username" href="/users/<%= u.id %>"><%= u.username %></a>
+                    <a class="col user-username" href="/users/<%= u.id %>"><%= u.username %></a>
                 <% end %>
+                <p class="col user-followers">Followers: <a href="/users/?followers=<%= u.id %>"><%= u.followers.count %></a></p>
+                <p class="col user-following">Following: <a href="/users/?following=<%= u.id %>"><%= u.following.count %></a></p>
                 <% if playlists.length > 0 %>
-                    <p class="user-playlists">Playlists: <%= playlists.length %></p>
+                    <p class="col user-playlists">Playlists: <a href="/users/<%= u.id %>"><%= playlists.length %></a></p>
                     <% pop_playlist = playlists.popular %>
-                    <p class="user-popular-playlist.first">Popular playlist: <%= link_to pop_playlist.first.title, playlist_path(pop_playlist.first.id) %></p>
+                    <p class="col user-popular-playlist">Popular playlist: <%= link_to pop_playlist.first.title, playlist_path(pop_playlist.first.id) %></p>
                 <% end %>
             </div>
         <% end %>

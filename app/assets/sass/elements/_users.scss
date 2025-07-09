@@ -1,0 +1,45 @@
+.users {
+    margin-top: 38px;
+    .user {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 6px 0;
+        font-size: 16px;
+        border-bottom: 1px solid var(--slate);
+
+        p {
+            margin: 0;
+        }
+
+        .col {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        &-username {
+            flex-shrink: 0;
+            width: 300px;
+        }
+
+        &-popular-playlist {
+            margin-left: auto !important;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .users {
+        .user {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            
+            &-popular-playlist {
+                margin-left: 0 !important;
+            }
+        }
+    }
+}

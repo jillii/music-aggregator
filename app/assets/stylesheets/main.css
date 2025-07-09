@@ -1199,6 +1199,44 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
   }
 }
+.users {
+  margin-top: 38px;
+}
+.users .user {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 6px 0;
+  font-size: 16px;
+  border-bottom: 1px solid var(--slate);
+}
+.users .user p {
+  margin: 0;
+}
+.users .user .col {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.users .user-username {
+  flex-shrink: 0;
+  width: 300px;
+}
+.users .user-popular-playlist {
+  margin-left: auto !important;
+}
+
+@media (max-width: 900px) {
+  .users .user {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+  }
+  .users .user-popular-playlist {
+    margin-left: 0 !important;
+  }
+}
 #intro {
   padding: 102px 0;
   text-align: center;
