@@ -92,6 +92,12 @@ form {
     .actions {
         margin-bottom: 28px;
     }
+    .honeypot {
+        position: absolute;
+        visibility: hidden;
+        left: -5000px;
+        top: -5000px;
+    }
 }
 
 .searchbox {

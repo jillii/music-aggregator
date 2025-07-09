@@ -534,6 +534,12 @@ form button.fill, form input.fill[type=submit], form textarea.fill[type=submit] 
 form .actions {
   margin-bottom: 28px;
 }
+form .honeypot {
+  position: absolute;
+  visibility: hidden;
+  left: -5000px;
+  top: -5000px;
+}
 
 .searchbox {
   display: flex;

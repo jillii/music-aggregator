@@ -29,6 +29,11 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
 
+        <div class="honeypot">
+          If you see this, leave it blank. Only bots should see this
+          <input type="text" name="body" value="" />
+        </div>
+
         <div class="actions">
           <%= f.submit "Sign up", data: {turbo_frame: '_top'} %>
         </div>

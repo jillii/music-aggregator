@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # Defines track reorder route
   post '/tracks/reorder', to: 'tracks#reorder'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   get 'users', to: 'home#users'
   post 'follows/create'
