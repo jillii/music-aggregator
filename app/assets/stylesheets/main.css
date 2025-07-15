@@ -331,7 +331,7 @@ form.btn-trash:before {
 
 .emerge .card {
   width: 90%;
-  margin: auto 0;
+  margin: auto;
   opacity: 0;
   transition: all 0.25s ease;
 }
