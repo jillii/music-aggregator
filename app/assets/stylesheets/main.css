@@ -184,20 +184,23 @@ button:active, input[type=submit]:active, textarea[type=submit]:active {
   display: inline;
 }
 
-.btn-trash:before {
+[class*=btn-]:before {
   content: "";
+  mask-position: center;
+  mask-repeat: no-repeat;
+  background-color: var(--black);
+}
+
+.btn-trash:before {
   mask-image: url("trash.svg");
 }
 .btn-edit:before {
-  content: "";
   mask-image: url("pencil.svg");
 }
 .btn-replace-image:before {
-  content: "";
   mask-image: url("replace-image.svg");
 }
 .btn-add-user:before {
-  content: "";
   mask-image: url("add-friend.svg");
 }
 .btn-add-editor {
@@ -208,13 +211,15 @@ button:active, input[type=submit]:active, textarea[type=submit]:active {
 .btn-add-editor:before {
   content: "+";
   margin-right: 4px;
+  background-color: transparent;
+}
+.btn-add-editor:hover {
+  background-color: transparent;
 }
 .btn-play:before {
-  content: "";
   mask-image: url("play.svg");
 }
 .btn-load:before {
-  content: "";
   mask-image: url("load.svg");
 }
 

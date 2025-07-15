@@ -71,28 +71,33 @@ button {
 	display: inline;
 }
 
+[class*=btn-] {
+	&:before {
+		content: '';
+		mask-position: center;
+		mask-repeat: no-repeat;
+		background-color: var(--black);
+	}
+}
+
 .btn {
 	&-trash {
 		&:before {
-			content: '';
 			mask-image: url('trash.svg');
 		}
 	}
 	&-edit {
 		&:before {
-			content: '';
 			mask-image: url('pencil.svg');
 		}
 	}
 	&-replace-image {
 		&:before {
-			content: '';
 			mask-image: url('replace-image.svg');
 		}
 	}
 	&-add-user {
 		&:before {
-			content: '';
 			mask-image: url('add-friend.svg');
 		}
 	}
@@ -103,17 +108,19 @@ button {
 		&:before {
 			content: '+';
 			margin-right: 4px;
+			background-color: transparent;
+		}
+		&:hover {
+			background-color: transparent;
 		}
 	}
 	&-play {
 		&:before {
-			content: '';
 			mask-image: url('play.svg');
 		}
 	}
 	&-load {
 		&:before {
-			content: '';
 			mask-image: url('load.svg');
 		}
 	}
