@@ -188,7 +188,7 @@ button:active, input[type=submit]:active, textarea[type=submit]:active {
   display: inline;
 }
 
-[class*=btn-]:before {
+[class*=btn-]:not(.btn-container):before {
   content: "";
   mask-position: center;
   mask-repeat: no-repeat;
@@ -1296,6 +1296,10 @@ h1, h2, h3, h4, h5, h6 {
     padding: 60px 0 38px;
   }
 }
+#about {
+  padding-bottom: 91px;
+}
+
 .user-profile-header {
   justify-content: space-between;
   align-items: center;

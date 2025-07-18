@@ -1,29 +1,31 @@
 <%= turbo_frame_tag "app" do %>
-    <section id="about">
-        <div class="site-container">
-            <h1>About Playlists With Friends</h1>
-        </div>
-    </section>
-    <section>
-        <div class="site-container">
-            <h2>Make Playlists</h2>
-            <p>Compile your favorite tracks to create the ultimate platlist. Listen ad-free.</p>
-        </div>
-    </section>
-    <section>
-        <div class="site-container">
-            <h2>Collab With Friends</h2>
-            <p>Invite friends to help curate your playlists.</p>
-        </div>
-    </section>
-    <section>
-        <div class="site-container">
-            <h2>Login Or Register To Start</h2>
-            <p>Feel free to listen to existing playlists, or login/register to create your own.</p>
-            <div class="btn-container">
-                <%= link_to 'login', new_user_session_path, class: "btn menu-item", data: {turbo_frame: 'app'} %>
-                <%= link_to 'register', new_user_registration_path, class: "btn menu-item", data: {turbo_frame: 'app'} %>
+    <div id="about">
+        <section>
+            <div class="site-container">
+                <h1>About Playlists With Friends</h1>
             </div>
-        </div>
-    </section>
+        </section>
+        <section>
+            <div class="site-container">
+                <h2>Make Playlists</h2>
+                <p>Compile your favorite tracks to create the ultimate platlist. Listen ad-free.</p>
+            </div>
+        </section>
+        <section>
+            <div class="site-container">
+                <h2>Collab With Friends</h2>
+                <p>Invite friends to help curate your playlists.</p>
+            </div>
+        </section>
+        <section>
+            <div class="site-container">
+                <h2>Login Or Register To Start</h2>
+                <p>Feel free to listen to existing playlists, or login/register to create your own.</p>
+                <div class="btn-container">
+                    <%= link_to 'login', new_user_session_path, class: "btn menu-item", data: {turbo_frame: 'app'} %>
+                    <%= link_to 'register', new_user_registration_path, class: "btn menu-item", data: {turbo_frame: 'app'} %>
+                </div>
+            </div>
+        </section>
+    </div>
 <% end %>

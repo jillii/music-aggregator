@@ -75,7 +75,7 @@ button {
 	display: inline;
 }
 
-[class*=btn-] {
+[class*=btn-]:not(.btn-container) {
 	&:before {
 		content: '';
 		mask-position: center;
