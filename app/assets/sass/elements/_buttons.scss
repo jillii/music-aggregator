@@ -12,6 +12,10 @@ a {
 	align-items: center;
 }
 
+[disabled] {
+	pointer-events: none;
+}
+
 .btn {
 	flex-shrink: 0;
 	display: inline-block;

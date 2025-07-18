@@ -1,8 +1,9 @@
 <% likes = playlist.likes %>
-<p class="playlist-likes">
+<div class="playlist-likes">
     <% if current_user && current_user.likes.exists?(playlist: playlist) %>
         <%= button_to '♥', playlist_like_path(playlist), class: 'heart link-btn', method: :delete %>
     <% else %>
         <%= button_to '♡', playlist_like_path(playlist), class: 'heart link-btn', method: :post %>
     <% end %>
-<%= likes.size %></p>
+    <%= likes.size %>
+</div>
