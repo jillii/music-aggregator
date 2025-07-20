@@ -158,6 +158,13 @@ footer {
 	}
 }
 
+.page-controls {
+	display: flex;
+	a:last-of-type {
+		margin-left: auto;
+	}
+}
+
 @media (max-width: 768px) {
 	.site-nav {
 		position: fixed;

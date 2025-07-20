@@ -897,6 +897,13 @@ footer {
   font-size: inherit;
 }
 
+.page-controls {
+  display: flex;
+}
+.page-controls a:last-of-type {
+  margin-left: auto;
+}
+
 @media (max-width: 768px) {
   .site-nav {
     position: fixed;
