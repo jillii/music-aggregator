@@ -39,6 +39,9 @@
 
     .card {
         max-width: 300px;
+        &-image {
+            height: 130px;
+        }
     }
 }
 

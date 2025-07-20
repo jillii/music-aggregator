@@ -356,8 +356,9 @@ form.btn-trash:before {
   text-decoration: none;
 }
 .card-image {
+  flex-shrink: 0;
   width: 100%;
-  height: 130px;
+  height: 180px;
   object-fit: cover;
 }
 .card .copy-area {
@@ -428,6 +429,9 @@ form.btn-trash:before {
 @media (max-width: 768px) {
   .card-container:not(.horizontal) {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .card-container .card-image {
+    height: 130px;
   }
   .card-container.horizontal .card .copy-area {
     padding: 33px 28px;
@@ -1100,6 +1104,9 @@ footer {
 }
 .slider .card {
   max-width: 300px;
+}
+.slider .card-image {
+  height: 130px;
 }
 
 .slider-nav {
