@@ -58,6 +58,8 @@
                   <%= form.file_field :image, required: true, accept: "image/*", onchange: "loadFile(event)" %>
                   <img id="output" class="output" src=""/>
                 </div>
+                <p class="form-info">Image must be less than 1MB</p>
+                <div class="form-error" id="image-error"></div>
                 <%= form.submit "Update" %>
                 <%= button_tag "Cancel", type: :reset %>
               <% end %>

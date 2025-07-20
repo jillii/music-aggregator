@@ -1,6 +1,6 @@
 <%= form_with(model: playlist) do |form| %>
   <% if playlist.errors.any? %>
-    <div style="color: red">
+    <div class="form-error">
       <h2><%= pluralize(playlist.errors.count, "error") %> prohibited this playlist from being saved:</h2>
 
       <ul>
@@ -18,6 +18,8 @@
     <%= form.file_field :image, required: true, accept: "image/*", onchange: "loadFile(event)" %>
     <img id="output" class="output" src=""/>
   </div>
+  <p class="form-info">Image must be less than 1MB</p>
+  <div id="image-error" class="form-error"></div>
 
 
   <%= form.label :tag_id, "Enter tags separated by commas" %>

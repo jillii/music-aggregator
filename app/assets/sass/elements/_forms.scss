@@ -98,6 +98,14 @@ form {
         left: -5000px;
         top: -5000px;
     }
+    .form-error {
+        margin-bottom: 21px;
+        font-size: 12px;
+        color: var(--red);
+    }
+    .form-info {
+        font-size: 12px;
+    }
 }
 
 .searchbox {

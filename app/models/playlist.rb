@@ -21,4 +21,13 @@ class Playlist < ApplicationRecord
   scope :popular, -> {
     order("likes_count DESC")
   }
+  validate :image_size_validation
+
+  private
+
+  def image_size_validation
+    if image.attached? && image.blob.byte_size > 1.megabytes
+      errors.add(:image, "should be less than 1MB")
+    end
+  end
 end

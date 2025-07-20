@@ -552,6 +552,14 @@ form .honeypot {
   left: -5000px;
   top: -5000px;
 }
+form .form-error {
+  margin-bottom: 21px;
+  font-size: 12px;
+  color: var(--red);
+}
+form .form-info {
+  font-size: 12px;
+}
 
 .searchbox {
   display: flex;
