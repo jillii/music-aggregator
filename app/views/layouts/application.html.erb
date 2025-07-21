@@ -12,6 +12,7 @@
     <%= javascript_include_tag "https://www.youtube.com/iframe_api" %>
     <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js" %>
     <%= javascript_include_tag "/assets/application.js", defer: true %>
+    <%= favicon_link_tag asset_path('favicon.ico') %>
   </head>
   <body>
     <%= turbo_frame_tag "nav" do %>
