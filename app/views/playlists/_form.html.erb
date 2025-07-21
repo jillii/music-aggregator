@@ -22,8 +22,11 @@
   <div id="image-error" class="form-error"></div>
 
 
-  <%= form.label :tag_id, "Enter tags separated by commas" %>
-  <%= form.text_area :tag_id, size: "40x5", placeholder: 'jazz, country, breakcore...' %><br>
+  <%= form.label :tag_id, "Tags" %>
+  <div id="tags" class="tag-list" name="playlist[tag_id]">
+    <%= form.text_area :tag_id, class: "tags" %>
+  </div>
+  <%= form.hidden_field :tags, id: "tags-collector" %>
   <%= form.submit %>
 <% end %>
 

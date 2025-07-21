@@ -52,7 +52,7 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
 
-    tags = params[:playlist][:tag_id].split(',')
+    tags = params[:playlist][:tags].split(',')
 
     tags.each do |tag|
       exists = Tag.where(label: tag)
@@ -86,7 +86,7 @@ class PlaylistsController < ApplicationController
 
   # PATCH/PUT /playlists/1 or /playlists/1.json
   def update
-    tags = params[:playlist][:tag_id].split(',') if params[:playlist][:tag_id]
+    tags = params[:playlist][:tags].split(',') if params[:playlist][:tags]
 
     if tags
       tags.each do |tag|

@@ -595,6 +595,49 @@ form .form-info {
   margin-bottom: 33px;
 }
 
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px;
+  border: var(--border-width) solid var(--black);
+}
+.tag-list .tag-pill {
+  max-width: 100%;
+  position: relative;
+  border: var(--border-width) solid var(--black);
+  border-radius: 18px;
+  padding: 2px 30px 2px 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.tag-list .tag-pill:after {
+  content: "+";
+  position: absolute;
+  right: 6px;
+  font-size: 25px;
+  rotate: 45deg;
+}
+.tag-list .tag-pill:hover {
+  background-color: var(--mid-slate);
+}
+.tag-list textarea:not([type=range]):not([type=file]):not([type=checkbox]) {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  border: none;
+  line-height: 0.7;
+  background-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.tag-list textarea:not([type=range]):not([type=file]):not([type=checkbox])::-webkit-scrollbar {
+  width: 1px !important;
+}
+
 #youtube-player {
   position: fixed;
   top: 0;

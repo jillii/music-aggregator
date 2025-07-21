@@ -116,7 +116,13 @@
                   </ul>
                 </div>
               <% end %>
-                <%= form.text_field :tag_id, size: "40x5", placeholder: "separate multiple tags with comma" %><br>
+
+              <%= form.label :tag_id, "Tags" %>
+              <div id="tags" class="tag-list" name="playlist[tag_id]">
+                <%= form.text_area :tag_id, class: "tags" %>
+              </div>
+              <%= form.hidden_field :tags, id: "tags-collector" %>
+
               <%= form.submit "Update" %>
               <%= button_tag "Cancel", type: :reset %>
             <% end %>
