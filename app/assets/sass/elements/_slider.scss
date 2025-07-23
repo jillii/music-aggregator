@@ -33,6 +33,16 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 
+
+    -ms-scroll-snap-points-x: repeat(250px);
+    scroll-snap-points-x: repeat(250px);
+    -ms-scroll-snap-type: mandatory;
+    scroll-snap-type: mandatory;
+    -ms-scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
+    -webkit-scroll-snap-type: x mandatory;
+
+
     &::-webkit-scrollbar {
         display: none;
     }
