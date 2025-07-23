@@ -166,6 +166,24 @@
     }
 }
 
+@media (max-width: 560px) {
+    #media-player {
+        .range-container {
+            #range {
+                position: fixed;
+                width: 100%;
+                left: 0;
+                bottom: 0;
+                height: 6px;
+                margin: 0;
+                &::-webkit-slider-thumb {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
 @keyframes glow {
     from {
         background-color: #ffffff8c;

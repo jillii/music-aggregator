@@ -779,6 +779,19 @@ form .form-info {
   rotate: 45deg;
 }
 
+@media (max-width: 560px) {
+  #media-player .range-container #range {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 6px;
+    margin: 0;
+  }
+  #media-player .range-container #range::-webkit-slider-thumb {
+    display: none;
+  }
+}
 @keyframes glow {
   from {
     background-color: rgba(255, 255, 255, 0.5490196078);
