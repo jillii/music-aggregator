@@ -49,6 +49,7 @@
 
     .card {
         max-width: 300px;
+        scroll-snap-align: center;
         &-image {
             height: 130px;
         }
@@ -95,6 +96,11 @@
     .slider {
         &-container-headline {
             margin-bottom: 0;
+        }
+        &.overlap {
+            .card {
+                margin-right: -100px;
+            }
         }
     }
 }

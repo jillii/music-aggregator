@@ -1183,6 +1183,7 @@ footer {
 }
 .slider .card {
   max-width: 300px;
+  scroll-snap-align: center;
 }
 .slider .card-image {
   height: 130px;
@@ -1227,6 +1228,9 @@ footer {
   }
   .slider-container-headline {
     margin-bottom: 0;
+  }
+  .slider.overlap .card {
+    margin-right: -100px;
   }
 }
 /* Tracks */
