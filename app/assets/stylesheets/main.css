@@ -1149,13 +1149,17 @@ footer {
 }
 .slider-container.box {
   padding: 0;
+  overflow: hidden;
 }
 .slider-container.box .slider-container-headline {
-  margin-bottom: 12px;
+  margin-bottom: 0;
   padding: 33px 33px 0 33px;
 }
 .slider-container.box .slider {
-  padding: 33px;
+  padding: 45px 33px 33px;
+}
+.slider-container.box.card-container {
+  gap: 0;
 }
 
 .slider {
@@ -1168,7 +1172,7 @@ footer {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
-  scrollbar-width: none;
+  scrollbar-width: thin;
   -ms-scroll-snap-points-x: repeat(250px);
   scroll-snap-points-x: repeat(250px);
   -ms-scroll-snap-type: mandatory;
@@ -1182,7 +1186,6 @@ footer {
 }
 .slider .card {
   max-width: 300px;
-  scroll-snap-align: center;
 }
 .slider .card-image {
   height: 130px;
@@ -1223,13 +1226,24 @@ footer {
 
 @media (max-width: 480px) {
   .slider-nav {
-    bottom: calc(100% + 18px);
+    position: relative;
+    bottom: unset;
+    padding: 0 18px !important;
   }
-  .slider-container-headline {
-    margin-bottom: 0;
+  .slider-nav .control {
+    height: 40px;
+    width: 40px;
   }
   .slider.overlap .card {
     margin-right: -100px;
+  }
+  .slider-container.box .slider {
+    padding: 21px 18px 33px;
+  }
+  .slider-container.box .slider-container-headline {
+    margin-bottom: 21px;
+    padding-right: 18px;
+    padding-left: 18px;
   }
 }
 /* Tracks */

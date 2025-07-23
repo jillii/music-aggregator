@@ -11,12 +11,16 @@
     margin: 69px 0;
     &.box {
         padding: 0;
+        overflow: hidden;
         .slider-container-headline {
-            margin-bottom: 12px;
+            margin-bottom: 0;
             padding: 33px 33px 0 33px;
         }
         .slider {
-            padding: 33px;
+            padding: 45px 33px 33px;
+        }
+        &.card-container {
+            gap: 0;
         }
     }
 }
@@ -30,7 +34,8 @@
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
-    scrollbar-width: none;
+    scrollbar-width: thin;
+    // scrollbar-width: none;
 
 
     -ms-scroll-snap-points-x: repeat(250px);
@@ -48,7 +53,6 @@
 
     .card {
         max-width: 300px;
-        scroll-snap-align: center;
         &-image {
             height: 130px;
         }
@@ -90,15 +94,30 @@
 }
 @media (max-width: 480px) {
     .slider-nav {
-        bottom: calc(100% + 18px);
+        position: relative;
+        bottom: unset;
+        padding: 0 18px !important;
+        .control {
+            height: 40px;
+            width: 40px;
+        }
     }
     .slider {
-        &-container-headline {
-            margin-bottom: 0;
-        }
         &.overlap {
             .card {
                 margin-right: -100px;
+            }
+        }
+    }
+    .slider-container {
+        &.box {
+            .slider {
+                padding: 21px 18px 33px;
+                &-container-headline {
+                    margin-bottom: 21px;
+                    padding-right: 18px;
+                    padding-left: 18px;
+                }
             }
         }
     }
