@@ -1152,7 +1152,6 @@ footer {
 }
 .slider-container.box {
   padding: 0;
-  overflow: hidden;
 }
 .slider-container.box .slider-container-headline {
   margin-bottom: 0;
@@ -1175,7 +1174,7 @@ footer {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
-  scrollbar-width: thin;
+  scrollbar-width: none;
   -ms-scroll-snap-points-x: repeat(250px);
   scroll-snap-points-x: repeat(250px);
   -ms-scroll-snap-type: mandatory;
