@@ -61,11 +61,12 @@ section {
 	border-radius: 0px;
 	background: var(--black);
 	box-shadow: inset -1px -1px 2px #ffffff;
+	transition: background .2s ease;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-	background: var(--slate);
+	background: var(--gray);
   }
 
   @media (max-width: 768px) {
