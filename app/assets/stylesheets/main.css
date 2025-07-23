@@ -675,6 +675,15 @@ form .form-info {
 #media-player button:active svg path, #media-player input[type=submit]:active svg path, #media-player textarea[type=submit]:active svg path {
   fill: var(--lime);
 }
+#media-player .controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#media-player .controls button, #media-player .controls input[type=submit], #media-player .controls textarea[type=submit] {
+  display: inline-flex;
+  align-items: center;
+}
 #media-player .controls button.active svg path, #media-player .controls input.active[type=submit] svg path, #media-player .controls textarea.active[type=submit] svg path {
   fill: var(--blue);
 }

@@ -43,7 +43,12 @@
     }
 
     .controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         button {
+            display: inline-flex;
+            align-items: center;
             &.active {
                 svg path {
                     fill: var(--blue);
