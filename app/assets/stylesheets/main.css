@@ -1240,6 +1240,9 @@ footer {
   .slider.overlap .card {
     margin-right: -100px;
   }
+  .slider-container.box {
+    margin: 44px 0;
+  }
   .slider-container.box .slider {
     padding: 21px 18px 33px;
   }
@@ -1399,14 +1402,18 @@ h1, h2, h3, h4, h5, h6 {
   flex: 1 0 0;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 672px) {
   #intro {
+    max-width: 400px;
     padding: 88px 0;
+    text-align: left;
+  }
+  .tags {
+    flex: 0 0 100%;
   }
 }
 @media (max-width: 480px) {
   #intro {
-    text-align: left;
     padding: 60px 0 38px;
   }
 }
