@@ -1178,7 +1178,7 @@ footer {
   -webkit-scroll-snap-type: x mandatory;
 }
 .slider::-webkit-scrollbar {
-  display: none;
+  opacity: 0;
 }
 .slider .card {
   max-width: 300px;
