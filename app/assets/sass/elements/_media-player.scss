@@ -69,28 +69,20 @@
             background: var(--mid-slate);
             cursor: pointer;
 
-            &::-ms-thumb,
-            &::-webkit-slider-thumb,
-            &::-moz-range-thumb {
-                display: none;
-                -webkit-appearance: none;
-                appearance: none;
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: var(--black) !important;
-                box-shadow: none;
+            &::-webkit-slider-thumb {
+                opacity: 0;
+                background: var(--blue);
+                transition: opacity .2s ease;
             }
-
-            &:hover {
-                &::-webkit-slider-thumb,
-                &::-moz-range-thumb {
-                    display: block;
-                } 
-            }
-
+            
             &:focus {
                 outline: none;
+            }
+        }
+
+        &:hover {
+            #range::-webkit-slider-thumb {
+                opacity: 1;
             }
         }
 
@@ -179,7 +171,7 @@
                 width: 100%;
                 left: 0;
                 bottom: 0;
-                height: 6px;
+                height: 1px;
                 margin: 0;
                 &::-webkit-slider-thumb {
                     display: none;
