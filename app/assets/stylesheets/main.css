@@ -433,6 +433,9 @@ form.btn-trash:before {
   .card-container .card-image {
     height: 130px;
   }
+  .card-container.horizontal .card-image {
+    height: auto;
+  }
   .card-container.horizontal .card .copy-area {
     padding: 33px 28px;
   }

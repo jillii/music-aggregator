@@ -166,6 +166,9 @@
 		}
 		&.horizontal {
 			.card {
+				&-image {
+					height: auto;
+				}
 				.copy-area {
 					padding: 33px 28px;
 				}
