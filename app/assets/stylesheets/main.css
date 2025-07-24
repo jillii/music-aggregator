@@ -994,20 +994,20 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .nav-container {
+  .nav-container:not(:has(.pagination)) {
     position: fixed;
     top: 0;
     width: 100%;
     border-bottom: var(--border-width) solid;
     border-radius: 0;
   }
-  .nav-container .site-nav {
+  .nav-container:not(:has(.pagination)) .site-nav {
     overflow: visible;
   }
-  .nav-container .hamburger {
+  .nav-container:not(:has(.pagination)) .hamburger {
     display: block;
   }
-  .nav-container .site-nav-inner {
+  .nav-container:not(:has(.pagination)) .site-nav-inner {
     position: absolute;
     top: 65px;
     width: 100%;
@@ -1016,14 +1016,14 @@ footer {
     transform: translateX(-100%);
     transition: transform 0.2s ease;
   }
-  .nav-container .site-nav-inner .site-container {
+  .nav-container:not(:has(.pagination)) .site-nav-inner .site-container {
     display: block;
     width: 100%;
   }
-  .nav-container .site-nav-inner.active {
+  .nav-container:not(:has(.pagination)) .site-nav-inner.active {
     transform: none;
   }
-  .nav-container .menu-item {
+  .nav-container:not(:has(.pagination)) .menu-item {
     display: block;
     width: 100%;
     padding: 12px 5%;
@@ -1033,30 +1033,30 @@ footer {
     border-bottom: none !important;
     transition: background-color 0.2s ease;
   }
-  .nav-container .menu-item:before {
+  .nav-container:not(:has(.pagination)) .menu-item:before {
     content: none !important;
   }
-  .nav-container .menu-item:hover {
+  .nav-container:not(:has(.pagination)) .menu-item:hover {
     background-color: var(--slate) !important;
   }
-  .nav-container .menu-item.active {
+  .nav-container:not(:has(.pagination)) .menu-item.active {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
   }
-  .nav-container .menu-item.active .notification-count {
+  .nav-container:not(:has(.pagination)) .menu-item.active .notification-count {
     position: relative;
     right: unset;
   }
-  .nav-container .menu-item .btn, .nav-container .menu-item.btn {
+  .nav-container:not(:has(.pagination)) .menu-item .btn, .nav-container:not(:has(.pagination)) .menu-item.btn {
     background-color: transparent;
     border: none;
     text-align: left;
   }
-  .nav-container .menu-item .btn:hover, .nav-container .menu-item.btn:hover {
+  .nav-container:not(:has(.pagination)) .menu-item .btn:hover, .nav-container:not(:has(.pagination)) .menu-item.btn:hover {
     color: initial;
   }
-  .nav-container .menu-item .btn {
+  .nav-container:not(:has(.pagination)) .menu-item .btn {
     padding: 0;
     font: inherit;
   }

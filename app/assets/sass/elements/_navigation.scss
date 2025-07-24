@@ -166,7 +166,7 @@ footer {
 }
 
 @media (max-width: 768px) {
-	.nav-container {
+	.nav-container:not(:has(.pagination)) {
 		position: fixed;
 		top: 0;
 		width: 100%;
