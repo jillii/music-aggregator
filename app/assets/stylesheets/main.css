@@ -35,7 +35,7 @@
 }
 
 .glass, .pagination {
-  backdrop-filter: blur(3px) brightness(1.1);
+  backdrop-filter: blur(2px) brightness(1.1);
 }
 .glass + .glass-border, .pagination + .glass-border, .glass + .glass-border + .glass-edge, .pagination + .glass-border + .glass-edge {
   position: absolute;

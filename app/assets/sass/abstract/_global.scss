@@ -30,7 +30,7 @@ $edge-width: 1px;
 	position: relative;
 }
 .glass {
-    backdrop-filter: blur(3px) brightness(1.1);
+    backdrop-filter: blur(2px) brightness(1.1);
     & + .glass-border,
     & + .glass-border + .glass-edge {
         position: absolute;
