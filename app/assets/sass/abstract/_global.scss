@@ -49,3 +49,9 @@ $edge-width: 1px;
         }
     }
 }
+
+@media (max-width: 768px) {
+	.glass {
+		backdrop-filter: blur(3px);
+	}
+}
