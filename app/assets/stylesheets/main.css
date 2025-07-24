@@ -827,14 +827,21 @@ form .form-info {
   font-size: 18px;
   font-weight: 600;
 }
-.site-nav + .glass-border {
-  backdrop-filter: blur(5px);
+.site-nav + .glass-border, .site-nav + .glass-border + .glass-edge {
   position: absolute;
-  height: 100%;
   width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  clip-path: polygon(0% 0%, 0% 100%, 2px 100%, 2px 2px, calc(100% - 2px) 2px, calc(100% - 2px) calc(100% - 2px), 2px calc(100% - 2px), 2px 100%, 100% 100%, 100% 0%);
+  border-radius: inherit;
+}
+.site-nav + .glass-border {
+  backdrop-filter: blur(4px);
+  clip-path: polygon(0% 0%, 0% 100%, 4px 100%, 4px 4px, calc(100% - 4px) 4px, calc(100% - 4px) calc(100% - 4px), 4px calc(100% - 4px), 4px 100%, 100% 100%, 100% 0%);
+}
+.site-nav + .glass-border + .glass-edge {
+  backdrop-filter: blur(10px);
+  clip-path: polygon(0% 0%, 0% 100%, 1px 100%, 1px 1px, calc(100% - 1px) 1px, calc(100% - 1px) calc(100% - 1px), 1px calc(100% - 1px), 1px 100%, 100% 100%, 100% 0%);
 }
 .site-nav .hamburger {
   display: none;
