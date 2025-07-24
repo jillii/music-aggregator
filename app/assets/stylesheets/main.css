@@ -994,17 +994,20 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .site-nav {
+  .nav-container {
     position: fixed;
     top: 0;
     width: 100%;
     border-bottom: var(--border-width) solid;
     border-radius: 0;
   }
-  .site-nav .hamburger {
+  .nav-container .site-nav {
+    overflow: visible;
+  }
+  .nav-container .hamburger {
     display: block;
   }
-  .site-nav .site-nav-inner {
+  .nav-container .site-nav-inner {
     position: absolute;
     top: 65px;
     width: 100%;
@@ -1013,14 +1016,14 @@ footer {
     transform: translateX(-100%);
     transition: transform 0.2s ease;
   }
-  .site-nav .site-nav-inner .site-container {
+  .nav-container .site-nav-inner .site-container {
     display: block;
     width: 100%;
   }
-  .site-nav .site-nav-inner.active {
+  .nav-container .site-nav-inner.active {
     transform: none;
   }
-  .site-nav .menu-item {
+  .nav-container .menu-item {
     display: block;
     width: 100%;
     padding: 12px 5%;
@@ -1030,30 +1033,30 @@ footer {
     border-bottom: none !important;
     transition: background-color 0.2s ease;
   }
-  .site-nav .menu-item:before {
+  .nav-container .menu-item:before {
     content: none !important;
   }
-  .site-nav .menu-item:hover {
+  .nav-container .menu-item:hover {
     background-color: var(--slate) !important;
   }
-  .site-nav .menu-item.active {
+  .nav-container .menu-item.active {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
   }
-  .site-nav .menu-item.active .notification-count {
+  .nav-container .menu-item.active .notification-count {
     position: relative;
     right: unset;
   }
-  .site-nav .menu-item .btn, .site-nav .menu-item.btn {
+  .nav-container .menu-item .btn, .nav-container .menu-item.btn {
     background-color: transparent;
     border: none;
     text-align: left;
   }
-  .site-nav .menu-item .btn:hover, .site-nav .menu-item.btn:hover {
+  .nav-container .menu-item .btn:hover, .nav-container .menu-item.btn:hover {
     color: initial;
   }
-  .site-nav .menu-item .btn {
+  .nav-container .menu-item .btn {
     padding: 0;
     font: inherit;
   }

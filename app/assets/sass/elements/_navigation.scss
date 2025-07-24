@@ -166,12 +166,15 @@ footer {
 }
 
 @media (max-width: 768px) {
-	.site-nav {
+	.nav-container {
 		position: fixed;
 		top: 0;
 		width: 100%;
 		border-bottom: var(--border-width) solid;
 		border-radius: 0;
+		.site-nav {
+			overflow: visible;
+		}
 		.hamburger {
 			display: block;
 		}
