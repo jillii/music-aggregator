@@ -820,7 +820,7 @@ form .form-info {
 }
 
 .site-nav {
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px) brightness(1.1);
   position: relative;
   width: 100%;
   padding: 21px 0;

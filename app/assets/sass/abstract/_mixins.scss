@@ -5,7 +5,7 @@
 }
 
 @mixin glass($border-width: 4px) {
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px) brightness(1.1);
     position: relative;
     & + .glass-border,
     & + .glass-border + .glass-edge {
