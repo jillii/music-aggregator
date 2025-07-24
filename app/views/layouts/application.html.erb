@@ -16,6 +16,7 @@
   </head>
   <body>
     <%= turbo_frame_tag "nav" do %>
+    <div class="nav-container">
       <nav class="site-nav">
         <div class="site-container">
           <button id="hamburger" class="hamburger" onclick="this.classList.toggle('active');document.getElementById('nav-inner').classList.toggle('active')">
@@ -44,6 +45,8 @@
           </div>
         </div>
       </nav>
+      <div class="glass-border"></div>
+    </div>
     <% end %>
     <%= render 'shared/flash' %>
     <%= yield %>

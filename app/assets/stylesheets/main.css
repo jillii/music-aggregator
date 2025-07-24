@@ -808,20 +808,33 @@ form .form-info {
     background-color: rgba(255, 255, 255, 0.8745098039);
   }
 }
-.site-nav {
+.nav-container {
   position: fixed;
-  max-width: 1300px;
   width: 80%;
+  max-width: 1300px;
   top: 16px;
   left: 50%;
-  padding: 21px 0;
-  background-color: rgba(255, 255, 255, 0.8117647059);
   border-radius: 16px;
-  backdrop-filter: blur(40px);
-  font-size: 18px;
-  font-weight: 600;
   transform: translateX(-50%);
   z-index: 999;
+}
+
+.site-nav {
+  backdrop-filter: blur(3px);
+  position: relative;
+  width: 100%;
+  padding: 21px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.site-nav + .glass-border {
+  backdrop-filter: blur(5px);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  clip-path: polygon(0% 0%, 0% 100%, 2px 100%, 2px 2px, calc(100% - 2px) 2px, calc(100% - 2px) calc(100% - 2px), 2px calc(100% - 2px), 2px 100%, 100% 100%, 100% 0%);
 }
 .site-nav .hamburger {
   display: none;
