@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_playlists, through: :likes, source: :playlist
 
-  paginates_per 20
+  paginates_per 13
 
   has_many :follower_relationships, class_name: 'Follow', foreign_key: 'followed_id'
   has_many :followers, through: :follower_relationships, source: :follower

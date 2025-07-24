@@ -16,7 +16,11 @@
           <%= render playlist %>
         <% end %>
       </div>
-      <%= paginate @playlists %>
+      <div class="glass-container nav-container">
+        <%= paginate @playlists %>
+        <div class="glass-border"></div>
+        <div class="glass-edge"></div>
+      </div>
     <% else %>
       <p>Sorry, we couldn't find anything</p>
     <% end %>

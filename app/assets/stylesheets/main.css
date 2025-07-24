@@ -30,6 +30,30 @@
   transition: all 0.2s ease;
 }
 
+.glass-container {
+  position: relative;
+}
+
+.glass, .pagination {
+  backdrop-filter: blur(3px) brightness(1.1);
+}
+.glass + .glass-border, .pagination + .glass-border, .glass + .glass-border + .glass-edge, .pagination + .glass-border + .glass-edge {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+}
+.glass + .glass-border, .pagination + .glass-border {
+  backdrop-filter: blur(4px);
+  clip-path: polygon(0% 0%, 0% 100%, 4px 100%, 4px 4px, calc(100% - 4px) 4px, calc(100% - 4px) calc(100% - 4px), 4px calc(100% - 4px), 4px 100%, 100% 100%, 100% 0%);
+}
+.glass + .glass-border + .glass-edge, .pagination + .glass-border + .glass-edge {
+  backdrop-filter: blur(10px);
+  clip-path: polygon(0% 0%, 0% 100%, 1px 100%, 1px 1px, calc(100% - 1px) 1px, calc(100% - 1px) calc(100% - 1px), 1px calc(100% - 1px), 1px 100%, 100% 100%, 100% 0%);
+}
+
 html, body {
   overflow-x: hidden;
 }
@@ -820,28 +844,10 @@ form .form-info {
 }
 
 .site-nav {
-  backdrop-filter: blur(3px) brightness(1.1);
-  position: relative;
   width: 100%;
   padding: 21px 0;
   font-size: 18px;
   font-weight: 600;
-}
-.site-nav + .glass-border, .site-nav + .glass-border + .glass-edge {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  border-radius: inherit;
-}
-.site-nav + .glass-border {
-  backdrop-filter: blur(4px);
-  clip-path: polygon(0% 0%, 0% 100%, 4px 100%, 4px 4px, calc(100% - 4px) 4px, calc(100% - 4px) calc(100% - 4px), 4px calc(100% - 4px), 4px 100%, 100% 100%, 100% 0%);
-}
-.site-nav + .glass-border + .glass-edge {
-  backdrop-filter: blur(10px);
-  clip-path: polygon(0% 0%, 0% 100%, 1px 100%, 1px 1px, calc(100% - 1px) 1px, calc(100% - 1px) calc(100% - 1px), 1px calc(100% - 1px), 1px 100%, 100% 100%, 100% 0%);
 }
 .site-nav .hamburger {
   display: none;
@@ -944,20 +950,17 @@ footer {
   padding: 33px 0 38px;
 }
 
-.pagination {
-  position: fixed;
-  width: 90%;
-  max-width: 1440px;
-  left: 50%;
+.nav-container:has(.pagination) {
+  top: unset;
   bottom: 102px;
+}
+
+.pagination {
   padding: 12px;
   display: flex;
   justify-content: center;
   gap: 12px;
   border-radius: 16px;
-  background-color: rgba(255, 255, 255, 0.811765);
-  backdrop-filter: blur(40px);
-  transform: translateX(-50%);
 }
 .pagination > :is(.prev, .next, .first, .last) {
   position: absolute;
