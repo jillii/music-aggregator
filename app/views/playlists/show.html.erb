@@ -135,7 +135,7 @@
             <% index = 0 %>
             <div class="playlist-actions">
               <%= button_to "", tracklists_create_path, params: {tracklist: { track_ids:  @tracks.map(&:id) }}, method: :post, id: "playPlaylist", class: "icon btn-play", title: "Play playlist", data: { turbo_frame: 'mediaplayer' } %>
-              <%= button_to "", tracklists_edit_path, params: {id: current_user.tracklist ? current_user.tracklist.id : nil, tracklist: { track_ids:  @tracks.map(&:id) }}, method: :put, id: "cuePlaylist", class: "icon btn-load", title: "Add playlist to queue", data: { turbo_frame: 'mediaplayer', playlist: @track_ids.join(','), titles: @track_titles.join(',') } %>
+              <%= button_to "", tracklists_edit_path, params: {id: current_user && current_user.tracklist ? current_user.tracklist.id : nil, tracklist: { track_ids:  @tracks.map(&:id) }}, method: :put, id: "cuePlaylist", class: "icon btn-load", title: "Add playlist to queue", data: { turbo_frame: 'mediaplayer', playlist: @track_ids.join(','), titles: @track_titles.join(',') } %>
             </div>
 
             <div id="<%= @is_user || @is_editor ? 'sortable-' : '' %>tracklist" class="playlist-track">
