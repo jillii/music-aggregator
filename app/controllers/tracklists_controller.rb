@@ -32,7 +32,7 @@ class TracklistsController < ApplicationController
   end
 
   def edit    
-    @tracklist = current_user && current_user.tracklist || Tracklist.new(user: current_user)
+    @tracklist = current_user && params[:id] ? current_user.tracklist : Tracklist.new(user: current_user)
     
     track_ids = tracklist_params[:track_ids].map(&:to_i)
     
