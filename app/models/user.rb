@@ -27,4 +27,6 @@ class User < ApplicationRecord
 
   has_many :collab_requests_received, class_name: 'CollabRequest', foreign_key: 'reciever_id'
   has_many :collab_requests_sent, class_name: 'CollabRequest', foreign_key: 'sender_id'
+
+  has_one :tracklist, dependent: :destroy
 end

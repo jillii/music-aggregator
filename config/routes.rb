@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   get 'errors/not_found'
   get 'errors/internal_server_error'
+
+
+ get 'tracklists', to: 'tracklists#index'
+ post 'tracklists/create'
+ put 'tracklists/edit'
+ delete 'tracklists/destroy'
+ 
   get 'notifications', to: 'notifications#index', as: :user_notifications
   get 'notification/:id', to: 'notifications#show', as: :notification
   post 'notification/:id', to: 'notifications#read', as: :read_notification

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_23_150446) do
+ActiveRecord::Schema[7.0].define(version: 2025_07_25_180827) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -116,6 +116,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_23_150446) do
     t.index ["playlist_id"], name: "index_tags_on_playlist_id"
   end
 
+  create_table "tracklists", force: :cascade do |t|
+    t.string "link"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tracklists_on_user_id"
+  end
+
   create_table "tracks", force: :cascade do |t|
     t.string "track_id"
     t.string "title"
@@ -125,7 +133,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_23_150446) do
     t.datetime "updated_at", null: false
     t.integer "order"
     t.integer "addedby"
+    t.integer "tracklist_id"
     t.index ["playlist_id"], name: "index_tracks_on_playlist_id"
+    t.index ["tracklist_id"], name: "index_tracks_on_tracklist_id"
   end
 
 # Could not dump table "users" because of following StandardError
@@ -144,5 +154,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_23_150446) do
   add_foreign_key "playlists_tags", "playlists"
   add_foreign_key "playlists_tags", "tags"
   add_foreign_key "tags", "playlists"
+  add_foreign_key "tracklists", "users"
   add_foreign_key "tracks", "playlists"
+  add_foreign_key "tracks", "tracklists"
 end

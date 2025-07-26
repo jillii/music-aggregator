@@ -1,4 +1,5 @@
 <%= turbo_frame_tag "mediaplayer" do %>
+<%= render 'tracklist/index' %>
 <div id="queue-container" class="queue-container">
     <button class="toggle" data-expanded="Close playlist" data-collapsed="View playlist" onclick="document.getElementById('queue-container').classList.toggle('active')"></button>
     <div id="queue" class="queue"></div>
