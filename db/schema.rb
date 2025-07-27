@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_07_25_180827) do
+ActiveRecord::Schema[7.0].define(version: 2025_07_26_213307) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -118,10 +118,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_25_180827) do
 
   create_table "tracklists", force: :cascade do |t|
     t.string "link"
-    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tracklists_on_user_id"
+    t.string "session"
   end
 
   create_table "tracks", force: :cascade do |t|
@@ -154,7 +153,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_25_180827) do
   add_foreign_key "playlists_tags", "playlists"
   add_foreign_key "playlists_tags", "tags"
   add_foreign_key "tags", "playlists"
-  add_foreign_key "tracklists", "users"
   add_foreign_key "tracks", "playlists"
   add_foreign_key "tracks", "tracklists"
 end
