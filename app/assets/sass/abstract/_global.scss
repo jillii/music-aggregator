@@ -48,6 +48,10 @@ $edge-width: 1px;
             clip-path: polygon(0% 0%, 0% 100%, $edge-width 100%, $edge-width $edge-width, calc(100% - $edge-width) $edge-width, calc(100% - $edge-width) calc(100% - $edge-width), $edge-width calc(100% - $edge-width), $edge-width 100%, 100% 100%, 100% 0%);
         }
     }
+    .btn {
+        background-color: #ebeaeab5;
+        backdrop-filter: blur(10px);
+    }
 }
 
 @media (max-width: 768px) {

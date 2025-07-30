@@ -53,6 +53,10 @@
   backdrop-filter: blur(10px);
   clip-path: polygon(0% 0%, 0% 100%, 1px 100%, 1px 1px, calc(100% - 1px) 1px, calc(100% - 1px) calc(100% - 1px), 1px calc(100% - 1px), 1px 100%, 100% 100%, 100% 0%);
 }
+.glass .btn, .pagination .btn {
+  background-color: rgba(235, 234, 234, 0.7098039216);
+  backdrop-filter: blur(10px);
+}
 
 @media (max-width: 768px) {
   .glass, .pagination {
