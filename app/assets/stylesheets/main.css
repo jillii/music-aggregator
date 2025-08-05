@@ -686,12 +686,6 @@ form .form-info {
   pointer-events: none;
 }
 
-#mediaplayer {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}
-
 #media-player {
   position: relative;
   padding-bottom: 21px;
@@ -750,6 +744,12 @@ form .form-info {
 }
 #media-player .range-container .current-time-container {
   font-size: 14px;
+}
+
+.media-wrapper {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 .queue-container {
@@ -1132,9 +1132,6 @@ footer {
   display: flex;
   gap: 6px;
 }
-.playlist.full .play-tracks {
-  margin-right: auto;
-}
 .playlist-likes {
   display: inline-flex;
   gap: 3px;
@@ -1298,11 +1295,6 @@ footer {
 .track:first-of-type {
   border-top: 1px solid var(--slate);
 }
-.track .play-tracks {
-  position: relative;
-  padding: 12px 0;
-  overflow: hidden;
-}
 .track-title {
   margin: 0;
   white-space: nowrap;
@@ -1322,6 +1314,21 @@ footer {
 }
 .track .search-related, .track .added-by {
   flex-shrink: 0;
+}
+.track .play-tracks {
+  max-width: 100%;
+  flex: 1 0;
+  cursor: pointer;
+}
+.track .play-tracks button[type=submit], .track .play-tracks input[type=submit], .track .play-tracks textarea[type=submit] {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  background-color: transparent;
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 100;
+  text-align: left;
+  color: var(--blue);
 }
 
 #sortable-tracklist .track {

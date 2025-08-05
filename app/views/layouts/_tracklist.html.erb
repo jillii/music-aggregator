@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "tracklistFrame" do %>
+    <% tracklist = Tracklist.find_by(session: session.id.to_s) %>
+    <% if tracklist.present? %>
+        <div id="queue-container" class="queue-container">
+            <button class="toggle" data-expanded="Close playlist" data-collapsed="View playlist" onclick="document.getElementById('queue-container').classList.toggle('active')"></button>
+            <div id="queue" class="queue">
+                <% tracklist.tracks.each_with_index  do |track, index| %>
+                    <div class="play-track-wrapper">
+                        <a class="play-tracks" data-index="<%= index %>" data-id="<%= track.track_id %>" data-turbo-frame="mediaplayer" href="#"><%= track.title %></a>
+                        <button class="play-track-remove" title="Remove"></button>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+<% end %>

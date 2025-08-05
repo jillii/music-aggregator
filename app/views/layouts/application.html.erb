@@ -51,6 +51,9 @@
     <% end %>
     <%= render 'shared/flash' %>
     <%= yield %>
-    <%= render 'layouts/mediaplayer' %>
+    <div class="media-wrapper">
+      <%= render 'layouts/tracklist' %>
+      <%= render 'layouts/mediaplayer' %>
+    </div>
   </body>
 </html>

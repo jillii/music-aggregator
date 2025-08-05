@@ -134,13 +134,13 @@
         <% if @tracks.present? %>
             <% index = 0 %>
             <div class="playlist-actions">
-              <%= button_to "", tracklists_create_path, params: {tracklist: { track_ids:  @tracks.map(&:id) }}, method: :post, id: "playPlaylist", class: "icon btn-play", title: "Play playlist", data: { turbo_frame: 'mediaplayer' } %>
-              <%= button_to "", tracklists_edit_path, params: {tracklist: { track_ids:  @tracks.map(&:id) }}, method: :put, id: "cuePlaylist", class: "icon btn-load", title: "Add playlist to queue", data: { turbo_frame: 'mediaplayer', playlist: @track_ids.join(','), titles: @track_titles.join(',') } %>
+              <%= button_to "", tracklists_create_path, params: { tracklist: { track_ids:  @tracks.map(&:id) } }, method: :post, class: "play-tracks icon btn-play", title: "Play playlist", data: { index: 0 }, form: { data: { turbo_frame: 'tracklistFrame', turbo_method: :post }  }%>
+              <%= button_to "", tracklists_edit_path, params: { tracklist: { track_ids:  @tracks.map(&:id) } }, id: "cuePlaylist", method: :put, class: "icon btn-load", title: "Add playlist to queue", form: { data: { turbo_frame: 'tracklistFrame', turbo_method: :put }  }%>
             </div>
 
             <div id="<%= @is_user || @is_editor ? 'sortable-' : '' %>tracklist" class="playlist-track">
                 <% for track in @tracks %>
-                    <%= render "tracks/track", track: track, index: index, user: @user %>
+                    <%= render "tracks/track", tracks: @tracks, track: track, index: index, user: @user %>
                     <% index += 1 %>
                 <% end %>
             </div>

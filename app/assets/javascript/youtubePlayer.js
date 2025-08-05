@@ -13,7 +13,8 @@ var reloadYoutube = function () {
 };
 reloadYoutube();
 
-let player;
+let player = null;
+let playlist;
 let is_looping = false;
 let is_shuffled = false;
 const range = document.getElementById('range');
@@ -28,21 +29,24 @@ addEventListener('turbo:load', () => {
     const queue = document.getElementById('queue');
 
     // initiallize youtube player
-    player = new YT.Player('youtube-player', {
-        width: 300,
-        height: 200,
-        events: {
-            onReady: onReadyEvent,
-            onStateChange: handleChange
-        }
-    });
+    if (!player) {
+        player = new YT.Player('youtube-player', {
+            width: 300,
+            height: 200,
+            events: {
+                onReady: onReadyEvent,
+                onStateChange: handleChange,
+                onError: onPlayerError
+            }
+        });
+    }
     
     // handle seek / ff
     const range = document.getElementById('range');
     const time = document.getElementById('current-time');
     function updateTimerDisplay() {
         // Update current time text display.
-        if (player) {
+        if (player && player.getCurrentTime()) {
             time.innerHTML = formatTime( player.getCurrentTime() );
         }
     }
@@ -72,12 +76,15 @@ addEventListener('turbo:load', () => {
             } else {
                 player.cuePlaylist(currentPlaylist, currentIndex, currentStart);
             }
-
+            
             if (is_looping) {
                 player.setLoop(1); // set loop to true
             }
             range.value = currentStart;
             time.innerHTML = formatTime(currentStart);
+        } else {            
+            playlist = Array.from(queue.querySelectorAll('.play-tracks')).map(track => track.dataset.id)
+            player.cuePlaylist(playlist)
         }
         // Update the controls on load
         updateTimerDisplay();
@@ -120,13 +127,11 @@ addEventListener('turbo:load', () => {
         }
     });
     next.addEventListener("click", function() {
-        if (player.getPlaylist() && player.getPlaylistIndex() + 1 < player.getPlaylist().length || is_looping) {
-            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-                player.nextVideo();
-            } else {
-                player.nextVideo();
-                player.pauseVideo();
-            }
+        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+            player.nextVideo();
+        } else {
+            player.nextVideo();
+            player.pauseVideo();
         }
     });
     loop.addEventListener("click", function() {
@@ -152,120 +157,53 @@ addEventListener('turbo:load', () => {
     let titleElem = document.getElementById('track-title') || null;
 
     function handleChange(event) {
+        const playerState = player.getPlayerState()
+        const playerIndex = player.getPlaylistIndex()
+        const playerTime  = player.getCurrentTime()
         // update document title
-        if (event.target.videoTitle !== titleElem.innerHTML && player.getPlayerState() == YT.PlayerState.PLAYING) {
+        if (event.target.videoTitle !== titleElem.innerHTML && playerState == YT.PlayerState.PLAYING) {
             titleElem.innerHTML = event.target.videoTitle;
             document.title = event.target.videoTitle;
         } else {
             document.title = 'Playlists With Friends';
         }
         // set background of current track
-        queue.querySelectorAll('.play-track-wrapper').forEach(item => item.classList.remove('active'))
-        queue.querySelector(`.play-track-wrapper:nth-child(${player.getPlaylistIndex() + 1})`).classList.add('active')
+        Array.from(queue.querySelectorAll(".play-track-wrapper")).map((track,index) => {index === playerIndex ? track.classList.add('active') : track.classList.remove('active')})
 
         // set play or pause
-        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+        if (playerState == YT.PlayerState.PLAYING) {
             play.innerHTML = pauseBtn
         } else {
             play.innerHTML = playBtn
         }
+
+        // check if playlist changed
+        if (playerState === YT.PlayerState.UNSTARTED) {
+            if (JSON.stringify(playlist) !== JSON.stringify(player.getPlaylist())) {
+                player.loadPlaylist(playlist, playerIndex, playerTime)
+            }
+        }
     }
 });
 
-addEventListener('turbo:load', youtube_player, false);
-addEventListener('turbo:frame-load', youtube_player, false);
+document.addEventListener("click", function(e) {
+    // play from clicked track if target contains 'play-tracks' class
+    if (e.target.parentElement.classList.contains("play-tracks")) {
+        const tracklist = document.getElementById("tracklist") || document.getElementById("sortable-tracklist")
+        const new_playlist = Array.from(tracklist.querySelectorAll('.track')).map(item => item.dataset.id)
+        const index = parseInt(e.target.getAttribute('data-index'));
 
-function youtube_player () {
-    const playTracks = document.getElementsByClassName('play-tracks');
-
-    if (playTracks.length > 0) {
-        let playlist = document.getElementById('cuePlaylist').dataset.playlist.split(',');
-        const titles = document.getElementById('cuePlaylist').dataset.titles.split(',');
-        let index = 0;
-
-        // start playlist from clicked item
-        for (var i = 0; i < playTracks.length; i++) {
-            playTracks[i].addEventListener("click", function(e){
-                e.preventDefault();
-                index = this.getAttribute('data-index');
-                player.loadPlaylist(playlist, index);
-                setQueue(index, titles, playlist, true)
-            });
-        }
-
-        // define media player controls
-        const playAll = document.getElementById("playPlaylist"),
-            cue  = document.getElementById("cuePlaylist");
-
-        cue.addEventListener("click", function(e){
-            e.preventDefault();
-            setQueue(index, titles, playlist)
-            if (player.getPlaylist()) {
-                const new_playlist = player.getPlaylist().concat(playlist);
-                if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-                    player.loadPlaylist(new_playlist, player.getPlaylistIndex(), player.getCurrentTime());
-                    play.innerHTML = pauseBtn;
-                } else {
-                    player.cuePlaylist(new_playlist);
-                }
-            } else {
-                player.cuePlaylist(playlist);
-            }
-        });
-
-        playAll.addEventListener("click", function(e) {
-            e.preventDefault();
-            player.loadPlaylist(playlist);
-            play.innerHTML = pauseBtn;
-            setQueue(index, titles, playlist, true)
-        });
+        playlist = new_playlist
+        player.loadPlaylist(new_playlist, index) 
     }
-
-    function setQueue(index, titles, playlist, reset = false) {
-        if (reset) {queue.innerHTML = ''}
-        // add track titles to queue
-        for (let j = 0; j < titles.length; j++) {
-            let container = document.createElement('div')
-            container.className = "play-track-wrapper"
-
-            let removeBtn = document.createElement('button')
-            removeBtn.className = "play-track-remove"
-            removeBtn.setAttribute("title", "Remove")
-            removeBtn.addEventListener("click", function(e) {
-                e.preventDefault()
-                const index = Array.from(queue.children).indexOf(this.parentElement)
-                const current_playlist = player.getPlaylist()
-                const new_playlist = current_playlist.filter((item, i) => index != i)
-                const current_index = player.getPlaylistIndex()
+    // cue playlist
+    if (e.target.id === 'cuePlaylist') {
+        const tracklist = document.getElementById("tracklist") || document.getElementById("sortable-tracklist")
+        const new_playlist = Array.from(tracklist.querySelectorAll('.track')).map(item => item.dataset.id)
         
-                // remove from player
-                if (current_index < j) {
-                    player.loadPlaylist(new_playlist, current_index, player.getCurrentTime())
-                } else {
-                    player.loadPlaylist(new_playlist, current_index - 1, player.getCurrentTime())
-                }
-        
-                // remove from queue
-                this.parentElement.remove()
-            })
-
-            let node = document.createElement('a')
-            node.className = "play-tracks"
-            node.setAttribute("data-index", j)
-            node.setAttribute("data-turbo-frame", "mediaplayer")
-            node.href = "#"
-            node.innerHTML += titles[j]
-            node.addEventListener("click", function(e) {
-                e.preventDefault();
-                const index = Array.from(queue.children).indexOf(this.parentElement)
-                player.playVideoAt(index)
-            })
-            container.appendChild(node)
-            container.appendChild(removeBtn)
-            queue.appendChild(container)
-        }
+        playlist.push(...new_playlist)
     }
-}
+})
 
 function formatTime(time){
     time = Math.round(time);

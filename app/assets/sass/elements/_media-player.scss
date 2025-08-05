@@ -7,14 +7,6 @@
     opacity: 0;
     pointer-events: none;
 }
-#mediaplayer {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    // &:has(#queue:empty) button {
-    //     pointer-events: none;
-    // }
-}
 #media-player {
     position: relative;
     padding-bottom: 21px;
@@ -90,6 +82,12 @@
             font-size: 14px;
         }
     }
+}
+
+.media-wrapper {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
 
 .queue-container {

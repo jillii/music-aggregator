@@ -3,8 +3,11 @@ addEventListener('turbo:click', (e) => {
 })
 
 addEventListener('turbo:submit-end', (e) => {
-    console.log(e.detail.fetchResponse.response.url);
-    history.pushState({}, null, e.detail.fetchResponse.response.url);
+    const url = e.detail.fetchResponse.response.url
+    if (!url.includes('/tracklists/')) {
+        console.log("this happenend")
+        history.pushState({}, null, url);
+    }
 })
 
 // Reload page if user clicks browser back button
