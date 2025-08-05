@@ -34,21 +34,22 @@
 	.search-related, .added-by {
 		flex-shrink: 0;
 	}
-
-	.play-tracks {
+	
+	.play-tracks-container {
 		max-width: 100%;
-		flex: 1 0;
-		cursor: pointer;
-		button[type=submit] {
-			width: 100%;
-			padding: 12px 0;
-			border: none;
-			background-color: transparent;
-			font-family: "Silkscreen", sans-serif;
-			font-weight: 100;
-			text-align: left;
-			color: var(--blue);
-		}
+		flex: 1;
+		overflow: hidden;
+	}
+	.play-tracks {
+		appearance: none;
+		border: none;
+		background-color: transparent;
+		width: 100%;
+		padding: 12px 0;
+		font-family: "Silkscreen", sans-serif;
+		font-weight: 100;
+		text-align: left;
+		color: var(--blue);
 	}
 }
 

@@ -1315,16 +1315,17 @@ footer {
 .track .search-related, .track .added-by {
   flex-shrink: 0;
 }
-.track .play-tracks {
+.track .play-tracks-container {
   max-width: 100%;
-  flex: 1 0;
-  cursor: pointer;
+  flex: 1;
+  overflow: hidden;
 }
-.track .play-tracks button[type=submit], .track .play-tracks input[type=submit], .track .play-tracks textarea[type=submit] {
-  width: 100%;
-  padding: 12px 0;
+.track .play-tracks {
+  appearance: none;
   border: none;
   background-color: transparent;
+  width: 100%;
+  padding: 12px 0;
   font-family: "Silkscreen", sans-serif;
   font-weight: 100;
   text-align: left;

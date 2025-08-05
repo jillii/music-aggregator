@@ -206,13 +206,14 @@ addEventListener('turbo:load', () => {
 
 document.addEventListener("click", function(e) {
     // play from clicked track if target contains 'play-tracks' class
-    if (e.target.parentElement.classList.contains("play-tracks")) {
+    if (e.target.classList.contains("play-tracks")) {
         const tracklist = document.getElementById("tracklist") || document.getElementById("sortable-tracklist")
         const new_playlist = Array.from(tracklist.querySelectorAll('.track')).map(item => item.dataset.id)
         const index = parseInt(e.target.getAttribute('data-index'));
 
         playlist = new_playlist
         player.loadPlaylist(new_playlist, index) 
+        player.playVideo()
     }
     // cue playlist
     if (e.target.id === 'cuePlaylist') {
