@@ -13,8 +13,9 @@ var reloadYoutube = function () {
 };
 reloadYoutube();
 
-let player = null;
+let player;
 let playlist;
+let playerIndex;
 let is_looping = false;
 let is_shuffled = false;
 const range = document.getElementById('range');
@@ -25,25 +26,23 @@ addEventListener('turbo:load', () => {
     currentIndex    = player ? player.getPlaylistIndex() : null,
     currentStart    = player ? player.getCurrentTime() : null,
     currentState    = player ? player.getPlayerState() : null;
-
-    const queue = document.getElementById('queue');
-
-    // initiallize youtube player
-    if (!player) {
-        player = new YT.Player('youtube-player', {
-            width: 300,
-            height: 200,
-            events: {
-                onReady: onReadyEvent,
-                onStateChange: handleChange,
-                onError: onPlayerError
-            }
-        });
-    }
     
-    // handle seek / ff
+    const queue = document.getElementById('queue');
     const range = document.getElementById('range');
     const time = document.getElementById('current-time');
+    
+    // initiallize youtube player
+    player = new YT.Player('youtube-player', {
+        width: 300,
+        height: 200,
+        events: {
+            onReady: onReadyEvent,
+            onStateChange: handleChange,
+            onError: onPlayerError
+        }
+    });
+
+    // handle seek / ff
     function updateTimerDisplay() {
         // Update current time text display.
         if (player && player.getCurrentTime()) {
@@ -88,6 +87,7 @@ addEventListener('turbo:load', () => {
     }
 
     function onReadyEvent () {
+        // load playlist if it already exists
         if (currentPlaylist) {
             if (currentState == YT.PlayerState.PLAYING) { // player is playing
                 player.loadPlaylist(currentPlaylist, currentIndex, currentStart);
@@ -176,7 +176,7 @@ addEventListener('turbo:load', () => {
 
     function handleChange(event) {
         const playerState = player.getPlayerState()
-        const playerIndex = player.getPlaylistIndex()
+        playerIndex = player.getPlaylistIndex()
         const playerTime  = player.getCurrentTime()
         // update document title
         if (event.target.videoTitle !== titleElem.innerHTML && playerState == YT.PlayerState.PLAYING) {
@@ -185,8 +185,6 @@ addEventListener('turbo:load', () => {
         } else {
             document.title = 'Playlists With Friends';
         }
-        // set background of current track
-        Array.from(queue.querySelectorAll(".play-track-wrapper")).map((track,index) => {index === playerIndex ? track.classList.add('active') : track.classList.remove('active')})
 
         // set play or pause
         if (playerState == YT.PlayerState.PLAYING) {
@@ -203,6 +201,13 @@ addEventListener('turbo:load', () => {
         }
     }
 });
+
+// set background of current track
+const updateActive = () => {
+    Array.from(queue.querySelectorAll(".play-track-wrapper")).map((track,index) => { if (index == playerIndex) {track.classList.add('active')} })
+}
+addEventListener('turbo:load', updateActive)
+addEventListener('turbo:frame-load', updateActive)
 
 document.addEventListener("click", function(e) {
     // play from clicked track if target contains 'play-tracks' class
