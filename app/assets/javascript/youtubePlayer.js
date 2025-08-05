@@ -69,6 +69,24 @@ addEventListener('turbo:load', () => {
         player.seekTo(newTime);
     }
 
+    function onPlayerError(event) {
+        // Handle the error based on the event.data (error code)
+        switch (event.data) {
+            case 2:
+                console.error('Invalid parameter or video not found.');
+                break;
+            case 100:
+                console.error('Video not found or marked as private.');
+                break;
+            case 101:
+            case 150:
+                console.error('Video owner does not allow embedding.');
+                break;
+            default:
+                console.error('An unknown error occurred:', event.data);
+        }
+    }
+
     function onReadyEvent () {
         if (currentPlaylist) {
             if (currentState == YT.PlayerState.PLAYING) { // player is playing
