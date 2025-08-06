@@ -199,12 +199,14 @@ addEventListener('turbo:load', () => {
                 player.loadPlaylist(playlist, playerIndex, playerTime)
             }
         }
+        // update active style
+        updateActive()
     }
 });
 
 // set background of current track
 const updateActive = () => {
-    Array.from(queue.querySelectorAll(".play-track-wrapper")).map((track,index) => { if (index == playerIndex) {track.classList.add('active')} })
+    Array.from(queue.querySelectorAll(".play-track-wrapper")).map((track,index) => { if (index == playerIndex) {track.classList.add('active')} else {track.classList.remove('active')} })
 }
 addEventListener('turbo:load', updateActive)
 addEventListener('turbo:frame-load', updateActive)
@@ -227,6 +229,22 @@ document.addEventListener("click", function(e) {
         
         playlist.push(...new_playlist)
     }
+    // skip to
+    if (e.target.classList.contains("skip-to")) {
+        if (playlist.length === 0) {
+            playlist = queue.dataset.tracks.split(',')
+        }
+        const skipTo = e.target.dataset.index
+        player.loadPlaylist(playlist, skipTo)
+        playerIndex = skipTo
+        updateActive()
+    }
+    // remove track
+    if (e.target.classList.contains("play-track-remove")) {
+        const index = e.target.dataset.index
+        playlist.splice(index, 1)
+    }
+
 })
 
 function formatTime(time){

@@ -1,13 +1,13 @@
 <%= turbo_frame_tag "tracklistFrame" do %>
     <% tracklist = Tracklist.find_by(session: session.id.to_s) %>
     <% if tracklist.present? %>
-        <div id="queue-container" class="queue-container">
+        <div id="queue-container" class="queue-container<%= @active ? ' active' : '' %>">
             <button class="toggle" data-expanded="Close playlist" data-collapsed="View playlist" onclick="document.getElementById('queue-container').classList.toggle('active')"></button>
-            <div id="queue" class="queue">
+            <div id="queue" class="queue" data-tracks="<%= tracklist.tracks.map(&:track_id).join(',') %>">
                 <% tracklist.tracks.each_with_index  do |track, index| %>
                     <div class="play-track-wrapper">
-                        <a class="play-tracks" data-index="<%= index %>" data-id="<%= track.track_id %>" data-turbo-frame="mediaplayer" href="#"><%= track.title %></a>
-                        <button class="play-track-remove" title="Remove"></button>
+                        <%= button_tag track.title, class: "skip-to track-title", data: {index: index} %>
+                        <%= button_to '', tracklists_edit_path, params: { tracklist: { track_ids: tracklist.tracks.map(&:id).reject{|id| id === track.id} } }, method: :put, form_class: "play-track-remove-container", class: "play-track-remove", title: 'Remove', data: { index: index }, form: { data: { turbo_frame: 'tracklistFrame', turbo_method: :put }} %>
                     </div>
                 <% end %>
             </div>

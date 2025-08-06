@@ -146,10 +146,12 @@
             }
             &-remove {
                 appearance: none;
-                position: absolute;
-                right: 6px;
                 border: none;
                 background-color: transparent;
+                &-container {
+                    position: absolute;
+                    right: 6px;
+                }
                 &:before {
                     content: '+';
                     display: inline-block;

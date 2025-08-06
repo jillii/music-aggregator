@@ -809,10 +809,12 @@ form .form-info {
 }
 .queue-container .queue .play-track-remove {
   appearance: none;
-  position: absolute;
-  right: 6px;
   border: none;
   background-color: transparent;
+}
+.queue-container .queue .play-track-remove-container {
+  position: absolute;
+  right: 6px;
 }
 .queue-container .queue .play-track-remove:before {
   content: "+";
@@ -1168,6 +1170,28 @@ footer {
     width: auto;
   }
 }
+.queue .skip-to-container {
+  width: 100%;
+  max-width: 100%;
+}
+.queue .skip-to {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  flex: 1 0 auto;
+  padding: 6px calc((100% - min(1440px, 90vw)) / 2);
+  border-top: 1px solid var(--slate);
+  text-align: left;
+  color: var(--blue);
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  transition: background-color 0.2s ease;
+}
+.queue .skip-to:hover {
+  background-color: var(--slate);
+}
+
 .slider-wrapper {
   flex-wrap: wrap;
   justify-content: flex-start;

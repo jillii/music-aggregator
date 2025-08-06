@@ -28,7 +28,7 @@ class TracklistsController < ApplicationController
   def edit
     session_id = session.id.to_s
     @tracklist =  Tracklist.new(session: session_id) unless @tracklist.present?
-    
+    @tracklist.tracks.delete_all
     track_ids = tracklist_params[:track_ids].map(&:to_i)
     
     if track_ids
@@ -39,6 +39,7 @@ class TracklistsController < ApplicationController
     
     respond_to do |format|
       if @tracklist.save
+        @active = true
         format.html { render partial: 'layouts/tracklist' }
       end
     end
