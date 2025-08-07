@@ -224,6 +224,9 @@ document.addEventListener("click", function(e) {
     }
     // cue playlist
     if (e.target.id === 'cuePlaylist') {
+        if (playlist.length === 0) {
+            playlist = queue.dataset.tracks.split(',')
+        }
         const tracklist = document.getElementById("tracklist") || document.getElementById("sortable-tracklist")
         const new_playlist = Array.from(tracklist.querySelectorAll('.track')).map(item => item.dataset.id)
         
