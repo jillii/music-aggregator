@@ -135,7 +135,7 @@
             <% index = 0 %>
             <div class="playlist-actions">
               <%= button_to "", tracklists_create_path, params: { tracklist: { track_ids:  @tracks.map(&:id) } }, method: :post, class: "play-tracks icon btn-play", title: "Play playlist", data: { index: 0 }, form: { data: { turbo_frame: 'tracklistFrame', turbo_method: :post }  }%>
-              <%= button_to "", tracklists_edit_path, params: { tracklist: { track_ids:  @tracks.map(&:id) } }, id: "cuePlaylist", method: :put, class: "icon btn-load", title: "Add playlist to queue", form: { data: { turbo_frame: 'tracklistFrame', turbo_method: :put }  }%>
+              <%= button_to "", tracklists_edit_path, params: { tracklist: { track_ids:  @tracks.map(&:id) }, reset: false }, id: "cuePlaylist", method: :put, class: "icon btn-load", title: "Add playlist to queue", form: { data: { turbo_frame: 'tracklistFrame', turbo_method: :put }  }%>
             </div>
 
             <div id="<%= @is_user || @is_editor ? 'sortable-' : '' %>tracklist" class="playlist-track">

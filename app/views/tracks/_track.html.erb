@@ -1,6 +1,6 @@
 <div class="track" data-track="<%= track.id %>" data-id="<%= track.track_id %>" data-index="<%= index %>">
     <% if track.source == 'youtube' %>
-        <%= button_to track.title, tracklists_create_path, params: { tracklist: { track_ids:  @tracks.map(&:id) } }, method: :post, form_class: "play-tracks-container", class: "play-tracks track-title", data: { index: index }, form: { data: { index: index, turbo_frame: 'tracklistFrame', turbo_method: :post }} %>
+        <%= button_to track.title, tracklists_create_path, params: { tracklist: { track_ids:  @tracks.map(&:id) }, reset: true }, method: :post, form_class: "play-tracks-container", class: "play-tracks track-title", data: { index: index }, form: { data: { index: index, turbo_frame: 'tracklistFrame', turbo_method: :post }} %>
 
         <%= link_to "Search related", playlists_path(track: track.track_id), class: 'search-related' %>
 

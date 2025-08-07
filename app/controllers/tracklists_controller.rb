@@ -28,7 +28,9 @@ class TracklistsController < ApplicationController
   def edit
     session_id = session.id.to_s
     @tracklist =  Tracklist.new(session: session_id) unless @tracklist.present?
-    @tracklist.tracks.delete_all
+
+    @tracklist.tracks.delete_all if params[:reset] === true
+
     track_ids = tracklist_params[:track_ids].map(&:to_i)
     
     if track_ids
